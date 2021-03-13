@@ -1,0 +1,7 @@
+artifacts/
+App.js
+commitlint.config.js
+tsconfig.json
+tsconfig.paths.json
+README.md
+CHANGELOG.md

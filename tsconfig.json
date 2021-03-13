@@ -1,0 +1,33 @@
+{
+  "extends": "./tsconfig.paths",
+  "compilerOptions": {
+    "experimentalDecorators": true,
+    "target": "esnext",
+    "jsx": "react-jsx",
+    "moduleResolution": "node",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowJs": false,
+    "isolatedModules": true,
+    "strict": true,
+    "baseUrl": "./",
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "module": "esnext",
+    "resolveJsonModule": true,
+    "noEmit": true,
+    "noFallthroughCasesInSwitch": true
+  },
+  "exclude": [
+    "node_modules",
+    "__tests__/**/*-test.ts"
+  ],
+  "include": [
+    "src"
+  ]
+}
