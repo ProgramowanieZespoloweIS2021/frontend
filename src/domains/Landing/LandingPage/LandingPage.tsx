@@ -1,17 +1,28 @@
 import React from 'react';
-import { Box, Button } from '@material-ui/core';
+import { Box, Button, Container, Grid, Typography } from '@material-ui/core';
+import { MainSubtitle, MainTitle } from './LandingPage.styled';
 
-interface IProps { }
+interface IProps {}
 
 const LandingPage: React.FC<IProps> = () => {
     return (
         <>
-            <Box m={4}>
-                <Button color='primary'>Hello Landing page</Button>
-            </Box>
+            <Container>
+                <Grid container>
+                    <Grid item xs={6}>
+                        <MainTitle>Professional IT Products</MainTitle>
+                        <MainSubtitle>
+                            Do you need app, website or design? Hire the best
+                            developers and let them make it for you.
+                        </MainSubtitle>
+                        <Button variant="contained">Login</Button>
+                        <Button variant="contained">Register</Button>
+                    </Grid>
+                    <Grid item xs={6}></Grid>
+                </Grid>
+            </Container>
         </>
     );
 };
 
 export default LandingPage;
-
