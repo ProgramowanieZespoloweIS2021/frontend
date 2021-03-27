@@ -15,7 +15,9 @@ const LandingPage: React.FC<IProps> = () => {
                             Do you need app, website or design? Hire the best
                             developers and let them make it for you.
                         </MainSubtitle>
-                        <Button variant="contained">Login</Button>
+                        <Button variant="contained" color="primary">
+                            Login
+                        </Button>
                         <Button variant="contained">Register</Button>
                     </Grid>
                     <Grid item xs={6}></Grid>

@@ -3,6 +3,7 @@ export const palette = {
     black: '#000000',
     navyGray: '#59616e',
     crimsonRed: '#990000',
+    blue: '#00AFF5',
 };
 
 export const shadows = {
