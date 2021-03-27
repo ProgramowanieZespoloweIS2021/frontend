@@ -1,5 +1,6 @@
 import React from 'react';
-import { Box, Button, Container, Grid } from '@material-ui/core';
+import { Box, Button, Container, Grid, IconButton } from '@material-ui/core';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { MainSubtitle, MainTitle } from './LandingPage.styled';
 import { ShowcaseImage } from '@shared/svgs/ShowcaseImage';
 
@@ -9,7 +10,7 @@ const LandingPage: React.FC<IProps> = () => {
     return (
         <>
             <Container>
-                <Box mt={5}>
+                <Box mt={8}>
                     <Grid container direction="row" justify="center">
                         <Grid item xs={6}>
                             <MainTitle>Professional IT Products</MainTitle>
@@ -18,7 +19,7 @@ const LandingPage: React.FC<IProps> = () => {
                                 best developers and let them make it for you.
                             </MainSubtitle>
                             <Box display="flex" flexDirection="row" mt={4}>
-                                <Box mr={3}>
+                                <Box mr={4}>
                                     <Button variant="contained" color="primary">
                                         Login
                                     </Button>
@@ -33,6 +34,11 @@ const LandingPage: React.FC<IProps> = () => {
                         <Grid item xs={6}>
                             <ShowcaseImage width={600} height={400} />
                         </Grid>
+                        <Box mt={20}>
+                            <IconButton color="primary">
+                                <ExpandMoreIcon fontSize="large" />
+                            </IconButton>
+                        </Box>
                     </Grid>
                 </Box>
             </Container>
