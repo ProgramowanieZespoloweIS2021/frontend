@@ -5,7 +5,7 @@ export const IconWrapper = styled.span<{
     rotate?: number;
     center?: boolean;
     size: number;
-    cursor?: CursorType; 
+    cursor?: CursorType;
 }>`
     display: flex;
     font-size: ${({ size }) => size}px;

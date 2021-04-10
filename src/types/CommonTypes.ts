@@ -2,7 +2,6 @@ import * as Icons from '@shared/svgs/Icons';
 import defaultTheme from '@shared/theme/default.theme';
 import { StateType } from 'typesafe-actions';
 import reducers from '@state/_redux/reducers';
-import { ValueType } from 'react-select';
 
 export enum EnvType {
     development = 'development',

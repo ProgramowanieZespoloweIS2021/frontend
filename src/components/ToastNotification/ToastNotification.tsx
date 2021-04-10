@@ -5,7 +5,7 @@ import { IconManager } from '@components/_universal';
 import { toast, ToastProps } from 'react-toastify';
 import { ToastTypes } from '@@types/CommonTypes';
 
-interface IProps { }
+interface IProps {}
 
 export const notify = (contentText: React.ReactNode | string) => {
     return {
