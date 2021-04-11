@@ -28,12 +28,12 @@ const routerConfig: RouterConfig = [
             {
                 component: DashboardPage,
                 exact: true,
-                path: paths.dashboard,
+                path: paths.home,
             },
             {
                 component: LandingPage,
                 exact: true,
-                path: paths.landing
+                path: paths.home
             }
         ],
         layoutComponent: ShopLayout,
