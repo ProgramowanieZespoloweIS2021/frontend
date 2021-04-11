@@ -1,6 +1,6 @@
 import { RouteProps } from 'react-router-dom';
 import { ShopLayout } from '@components/index';
-import { DashboardPage, LandingPage } from '@domains/index';
+import { OfferDetailsPage, LandingPage } from '@domains/index';
 import paths from '@shared/paths';
 
 interface IRouteConfig extends RouteProps {
@@ -26,15 +26,20 @@ const routerConfig: RouterConfig = [
     {
         routes: [
             {
-                component: DashboardPage,
+                component: OfferDetailsPage,
                 exact: true,
-                path: paths.home,
+                path: paths.offerDetails,
             },
+        ],
+        layoutComponent: ShopLayout,
+    },
+    {
+        routes: [
             {
                 component: LandingPage,
                 exact: true,
-                path: paths.home
-            }
+                path: paths.home,
+            },
         ],
         layoutComponent: ShopLayout,
     },

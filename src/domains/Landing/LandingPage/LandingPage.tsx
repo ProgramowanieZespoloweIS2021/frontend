@@ -10,8 +10,13 @@ const LandingPage: React.FC<IProps> = () => {
     return (
         <>
             <Container>
-                <Box mt={8}>
-                    <Grid container direction="row" justify="center">
+                <Box mt={8} p={4}>
+                    <Grid
+                        container
+                        alignItems="center"
+                        direction="row"
+                        justify="center"
+                    >
                         <Grid item xs={6}>
                             <MainTitle>Professional IT Products</MainTitle>
                             <MainSubtitle>
@@ -32,7 +37,9 @@ const LandingPage: React.FC<IProps> = () => {
                             </Box>
                         </Grid>
                         <Grid item xs={6}>
-                            <ShowcaseImage width={600} height={400} />
+                            <Box display="flex" justifyContent="center">
+                                <ShowcaseImage width={500} height={400} />
+                            </Box>
                         </Grid>
                         <Box mt={20}>
                             <IconButton color="primary">

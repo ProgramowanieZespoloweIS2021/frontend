@@ -2,14 +2,14 @@ export const palette = {
     white: '#FFFFFF',
     black: '#000000',
     navyGray: '#59616e',
+    turkeyBlue: '#0092CC',
     crimsonRed: '#990000',
     blue: '#00AFF5',
+    golden: '#F9D350',
 };
 
 export const shadows = {
-    blue_shadow: '10px 10px 24px rgba(36, 48, 224, 0.6)',
-    dark_red_shadow: '5px 5px 16px rgba(255, 66, 66, 0.4)',
-    light_red_shadow: '5px 5px 16px rgba(255, 66, 66, 0.2)',
+    default_shadow: '0px 4px 4px rgba(0,0,0,0.25)',
 };
 
 export const global = {
