@@ -1,4 +1,5 @@
 export default {
     // dashboard
-    dashboard: '/',
+    offerDetails: '/offers/:id',
+    home: '/',
 };

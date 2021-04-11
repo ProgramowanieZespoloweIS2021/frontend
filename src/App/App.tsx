@@ -20,11 +20,11 @@ const App = () => {
         <BrowserRouter basename={resolveEnv('PUBLIC_URL')}>
             <ThemeProvider theme={themeVariant[Theme.DEFAULT]}>
                 <MuiThemeProvider theme={muiTheme}>
-                <GlobalStyled />
-                <RootWrapper>
-                    <RootRoutes />
-                    <ToastNotification />
-                </RootWrapper>
+                    <GlobalStyled />
+                    <RootWrapper>
+                        <RootRoutes />
+                        <ToastNotification />
+                    </RootWrapper>
                 </MuiThemeProvider>
             </ThemeProvider>
         </BrowserRouter>

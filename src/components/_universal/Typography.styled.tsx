@@ -28,6 +28,13 @@ export const textStylesCss = css<ITextProps>`
     text-align: ${({ center }) => (center ? 'center' : 'left')};
 `;
 
+export const Header = styled.h1<ITextProps>`
+    ${textStylesCss};
+    font-size: ${({ theme, fontSize }) =>
+        fontSize ? theme.fontSizes[fontSize] : theme.fontSizes.xxl}px;
+    line-height: 1.7;
+`;
+
 export const DefaultText = styled.p<ITextProps>`
     ${textStylesCss};
     font-size: ${({ theme, fontSize }) =>
