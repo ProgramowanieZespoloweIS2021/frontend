@@ -40,7 +40,7 @@ const muiTheme = createMuiTheme({
                 padding: '11px 34px',
             },
             containedPrimary: {
-                color: theme.colors.text,
+                color: theme.colors.white,
             },
             containedSizeLarge: {
                 padding: '19px 34px',
