@@ -2,81 +2,94 @@
 ## Poszczególne widoki appki wraz z funkcjonalnościami
 
 ### LandingPage, OffersList
-path: / <br />
-info: <br />
+*path: /*
 - Landing page z statycznymi danymi
 - Lista ofert, wraz z formularzem do wyszukiwania, sortowania, filtrowania
-use: <br />
+
+use:
 - offers-service
 - wszystkie endpointy z GET od offers-service
+- wrzucamy odpowienie parametry do sortowania, filtracji, paginacji
+
+> ### Getting offers (filtering, sorting and pagination)
+> 
+> URL:  `localhost:8080/offers?<params>`
+> 
+> For example: 
+> `localhost:8080/offers?limit=8&offset=0&order_by=desc:creation_timestamp&min_price=lt:6`
+> 
+> Sorting:  `order_by=<direction>:<field>`, where  `direction =
+> (asc|desc)`  and  `field = (title|creation_timestamp|lowest_price)` 
+> (for now).
+> 
+> Pagination:  `limit=<value>&offset=<value>`  - limit is 20 by default
+> and offset is 0 by default
+> 
+> Filtering:  `<property>=<condition>:<value>`, for example 
+> `min_price=lt:6`  (will be renamed).
+> 
+> Filtering by tags:  `tags=<tag_list>`, for example 
+> `tags=java,backend`.
 
 ### Login, Register
-paths: /login, /register <br />
-info: <br />
+*paths: /login, /register*
 - formularze do logowania, rejestracji
 - po udanej operacji redirect do głównego page'a
 
 ### OfferDetails
-path: offers/:id <br />
-- offerDetails
-info: <br />
+*path: offers/:id* 
 - szczegóły oferty,
 - tytuł, opis, fotki?, userName, oceny?
 - poszczególne tiery z cenami
 - button do kontaktu -> message, do dodania do koszyka
-use: <br />
+
+use:
 - pobieramy wcześniej oferte i trzymamy do w store reduxowym
 - pobieramy oferte korzystając z store 
 - przekierowanie do /messages /cart
 
 ### OffersDashboard
-path: /offersDashboard <br />
-info: <br />
+*path: /offersDashboard*
 - edycja, CRUD na offertach
 - CRUD na tierach do oferty, dynamiczny formularz,
 - dodawanie tagów
 
 ### Cart
-path: /cart <br />
-info: <br />
+*path: /cart*
 - info o ofertach dodanych do koszyka
 - usunięcie oferty
 - zmiania wybranego tieru
 - podsumowanie transakcji -> płatność
 
 ### Profile
-path: /profile <br />
-info: <br />
+*path: /profile*
 - dane o userze,
 - zmiana danych
 - jakiś button żeby przekierować na /profile/myOffers albo coś jak /myOffers /offersDashboard
 - button do przekierowania na 
 
 ### OrdersDashboard
-path: /orders <br />
-info: <br />
-- zamówione zrobione,
+*path: /orders*
+- zrobione zamówienia,
 - zamówienia które ludzie zrobili u mnie
 - przeniesienie stanu oferty do DONE
 
 ### Messages | Conversations
-path: /messages | /conversations <br />
-info: <br />
+*path: /messages | /conversations*
 - lista konwersacji
 - lista z jakąś paginacją?
-use: <br />
+
+use:
 - GET /messages
 
-<br />
-
-path: /messages:id <br />
+*path: /messages:id*
 - wyświetlanie konkretnej konwersacji z innym userem
 - wysłanie wiadomości
 - przeczytanie wiadomości
-use: <br />
+
+use:
 - GET /messages/:id
 - POST /messages
-
 
 # Frontend
 ## Installation, package managers:
