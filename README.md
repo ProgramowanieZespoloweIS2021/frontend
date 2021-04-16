@@ -2,76 +2,78 @@
 ## Poszczególne widoki appki wraz z funkcjonalnościami
 
 ### LandingPage, OffersList
-path: /
-info: 
+path: / <br />
+info: <br />
 - Landing page z statycznymi danymi
 - Lista ofert, wraz z formularzem do wyszukiwania, sortowania, filtrowania
-use: 
+use: <br />
 - offers-service
 - wszystkie endpointy z GET od offers-service
 
 ### Login, Register
-paths: /login, /register
-info:
+paths: /login, /register <br />
+info: <br />
 - formularze do logowania, rejestracji
 - po udanej operacji redirect do głównego page'a
 
 ### OfferDetails
-path: offers/:id
+path: offers/:id <br />
 - offerDetails
-Info:
+info: <br />
 - szczegóły oferty,
 - tytuł, opis, fotki?, userName, oceny?
 - poszczególne tiery z cenami
 - button do kontaktu -> message, do dodania do koszyka
-use:
+use: <br />
 - pobieramy wcześniej oferte i trzymamy do w store reduxowym
 - pobieramy oferte korzystając z store 
 - przekierowanie do /messages /cart
 
 ### OffersDashboard
-path: /offersDashboard
-info:
+path: /offersDashboard <br />
+info: <br />
 - edycja, CRUD na offertach
 - CRUD na tierach do oferty, dynamiczny formularz,
 - dodawanie tagów
 
 ### Cart
-path: /cart
-info:
+path: /cart <br />
+info: <br />
 - info o ofertach dodanych do koszyka
 - usunięcie oferty
 - zmiania wybranego tieru
 - podsumowanie transakcji -> płatność
 
 ### Profile
-path: /profile
-info:
+path: /profile <br />
+info: <br />
 - dane o userze,
 - zmiana danych
 - jakiś button żeby przekierować na /profile/myOffers albo coś jak /myOffers /offersDashboard
 - button do przekierowania na 
 
 ### OrdersDashboard
-path: /orders
-info:
+path: /orders <br />
+info: <br />
 - zamówione zrobione,
 - zamówienia które ludzie zrobili u mnie
 - przeniesienie stanu oferty do DONE
 
 ### Messages | Conversations
-path: /messages | /conversations
-info:
+path: /messages | /conversations <br />
+info: <br />
 - lista konwersacji
 - lista z jakąś paginacją?
-use:
+use: <br />
 - GET /messages
 
-path: /messages:id
+<br />
+
+path: /messages:id <br />
 - wyświetlanie konkretnej konwersacji z innym userem
 - wysłanie wiadomości
 - przeczytanie wiadomości
-use:
+use: <br />
 - GET /messages/:id
 - POST /messages
 
