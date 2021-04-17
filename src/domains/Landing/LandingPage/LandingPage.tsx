@@ -3,6 +3,7 @@ import { Box, Button, Container, Grid, IconButton } from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { MainSubtitle, MainTitle } from './LandingPage.styled';
 import { ShowcaseImage } from '@shared/svgs/ShowcaseImage';
+import OffersList from '../OffersList/OffersList';
 
 interface IProps {}
 
@@ -48,6 +49,7 @@ const LandingPage: React.FC<IProps> = () => {
                         </Box>
                     </Grid>
                 </Box>
+                <OffersList />
             </Container>
         </>
     );
