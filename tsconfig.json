@@ -3,7 +3,7 @@
   "compilerOptions": {
     "experimentalDecorators": true,
     "target": "esnext",
-    "jsx": "react",
+    "jsx": "react-jsx",
     "moduleResolution": "node",
     "lib": [
       "dom",

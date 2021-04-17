@@ -14,14 +14,18 @@ export const Container = styled(Grid)(
 
 export const Checkbox = styled(CheckboxMui)(
     ({ theme }) => css`
-        color: ${theme.colors.primary} !important;
+        && {
+            color: ${theme.colors.primary} !important;
+        }
     `,
 );
 
 export const Input = styled(TextField)(
     ({ theme }) => css`
         width: 100%;
-
+        && {
+            margin: 4px 0;
+        }
         & label {
             color: ${theme.colors.primary};
         }
@@ -30,6 +34,10 @@ export const Input = styled(TextField)(
 
 export const Button = styled(ButtonMui)`
     width: 100%;
+
+    && {
+        margin: 8px 0;
+    }
 `;
 
 export {};

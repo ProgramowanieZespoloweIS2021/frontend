@@ -1,94 +1,76 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { Controller, useForm } from 'react-hook-form';
 
 import { Grid, FormControlLabel } from '@material-ui/core';
 
-import * as styled from './Form.styled';
-import TextInput from './TextInput';
-import Button from './Button';
+import { Container, Checkbox, Input, Button } from './Form.styled';
 
-export const Form = () => {
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
-    const [termsAgreement, setTermsAgreement] = useState(false);
+interface IRegisterData {
+    firstName: string;
+    lastName: string;
+    email: string;
+    password: string;
+    confirmPassword: string;
+    terms: boolean;
+}
 
-    const handleFirstNameChange = (
-        event: React.ChangeEvent<HTMLInputElement>,
-    ): void => setFirstName(event.target.value);
+const Form = () => {
+    const {
+        register,
+        handleSubmit,
+        control,
+        formState: { errors },
+    } = useForm();
 
-    const handleLastNameChange = (
-        event: React.ChangeEvent<HTMLInputElement>,
-    ): void => setLastName(event.target.value);
-
-    const handleEmailChange = (
-        event: React.ChangeEvent<HTMLInputElement>,
-    ): void => setEmail(event.target.value);
-
-    const handlePasswordChange = (
-        event: React.ChangeEvent<HTMLInputElement>,
-    ): void => setPassword(event.target.value);
-
-    const handleConfirmPasswordChange = (
-        event: React.ChangeEvent<HTMLInputElement>,
-    ): void => setConfirmPassword(event.target.value);
-
-    const handleTermsAgreementChange = (
-        event: React.ChangeEvent<HTMLInputElement>,
-    ): void => setTermsAgreement(event.target.checked);
-
-    const handleRegister = (
-        event: React.MouseEvent<HTMLButtonElement>,
-    ): void => {};
+    const onSubmit = (data: IRegisterData) => console.log(data);
 
     return (
-        <styled.Container container direction="column" spacing={3}>
-            <TextInput
-                label="First name"
-                type="text"
-                onChange={handleFirstNameChange}
-            />
-            <TextInput
-                label="Last name"
-                type="text"
-                onChange={handleLastNameChange}
-            />
-            <TextInput
-                label="Email"
-                type="email"
-                onChange={handleEmailChange}
-            />
-            <TextInput
-                label="Password"
-                type="password"
-                onChange={handlePasswordChange}
-            />
-            <TextInput
-                label="Confirm password"
-                type="password"
-                onChange={handleConfirmPasswordChange}
-            />
-            <Grid item xs>
-                <FormControlLabel
-                    label="I agree to Terms and Privacy Policy."
-                    control={
-                        <styled.Checkbox
-                            checked={termsAgreement}
-                            onChange={handleTermsAgreementChange}
-                            name="terms-agreement"
-                        />
-                    }
-                />
+        <Container container direction="column" spacing={3}>
+            <Grid item>
+                <form onSubmit={handleSubmit(onSubmit)}>
+                    <Input
+                        label="First name"
+                        type="text"
+                        {...register('firstName', { required: true })}
+                    />
+                    <Input
+                        label="Last name"
+                        type="text"
+                        {...register('lastName', { required: true })}
+                    />
+                    <Input
+                        label="Email"
+                        type="email"
+                        {...register('email', { required: true })}
+                    />
+                    <Input
+                        label="Password"
+                        type="password"
+                        {...register('password', { required: true })}
+                    />
+                    <Input
+                        label="Confirm password"
+                        type="password"
+                        {...register('confirmPassword', { required: true })}
+                    />
+                    <FormControlLabel
+                        label="I agree to Terms and Privacy Policy."
+                        control={
+                            <Controller
+                                name="termsAgreement"
+                                control={control}
+                                defaultValue={false}
+                                rules={{ required: true }}
+                                render={({ field }) => <Checkbox {...field} />}
+                            />
+                        }
+                    />
+                    <Button variant="contained" color="primary" type="submit">
+                        Create account
+                    </Button>
+                </form>
             </Grid>
-            <Button
-                variant="contained"
-                color="primary"
-                onClick={handleRegister}
-            >
-                Create account
-            </Button>
-        </styled.Container>
+        </Container>
     );
 };
 

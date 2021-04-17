@@ -1,48 +1,49 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useForm } from 'react-hook-form';
 
-import * as styled from './Form.styled';
-import TextInput from './TextInput';
-import Button from './Button';
+import { Grid } from '@material-ui/core';
 
-export const Form = () => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+import { Container, Button, Input } from './Form.styled';
 
-    const handleEmailChange = (
-        event: React.ChangeEvent<HTMLInputElement>,
-    ): void => setEmail(event.target.value);
+interface ILoginData {
+    email: string;
+    password: string;
+}
 
-    const handlePasswordChange = (
-        event: React.ChangeEvent<HTMLInputElement>,
-    ): void => {
-        setPassword(event.target.value);
-    };
+const Form = () => {
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm();
 
-    const handleSignIn = (
-        event: React.MouseEvent<HTMLButtonElement>,
-    ): void => {};
+    const onSubmit = (data: ILoginData) => console.log(data);
 
     return (
-        <styled.Container container direction="column" spacing={3}>
-            <TextInput
-                id="register-email-input"
-                label="Email"
-                type="email"
-                onChange={handleEmailChange}
-            />
-            <TextInput
-                id="register-password-input"
-                label="Password"
-                type="password"
-                onChange={handlePasswordChange}
-            />
-            <Button variant="contained" color="primary" onClick={handleSignIn}>
-                Sign in
-            </Button>
-            <Button variant="text" color="primary">
-                Forgot password?
-            </Button>
-        </styled.Container>
+        <Container container direction="column" spacing={3}>
+            <Grid item>
+                <form onSubmit={handleSubmit(onSubmit)}>
+                    <Input
+                        id="register-email-input"
+                        label="Email"
+                        type="email"
+                        {...register('email', { required: true })}
+                    />
+                    <Input
+                        id="register-password-input"
+                        label="Password"
+                        type="password"
+                        {...register('password', { required: true })}
+                    />
+                    <Button variant="contained" color="primary" type="submit">
+                        Sign in
+                    </Button>
+                </form>
+                <Button variant="text" color="primary">
+                    Forgot password?
+                </Button>
+            </Grid>
+        </Container>
     );
 };
 
