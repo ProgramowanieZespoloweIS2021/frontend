@@ -37,7 +37,7 @@ const tagsOptions = [
 ];
 
 const OffersList: React.FC<IProps> = () => {
-    const { register, handleSubmit, control, errors } = useForm();
+    const { register, handleSubmit, control } = useForm();
 
     const onSubmit = (data: any): void => {
         console.log(data);
@@ -68,30 +68,36 @@ const OffersList: React.FC<IProps> = () => {
                         </Button>
                     </Box>
                     <Box display="flex">
-                        <styled.SliderContainer>
-                            <DefaultText>Prince range</DefaultText>
-                            <Controller
-                                name="minMaxSlider"
-                                control={control}
-                                defaultValue={[10, 50]}
-                                onChange={([, value]: number[]) => value}
-                                as={<Slider valueLabelDisplay="auto" />}
+                        <Box mr={2}>
+                            <TextField
+                                inputRef={register}
+                                label="min"
+                                name="min"
+                                placeholder="min"
+                                variant="outlined"
                             />
-                        </styled.SliderContainer>
+                        </Box>
+                        <Box mr={3}>
+                            <TextField
+                                inputRef={register}
+                                label="max"
+                                name="max"
+                                placeholder="max"
+                                variant="outlined"
+                            />
+                        </Box>
                         <Box display="flex" alignItems="center">
                             <Controller
                                 as={
                                     <Select native>
-                                        <option value={10}>Default</option>
-                                        <option value={20}>
-                                            By lowest price
-                                        </option>
-                                        <option value={30}>
-                                            By highest price
+                                        <option value={'Java'}>Java</option>
+                                        <option value={'Python'}>Python</option>
+                                        <option value={'Javascript'}>
+                                            Javascript
                                         </option>
                                     </Select>
                                 }
-                                defaultValue={10}
+                                defaultValue={'Java'}
                                 name="tags"
                                 control={control}
                             />
@@ -123,8 +129,8 @@ const OffersList: React.FC<IProps> = () => {
                 <Box my={2}>
                     <Grid container spacing={3} direction="row">
                         {mockOffers.map(
-                            ({ name, user, description, tiers }) => (
-                                <Grid item xs={3}>
+                            ({ name, user, description, tiers }, index) => (
+                                <Grid key={index} item xs={3}>
                                     <Card>
                                         <styled.CardImage image="https://picsum.photos/seed/picsum/300/200" />
                                         <CardContent>
