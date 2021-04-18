@@ -20,7 +20,6 @@ export const SortingLabel = styled(DefaultText)(
 
 export const CardImage = styled(CardMedia)(
     ({ theme }) => css`
-        height: 0;
         padding-top: 56.25%;
     `,
 );
