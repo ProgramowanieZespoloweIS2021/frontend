@@ -9,7 +9,6 @@ import {
     Grid,
     IconButton,
     Select,
-    Slider,
     TextField,
 } from '@material-ui/core';
 import Rating from '@material-ui/lab/Rating';
@@ -20,21 +19,6 @@ import { mockOffers } from './mockOffers';
 import { useForm, Controller } from 'react-hook-form';
 
 interface IProps {}
-
-const tagsOptions = [
-    {
-        value: 'Java',
-        label: 'Java',
-    },
-    {
-        value: 'Python',
-        label: 'Python',
-    },
-    {
-        value: 'Javascript',
-        label: 'Javascript',
-    },
-];
 
 const OffersList: React.FC<IProps> = () => {
     const { register, handleSubmit, control } = useForm();
