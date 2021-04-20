@@ -11,6 +11,10 @@ export const Input = styled(TextField)(
     ({ theme }) => css`
         width: 100%;
 
+        && {
+            margin: 4px 0;
+        }
+
         & label {
             color: ${theme.colors.primary};
         }
@@ -18,11 +22,11 @@ export const Input = styled(TextField)(
 );
 
 export const Button = styled(ButtonMui)`
+    width: 100%;
+
     && {
         margin-top: 16px;
     }
-
-    width: 100%;
 `;
 
 export {};

@@ -1,5 +1,7 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import * as yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
 
 import { Grid } from '@material-ui/core';
 
@@ -10,12 +12,17 @@ interface ILoginData {
     password: string;
 }
 
+const schema = yup.object().shape({
+    email: yup.string().email().required('Email is required'),
+    password: yup.string().required('Password is required'),
+});
+
 const Form = () => {
     const {
         register,
         handleSubmit,
         formState: { errors },
-    } = useForm();
+    } = useForm({ resolver: yupResolver(schema) });
 
     const onSubmit = (data: ILoginData) => console.log(data);
 
@@ -24,15 +31,21 @@ const Form = () => {
             <Grid item>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <Input
-                        id="register-email-input"
+                        error={!!errors.email}
+                        helperText={errors.email && errors.email.message}
+                        id="login-email-input"
                         label="Email"
                         type="email"
+                        variant="outlined"
                         {...register('email', { required: true })}
                     />
                     <Input
-                        id="register-password-input"
+                        error={!!errors.password}
+                        helperText={errors.password && errors.password.message}
+                        id="login-password-input"
                         label="Password"
                         type="password"
+                        variant="outlined"
                         {...register('password', { required: true })}
                     />
                     <Button variant="contained" color="primary" type="submit">

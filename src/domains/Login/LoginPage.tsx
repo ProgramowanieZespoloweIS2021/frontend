@@ -7,8 +7,8 @@ interface IProps {}
 
 const LoginPage: React.FC<IProps> = () => (
     <>
-        <Grid container justify="center">
-            <Grid item sm={6} md={4} xs={12}>
+        <Grid container justify="center" spacing={4}>
+            <Grid item sm={6} md={3} xs={12}>
                 <Container elevation={2}>
                     <LoginHeader>Login</LoginHeader>
                     <Form />

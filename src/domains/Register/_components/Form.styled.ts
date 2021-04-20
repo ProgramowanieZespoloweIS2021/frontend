@@ -23,9 +23,11 @@ export const Checkbox = styled(CheckboxMui)(
 export const Input = styled(TextField)(
     ({ theme }) => css`
         width: 100%;
+
         && {
             margin: 4px 0;
         }
+
         & label {
             color: ${theme.colors.primary};
         }
