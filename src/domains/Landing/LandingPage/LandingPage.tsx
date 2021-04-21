@@ -1,13 +1,13 @@
 import React from 'react';
 import { useHistory } from 'react-router';
-import { ShowcaseImage } from '@shared/svgs/ShowcaseImage';
 
 import { Box, Button, Container, Grid, IconButton } from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-
 import OffersList from '../OffersList/OffersList';
 import { MainSubtitle, MainTitle } from './LandingPage.styled';
-import paths from '../../../shared/paths';
+
+import { ShowcaseImage } from '@shared/svgs/ShowcaseImage';
+import paths from '@shared/paths';
 
 interface IProps {}
 
