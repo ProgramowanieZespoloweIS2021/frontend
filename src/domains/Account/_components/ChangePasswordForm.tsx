@@ -44,7 +44,9 @@ const ChangePasswordForm: React.FC<IProps> = () => {
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <Input
                         error={!!errors.oldPassword}
-                        helperText={errors.oldPassword && errors.oldPassword.message}
+                        helperText={
+                            errors.oldPassword && errors.oldPassword.message
+                        }
                         id="account-old-password-input"
                         label="Current password"
                         type="password"
@@ -53,7 +55,9 @@ const ChangePasswordForm: React.FC<IProps> = () => {
                     />
                     <Input
                         error={!!errors.newPassword}
-                        helperText={errors.newPassword && errors.newPassword.message}
+                        helperText={
+                            errors.newPassword && errors.newPassword.message
+                        }
                         id="account-new-password-input"
                         label="New password"
                         type="password"
@@ -62,7 +66,10 @@ const ChangePasswordForm: React.FC<IProps> = () => {
                     />
                     <Input
                         error={!!errors.confirmPassword}
-                        helperText={errors.confirmPassword && errors.confirmPassword.message}
+                        helperText={
+                            errors.confirmPassword &&
+                            errors.confirmPassword.message
+                        }
                         id="account-confirm-password-input"
                         label="Confirm new password"
                         type="password"

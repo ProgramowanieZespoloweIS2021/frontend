@@ -1,6 +1,6 @@
 import { Header } from '@components/_universal/Typography.styled';
 import styled, { css } from 'styled-components';
-import {Paper, TextField} from '@material-ui/core';
+import { Paper, TextField } from '@material-ui/core';
 
 export const Container = styled(Paper)(
     ({ theme }) => css`
