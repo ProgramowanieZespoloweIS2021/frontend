@@ -7,6 +7,8 @@ import { Grid } from '@material-ui/core';
 
 import { Container, Button, Input } from './Form.styled';
 
+interface IProps {}
+
 interface ILoginData {
     email: string;
     password: string;
@@ -17,7 +19,7 @@ const schema = yup.object().shape({
     password: yup.string().required('Password is required'),
 });
 
-const Form = () => {
+const Form: React.FC<IProps> = () => {
     const {
         register,
         handleSubmit,
@@ -37,7 +39,7 @@ const Form = () => {
                         label="Email"
                         type="email"
                         variant="outlined"
-                        {...register('email', { required: true })}
+                        {...register('email')}
                     />
                     <Input
                         error={!!errors.password}
@@ -46,7 +48,7 @@ const Form = () => {
                         label="Password"
                         type="password"
                         variant="outlined"
-                        {...register('password', { required: true })}
+                        {...register('password')}
                     />
                     <Button variant="contained" color="primary" type="submit">
                         Sign in

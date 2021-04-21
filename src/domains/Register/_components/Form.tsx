@@ -26,7 +26,10 @@ const schema = yup.object().shape({
         .matches(/[a-zA-Z]/, 'Password must be alphanumerical')
         .matches(/[0-9]/, 'Password must be alphanumerical')
         .required('Password is required'),
-    confirmPassword: yup.string().oneOf([yup.ref('password'), null], 'Passwords must match').required('Password is required'),
+    confirmPassword: yup
+        .string()
+        .oneOf([yup.ref('password'), null], 'Passwords must match')
+        .required('Password is required'),
 });
 
 const Form = () => {

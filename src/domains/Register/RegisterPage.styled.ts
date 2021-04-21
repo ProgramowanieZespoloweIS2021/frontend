@@ -4,7 +4,7 @@ import { Paper } from '@material-ui/core';
 
 export const Container = styled(Paper)(({ theme }) => css``);
 
-export const LoginHeader = styled(Header)(
+export const RegisterHeader = styled(Header)(
     ({ theme }) => css`
         text-align: center;
         padding-top: 16px;
