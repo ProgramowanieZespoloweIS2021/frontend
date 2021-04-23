@@ -20,7 +20,11 @@ export const Navigation: React.FC<IProps> = ({ children }) => {
                 >
                     Home
                 </Button>
-                <IconButton size={32} name="ShoppingCart" />
+                <IconButton
+                    size={32}
+                    name="ShoppingCart"
+                    onClick={() => history.push(paths.cart)}
+                />
             </styled.NavButtonsWrapper>
         </styled.Wrapper>
     );
