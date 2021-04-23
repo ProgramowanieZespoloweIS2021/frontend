@@ -8,6 +8,7 @@ import {
     Divider,
     Grid,
     IconButton,
+    MenuItem,
     Select,
     TextField,
 } from '@material-ui/core';
@@ -35,7 +36,7 @@ const OffersList: React.FC<IProps> = () => {
                         <Box flex="1" mr={4}>
                             <TextField
                                 fullWidth={true}
-                                inputRef={register}
+                                {...register('offerName')}
                                 label="Search offer"
                                 name="offerName"
                                 placeholder="Offer name"
@@ -54,7 +55,7 @@ const OffersList: React.FC<IProps> = () => {
                     <Box display="flex">
                         <Box mr={2}>
                             <TextField
-                                inputRef={register}
+                                {...register('min')}
                                 label="min"
                                 name="min"
                                 placeholder="min"
@@ -63,7 +64,7 @@ const OffersList: React.FC<IProps> = () => {
                         </Box>
                         <Box mr={3}>
                             <TextField
-                                inputRef={register}
+                                {...register('max')}
                                 label="max"
                                 name="max"
                                 placeholder="max"
@@ -72,18 +73,17 @@ const OffersList: React.FC<IProps> = () => {
                         </Box>
                         <Box display="flex" alignItems="center">
                             <Controller
-                                as={
-                                    <Select native>
-                                        <option value={'Java'}>Java</option>
-                                        <option value={'Python'}>Python</option>
-                                        <option value={'Javascript'}>
-                                            Javascript
-                                        </option>
+                                name="tag"
+                                render={({ field }) => (
+                                    <Select {...field}>
+                                        <MenuItem value={'Java'}>Java</MenuItem>
+                                        <MenuItem value={'Python'}>
+                                            Python
+                                        </MenuItem>
                                     </Select>
-                                }
-                                defaultValue={'Java'}
-                                name="tags"
+                                )}
                                 control={control}
+                                defaultValue={'Java'}
                             />
                         </Box>
                     </Box>
@@ -97,15 +97,22 @@ const OffersList: React.FC<IProps> = () => {
                         <DefaultText>{`Found ${mockOffers.length} offers`}</DefaultText>
                         <Box display="flex" alignItems="center">
                             <styled.SortingLabel>Sort by:</styled.SortingLabel>
-                            <Select
-                                native
-                                value="Ten"
-                                onChange={() => console.log('Change')}
-                            >
-                                <option value={10}>Default</option>
-                                <option value={20}>By lowest price</option>
-                                <option value={30}>By highest price</option>
-                            </Select>
+                            <Controller
+                                name="tag"
+                                render={({ field }) => (
+                                    <Select {...field}>
+                                        <MenuItem value={10}>Default</MenuItem>
+                                        <MenuItem value={20}>
+                                            By lowest price
+                                        </MenuItem>
+                                        <MenuItem value={30}>
+                                            By highest price
+                                        </MenuItem>
+                                    </Select>
+                                )}
+                                control={control}
+                                defaultValue={10}
+                            />
                         </Box>
                     </Box>
                 </form>
