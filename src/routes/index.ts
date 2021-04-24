@@ -32,6 +32,16 @@ const routerConfig: RouterConfig = [
     {
         routes: [
             {
+                component: CartPage,
+                exact: true,
+                path: paths.cart,
+            },
+        ],
+        layoutComponent: ShopLayout,
+    },
+    {
+        routes: [
+            {
                 component: OfferDetailsPage,
                 exact: true,
                 path: paths.offerDetails,
@@ -62,19 +72,9 @@ const routerConfig: RouterConfig = [
     {
         routes: [
             {
-                component: CartPage,
+                component: LandingPage,
                 exact: true,
                 path: paths.home,
-            },
-        ],
-        layoutComponent: ShopLayout,
-    },
-    {
-        routes: [
-            {
-                component: CartPage,
-                exact: true,
-                path: paths.cart,
             },
         ],
         layoutComponent: ShopLayout,

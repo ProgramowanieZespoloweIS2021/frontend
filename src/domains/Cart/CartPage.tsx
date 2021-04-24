@@ -1,4 +1,4 @@
-import { Header } from '@components/_universal/Typography.styled';
+import { DefaultText, Header } from '@components/_universal/Typography.styled';
 import {
     Container,
     TableContainer,
@@ -7,8 +7,12 @@ import {
     TableCell,
     TableBody,
     TableRow,
-    Paper,
     Grid,
+    FormControl,
+    RadioGroup,
+    FormControlLabel,
+    Radio,
+    Button,
 } from '@material-ui/core';
 import * as styled from './CartPage.styled';
 import React from 'react';
@@ -57,14 +61,48 @@ const CartPage: React.FC<IProps> = () => {
                         </TableBody>
                     </Table>
                 </TableContainer>
-                <Paper elevation={3}>
-                    <Grid container>
-                        <Grid item sm={6} md={6} xs={12}>
+                <styled.CartPaymentContainer elevation={3}>
+                    <Grid
+                        container
+                        alignItems="center"
+                        direction="row"
+                        justify="center"
+                    >
+                        <styled.CartPaymentItem item sm={6} md={6} xs={12}>
                             <Header>Delivery</Header>
-                        </Grid>
-                        <Grid item sm={6} md={6} xs={12}></Grid>
+                            <FormControl component="fieldset">
+                                <RadioGroup
+                                    aria-label="payment"
+                                    name="payment"
+                                    value="payu"
+                                    onChange={() => console.log('Change')}
+                                >
+                                    <FormControlLabel
+                                        value="payu"
+                                        control={<Radio />}
+                                        label="Payu"
+                                    />
+                                    <FormControlLabel
+                                        value="transfer"
+                                        control={<Radio />}
+                                        label="Transfer"
+                                    />
+                                    <FormControlLabel
+                                        value="bank"
+                                        control={<Radio />}
+                                        label="Bank"
+                                    />
+                                </RadioGroup>
+                            </FormControl>
+                        </styled.CartPaymentItem>
+                        <styled.CartPaymentItem item sm={6} md={6} xs={12}>
+                            <styled.PriceText>Price 92,88 $</styled.PriceText>
+                            <Button variant="contained" color="primary">
+                                Checkout
+                            </Button>
+                        </styled.CartPaymentItem>
                     </Grid>
-                </Paper>
+                </styled.CartPaymentContainer>
             </Container>
         </>
     );

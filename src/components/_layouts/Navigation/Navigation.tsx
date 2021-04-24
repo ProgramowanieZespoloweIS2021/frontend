@@ -14,12 +14,36 @@ export const Navigation: React.FC<IProps> = ({ children }) => {
         <styled.Wrapper>
             <styled.Logo>Software Factory</styled.Logo>
             <styled.NavButtonsWrapper>
-                <Button
+                <styled.NavButton
                     color="primary"
                     onClick={() => history.push(paths.home)}
                 >
                     Home
-                </Button>
+                </styled.NavButton>
+                <styled.NavButton
+                    color="primary"
+                    onClick={() => history.push(paths.home)}
+                >
+                    Offers
+                </styled.NavButton>
+                <styled.NavButton
+                    color="primary"
+                    onClick={() => history.push(paths.home)}
+                >
+                    Orders
+                </styled.NavButton>
+                <styled.NavButton
+                    color="primary"
+                    onClick={() => history.push(paths.home)}
+                >
+                    Messages
+                </styled.NavButton>
+                <styled.NavButton
+                    color="primary"
+                    onClick={() => history.push(paths.home)}
+                >
+                    Profile
+                </styled.NavButton>
                 <IconButton
                     size={32}
                     name="ShoppingCart"
