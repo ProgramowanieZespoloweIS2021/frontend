@@ -1,4 +1,4 @@
-import { DefaultText, Header } from '@components/_universal/Typography.styled';
+import { Header } from '@components/_universal/Typography.styled';
 import {
     Container,
     TableContainer,
@@ -14,7 +14,13 @@ import {
     Radio,
     Button,
 } from '@material-ui/core';
-import * as styled from './CartPage.styled';
+import {
+    CartPaymentContainer,
+    CartTitle,
+    CartPaymentItem,
+    TableImageCell,
+    PriceText,
+} from './CartPage.styled';
 import React from 'react';
 
 interface IProps {}
@@ -23,7 +29,7 @@ const CartPage: React.FC<IProps> = () => {
     return (
         <>
             <Container>
-                <styled.CartTitle>Cart</styled.CartTitle>
+                <CartTitle>Cart</CartTitle>
                 <TableContainer>
                     <Table>
                         <TableHead>
@@ -37,9 +43,9 @@ const CartPage: React.FC<IProps> = () => {
                         </TableHead>
                         <TableBody>
                             <TableRow>
-                                <styled.TableImageCell>
+                                <TableImageCell>
                                     <img src="https://picsum.photos/150" />
-                                </styled.TableImageCell>
+                                </TableImageCell>
                                 <TableCell align="center">
                                     Create Website
                                 </TableCell>
@@ -48,9 +54,9 @@ const CartPage: React.FC<IProps> = () => {
                                 <TableCell align="center">48,99 $</TableCell>
                             </TableRow>
                             <TableRow>
-                                <styled.TableImageCell>
+                                <TableImageCell>
                                     <img src="https://picsum.photos/150" />
-                                </styled.TableImageCell>
+                                </TableImageCell>
                                 <TableCell align="center">
                                     Create Website
                                 </TableCell>
@@ -61,14 +67,14 @@ const CartPage: React.FC<IProps> = () => {
                         </TableBody>
                     </Table>
                 </TableContainer>
-                <styled.CartPaymentContainer elevation={3}>
+                <CartPaymentContainer elevation={3}>
                     <Grid
                         container
                         alignItems="center"
                         direction="row"
                         justify="center"
                     >
-                        <styled.CartPaymentItem item sm={6} md={6} xs={12}>
+                        <CartPaymentItem item sm={6} md={6} xs={12}>
                             <Header>Delivery</Header>
                             <FormControl component="fieldset">
                                 <RadioGroup
@@ -94,15 +100,15 @@ const CartPage: React.FC<IProps> = () => {
                                     />
                                 </RadioGroup>
                             </FormControl>
-                        </styled.CartPaymentItem>
-                        <styled.CartPaymentItem item sm={6} md={6} xs={12}>
-                            <styled.PriceText>Price 92,88 $</styled.PriceText>
+                        </CartPaymentItem>
+                        <CartPaymentItem item sm={6} md={6} xs={12}>
+                            <PriceText>Price 92,88 $</PriceText>
                             <Button variant="contained" color="primary">
                                 Checkout
                             </Button>
-                        </styled.CartPaymentItem>
+                        </CartPaymentItem>
                     </Grid>
-                </styled.CartPaymentContainer>
+                </CartPaymentContainer>
             </Container>
         </>
     );
