@@ -120,28 +120,31 @@ const OffersList: React.FC<IProps> = () => {
                 <Box my={2}>
                     <Grid container spacing={3} direction="row">
                         {mockOffers.map(
-                            ({ name, user, description, tiers }, index) => (
+                            (
+                                {
+                                    title,
+                                    description,
+                                    creationTimestamp,
+                                    user,
+                                    thumbnails,
+                                    tiers,
+                                    tags,
+                                },
+                                index,
+                            ) => (
                                 <Grid key={index} item xs={3}>
                                     <Card>
                                         <styled.CardImage image="https://picsum.photos/seed/picsum/300/200" />
                                         <CardContent>
                                             <styled.CardTitle>
-                                                {name}
+                                                {title}
                                             </styled.CardTitle>
                                             <Box
                                                 display="flex"
                                                 alignItems="center"
                                             >
-                                                <Rating
-                                                    name="size-small"
-                                                    size="small"
-                                                    defaultValue={2}
-                                                />
-                                                <styled.UserRatesNumber>
-                                                    {`(${user.ratesNumber})`}
-                                                </styled.UserRatesNumber>
                                                 <styled.CardUsername>
-                                                    {user.name}
+                                                    {user.firstName}
                                                 </styled.CardUsername>
                                             </Box>
                                             <styled.CardDescription>

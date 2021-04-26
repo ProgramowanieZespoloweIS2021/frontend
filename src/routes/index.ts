@@ -5,6 +5,7 @@ import {
     LandingPage,
     LoginPage,
     RegisterPage,
+    OffersDashboardPage,
 } from '@domains/index';
 import paths from '@shared/paths';
 
@@ -34,6 +35,16 @@ const routerConfig: RouterConfig = [
                 component: OfferDetailsPage,
                 exact: true,
                 path: paths.offerDetails,
+            },
+        ],
+        layoutComponent: ShopLayout,
+    },
+    {
+        routes: [
+            {
+                component: OffersDashboardPage,
+                exact: true,
+                path: paths.offersDashboard,
             },
         ],
         layoutComponent: ShopLayout,

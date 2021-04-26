@@ -3,93 +3,123 @@ export {};
 
 export const mockOffers: IOffer[] = [
     {
-        name: 'Best Website Design',
-        shortName: 'Website design',
+        id: 1,
+        title: 'Best Website Design',
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing',
+        creationTimestamp: new Date(),
         user: {
-            name: 'John',
-            lastName: 'Doe',
-            averageRate: 5.0,
-            ratesNumber: 210,
+            firstName: 'John',
+            surname: 'Doe',
+            email: 'john@wp.pl',
         },
-        thumbnails: [],
+        thumbnails: [
+            {
+                id: 1,
+                url:
+                    'https://upload.wikimedia.org/wikipedia/commons/8/87/W3sDesign_Builder_Design_Pattern_UML.jpg',
+            },
+        ],
         tiers: [
             {
-                type: 'Low',
+                title: 'First Tier',
+                description: 'Super cool first tier',
                 price: 17.65,
                 deliveryTime: 7,
             },
             {
-                type: 'Medium',
+                title: 'Second Tier',
+                description: 'Super cool second tier',
                 price: 32.65,
                 deliveryTime: 3,
             },
             {
-                type: 'High',
+                title: 'Third Tier',
+                description: 'Super cool third tier',
                 price: 52.14,
                 deliveryTime: 2,
             },
         ],
         tags: [{ name: 'Java' }, { name: 'C#' }],
+        archived: false,
     },
     {
-        name: 'Best Website Design',
-        shortName: 'Website design',
+        id: 2,
+        title: 'Best Website Design',
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing',
+        creationTimestamp: new Date(),
         user: {
-            name: 'John',
-            lastName: 'Doe',
-            averageRate: 5.0,
-            ratesNumber: 210,
+            firstName: 'John',
+            surname: 'Doe',
+            email: 'john@wp.pl',
         },
-        thumbnails: [],
+        thumbnails: [
+            {
+                id: 1,
+                url:
+                    'https://upload.wikimedia.org/wikipedia/commons/8/87/W3sDesign_Builder_Design_Pattern_UML.jpg',
+            },
+        ],
         tiers: [
             {
-                type: 'Low',
+                title: 'First Tier',
+                description: 'Super cool first tier',
                 price: 17.65,
                 deliveryTime: 7,
             },
             {
-                type: 'Medium',
+                title: 'Second Tier',
+                description: 'Super cool second tier',
                 price: 32.65,
                 deliveryTime: 3,
             },
             {
-                type: 'High',
+                title: 'Third Tier',
+                description: 'Super cool third tier',
                 price: 52.14,
                 deliveryTime: 2,
             },
         ],
         tags: [{ name: 'Java' }, { name: 'C#' }],
+        archived: false,
     },
     {
-        name: 'Best Website Design',
-        shortName: 'Website design',
+        id: 3,
+        title: 'Best Website Design',
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing',
+        creationTimestamp: new Date(),
         user: {
-            name: 'John',
-            lastName: 'Doe',
-            averageRate: 5.0,
-            ratesNumber: 210,
+            firstName: 'John',
+            surname: 'Doe',
+            email: 'john@wp.pl',
         },
-        thumbnails: [],
+        thumbnails: [
+            {
+                id: 1,
+                url:
+                    'https://upload.wikimedia.org/wikipedia/commons/8/87/W3sDesign_Builder_Design_Pattern_UML.jpg',
+            },
+        ],
         tiers: [
             {
-                type: 'Low',
+                title: 'First Tier',
+                description: 'Super cool first tier',
                 price: 17.65,
                 deliveryTime: 7,
             },
             {
-                type: 'Medium',
+                title: 'Second Tier',
+                description: 'Super cool second tier',
                 price: 32.65,
                 deliveryTime: 3,
             },
             {
-                type: 'High',
+                title: 'Third Tier',
+                description: 'Super cool third tier',
                 price: 52.14,
                 deliveryTime: 2,
             },
         ],
         tags: [{ name: 'Java' }, { name: 'C#' }],
+        archived: false,
     },
 ];

@@ -8,34 +8,44 @@ interface IProps {}
 
 //TODO: Change mocks to real api objects
 const mockOffer: IOffer = {
-    name: 'Best Website Design',
-    shortName: 'Website design',
+    id: 1,
+    title: 'Best Website Design',
     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing',
+    creationTimestamp: new Date(),
     user: {
-        name: 'John',
-        lastName: 'Doe',
-        averageRate: 5.0,
-        ratesNumber: 210,
+        firstName: 'John',
+        surname: 'Doe',
+        email: 'john@wp.pl',
     },
-    thumbnails: [],
+    thumbnails: [
+        {
+            id: 1,
+            url:
+                'https://upload.wikimedia.org/wikipedia/commons/8/87/W3sDesign_Builder_Design_Pattern_UML.jpg',
+        },
+    ],
     tiers: [
         {
-            type: 'Low',
+            title: 'First Tier',
+            description: 'Super cool first tier',
             price: 17.65,
             deliveryTime: 7,
         },
         {
-            type: 'Medium',
+            title: 'Second Tier',
+            description: 'Super cool second tier',
             price: 32.65,
             deliveryTime: 3,
         },
         {
-            type: 'High',
+            title: 'Third Tier',
+            description: 'Super cool third tier',
             price: 52.14,
             deliveryTime: 2,
         },
     ],
     tags: [{ name: 'Java' }, { name: 'C#' }],
+    archived: false,
 };
 
 //TODO: Maybe separate tabs component? (waiting for API model structure)
@@ -49,22 +59,15 @@ const OfferDetailsPage: React.FC<IProps> = () => {
             <Box m={10}>
                 <Grid container spacing={10}>
                     <Grid item md={6}>
-                        <styled.OfferName>{mockOffer.name}</styled.OfferName>
+                        <styled.OfferName>{mockOffer.title}</styled.OfferName>
                         <Grid item md={6}>
                             <styled.UserInfoCard>
                                 <styled.LetterCircle>
-                                    {mockOffer.user.name[0]}
+                                    {mockOffer.user.firstName[0]}
                                 </styled.LetterCircle>
                                 <styled.UserName>
-                                    {`${mockOffer.user.name} ${mockOffer.user.lastName}`}
+                                    {`${mockOffer.user.firstName} ${mockOffer.user.surname}`}
                                 </styled.UserName>
-                                <IconManager size={12} name="Star" />
-                                <styled.RateValueText>
-                                    {mockOffer.user.averageRate}
-                                </styled.RateValueText>
-                                <styled.RateCountText>
-                                    ({mockOffer.user.ratesNumber})
-                                </styled.RateCountText>
                             </styled.UserInfoCard>
                         </Grid>
                         <styled.OfferThumbnail />
@@ -85,7 +88,7 @@ const OfferDetailsPage: React.FC<IProps> = () => {
                                 >
                                     {mockOffer.tiers.map((tierItem, index) => (
                                         <styled.TabButton
-                                            label={tierItem.type}
+                                            label={tierItem.title}
                                             onClick={() => setTabIndex(index)}
                                         />
                                     ))}
@@ -104,9 +107,7 @@ const OfferDetailsPage: React.FC<IProps> = () => {
                                                 >
                                                     <Grid item>
                                                         <styled.OfferShortName>
-                                                            {
-                                                                mockOffer.shortName
-                                                            }
+                                                            {mockOffer.title}
                                                         </styled.OfferShortName>
                                                     </Grid>
 

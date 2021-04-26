@@ -9,3 +9,6 @@ export { default as LoginPage } from '@domains/Login/LoginPage';
 
 // register views
 export { default as RegisterPage } from '@domains/Register/RegisterPage';
+
+// offers dashboard
+export { default as OffersDashboardPage } from '@domains/OffersDashboard/OffersDashboardPage';
