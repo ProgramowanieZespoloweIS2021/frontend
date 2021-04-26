@@ -41,7 +41,6 @@ export const UserRatesNumber = styled(DefaultText)(
 export const CardUsername = styled(DefaultText)(
     ({ theme }) => css`
         font-size: ${theme.fontSizes.m}px;
-        margin-left: 0.5rem;
     `,
 );
 

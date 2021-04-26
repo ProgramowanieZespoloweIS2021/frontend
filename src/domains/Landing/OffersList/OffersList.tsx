@@ -134,7 +134,9 @@ const OffersList: React.FC<IProps> = () => {
                             ) => (
                                 <Grid key={index} item xs={3}>
                                     <Card>
-                                        <styled.CardImage image="https://picsum.photos/seed/picsum/300/200" />
+                                        <styled.CardImage
+                                            image={thumbnails[0].url}
+                                        />
                                         <CardContent>
                                             <styled.CardTitle>
                                                 {title}
