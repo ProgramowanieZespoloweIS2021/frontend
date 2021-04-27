@@ -5,6 +5,7 @@ import {
     LandingPage,
     LoginPage,
     RegisterPage,
+    CartPage,
 } from '@domains/index';
 import paths from '@shared/paths';
 
@@ -28,6 +29,16 @@ type RouterConfig = IAppRoutes[];
 
 const routerConfig: RouterConfig = [
     // Main Layout
+    {
+        routes: [
+            {
+                component: CartPage,
+                exact: true,
+                path: paths.cart,
+            },
+        ],
+        layoutComponent: ShopLayout,
+    },
     {
         routes: [
             {

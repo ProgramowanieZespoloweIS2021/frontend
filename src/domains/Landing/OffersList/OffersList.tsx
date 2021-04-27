@@ -97,22 +97,14 @@ const OffersList: React.FC<IProps> = () => {
                         <DefaultText>{`Found ${mockOffers.length} offers`}</DefaultText>
                         <Box display="flex" alignItems="center">
                             <styled.SortingLabel>Sort by:</styled.SortingLabel>
-                            <Controller
-                                name="tag"
-                                render={({ field }) => (
-                                    <Select {...field}>
-                                        <MenuItem value={10}>Default</MenuItem>
-                                        <MenuItem value={20}>
-                                            By lowest price
-                                        </MenuItem>
-                                        <MenuItem value={30}>
-                                            By highest price
-                                        </MenuItem>
-                                    </Select>
-                                )}
-                                control={control}
-                                defaultValue={10}
-                            />
+                            <Select
+                                value={10}
+                                onChange={() => console.log('Change')}
+                            >
+                                <MenuItem value={10}>Default</MenuItem>
+                                <MenuItem value={20}>High value</MenuItem>
+                                <MenuItem value={30}>Low value</MenuItem>
+                            </Select>
                         </Box>
                     </Box>
                 </form>

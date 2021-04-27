@@ -1,6 +1,10 @@
 import React from 'react';
-import * as styled from './Navigation.styled';
-import { Box, Button } from '@material-ui/core';
+import {
+    Logo,
+    NavButton,
+    NavButtonsWrapper,
+    Wrapper,
+} from './Navigation.styled';
 import paths from '@shared/paths';
 import { useHistory } from 'react-router';
 import IconButton from '@components/_universal/IconButton/IconButton';
@@ -11,18 +15,46 @@ export const Navigation: React.FC<IProps> = ({ children }) => {
     const history = useHistory();
 
     return (
-        <styled.Wrapper>
-            <styled.Logo>Software Factory</styled.Logo>
-            <styled.NavButtonsWrapper>
-                <Button
+        <Wrapper>
+            <Logo>Software Factory</Logo>
+            <NavButtonsWrapper>
+                <NavButton
                     color="primary"
                     onClick={() => history.push(paths.home)}
                 >
                     Home
-                </Button>
-                <IconButton size={32} name="ShoppingCart" />
-            </styled.NavButtonsWrapper>
-        </styled.Wrapper>
+                </NavButton>
+                <NavButton
+                    color="primary"
+                    onClick={() => history.push(paths.home)}
+                >
+                    Offers
+                </NavButton>
+                <NavButton
+                    color="primary"
+                    onClick={() => history.push(paths.home)}
+                >
+                    Orders
+                </NavButton>
+                <NavButton
+                    color="primary"
+                    onClick={() => history.push(paths.home)}
+                >
+                    Messages
+                </NavButton>
+                <NavButton
+                    color="primary"
+                    onClick={() => history.push(paths.home)}
+                >
+                    Profile
+                </NavButton>
+                <IconButton
+                    size={32}
+                    name="ShoppingCart"
+                    onClick={() => history.push(paths.cart)}
+                />
+            </NavButtonsWrapper>
+        </Wrapper>
     );
 };
 export default Navigation;
