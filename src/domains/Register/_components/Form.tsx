@@ -2,10 +2,12 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useDispatch } from 'react-redux';
 
 import { Grid } from '@material-ui/core';
-
 import { Container, Input, Button } from './Form.styled';
+
+import { createUser } from '@state/_redux/user/actions';
 
 interface IRegisterData {
     firstName: string;
@@ -22,24 +24,27 @@ const schema = yup.object().shape({
     email: yup.string().email().required('Email is required'),
     password: yup
         .string()
-        .min(8, 'Password must contain at least 8 characters')
-        .matches(/[a-zA-Z]/, 'Password must be alphanumerical')
-        .matches(/[0-9]/, 'Password must be alphanumerical')
+        // .min(8, 'Password must contain at least 8 characters')
+        // .matches(/[a-zA-Z]/, 'Password must be alphanumerical')
+        // .matches(/[0-9]/, 'Password must be alphanumerical')
         .required('Password is required'),
     confirmPassword: yup
         .string()
-        .oneOf([yup.ref('password'), null], 'Passwords must match')
+        // .oneOf([yup.ref('password'), null], 'Passwords must match')
         .required('Password is required'),
 });
 
 const Form = () => {
+    const dispatch = useDispatch();
     const {
         register,
         handleSubmit,
         formState: { errors },
     } = useForm({ resolver: yupResolver(schema) });
 
-    const onSubmit = (data: IRegisterData) => console.log(data);
+    const onSubmit = (data: IRegisterData) => {
+        dispatch(createUser.request(data));
+    };
 
     return (
         <Container container direction="column" spacing={3}>
