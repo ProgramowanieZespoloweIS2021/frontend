@@ -16,16 +16,17 @@ const mergeOptions = (options: any, jwtToken: any) => {
     if (jwtToken) mergedOptions.headers.Authorization = `Bearer ${jwtToken}`;
 
     return mergedOptions;
-}
+};
 
-const request = (dispatch: any, actions: any, { jwtToken = getJwt() } = {}) => async (
-    url: string,
-    options: any,
-) => {
+const request = (
+    dispatch: any,
+    actions: any,
+    { jwtToken = getJwt() } = {},
+) => async (url: string, options: any) => {
     try {
         const response = await fetch(url, mergeOptions(options, jwtToken));
         if (!response.ok) throw new Error('Request failed');
-        const data = await response.json();
+        const data = response.status === 200 && await response.json();
         const headers = response.headers;
         dispatch(actions.success({ data, headers }));
     } catch (err) {
