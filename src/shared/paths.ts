@@ -4,5 +4,6 @@ export default {
     home: '/',
     login: '/login',
     register: '/register',
+    cart: '/cart',
     account: '/account',
 };

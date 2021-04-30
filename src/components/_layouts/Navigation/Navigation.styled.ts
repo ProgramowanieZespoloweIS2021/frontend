@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components';
 import { Header } from '@components/_universal/Typography.styled';
+import { Button } from '@material-ui/core';
 
 export const Wrapper = styled.div(
     ({ theme }) => css`
@@ -28,3 +29,9 @@ export const NavButtonsWrapper = styled.div`
     display: flex;
     align-items: center;
 `;
+
+export const NavButton = styled(Button)(
+    ({ theme }) => css`
+        margin-right: 10px;
+    `,
+);
