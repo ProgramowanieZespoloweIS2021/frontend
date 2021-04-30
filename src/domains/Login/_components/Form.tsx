@@ -3,12 +3,14 @@ import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router';
 
 import { Grid } from '@material-ui/core';
 
 import { Container, Button, Input } from './Form.styled';
 
 import { loginUser } from '@state/_redux/user/actions';
+import paths from '@shared/paths';
 
 interface IProps {}
 
@@ -24,14 +26,17 @@ const schema = yup.object().shape({
 
 const Form: React.FC<IProps> = () => {
     const dispatch = useDispatch();
+    const history = useHistory();
     const {
         register,
         handleSubmit,
         formState: { errors },
     } = useForm({ resolver: yupResolver(schema) });
 
-    const onSubmit = (data: ILoginData) => {
-        dispatch(loginUser.request(data));
+    const onSubmit = async (data: ILoginData) => {
+        if (await dispatch(loginUser.request(data))) {
+            history.push(paths.account);
+        }
     };
 
     return (

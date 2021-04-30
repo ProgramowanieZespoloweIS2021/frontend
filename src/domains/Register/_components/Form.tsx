@@ -3,11 +3,13 @@ import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router';
 
 import { Grid } from '@material-ui/core';
 import { Container, Input, Button } from './Form.styled';
 
 import { createUser } from '@state/_redux/user/actions';
+import paths from '@shared/paths';
 
 interface IRegisterData {
     firstName: string;
@@ -36,14 +38,17 @@ const schema = yup.object().shape({
 
 const Form = () => {
     const dispatch = useDispatch();
+    const history = useHistory();
     const {
         register,
         handleSubmit,
         formState: { errors },
     } = useForm({ resolver: yupResolver(schema) });
 
-    const onSubmit = (data: IRegisterData) => {
-        dispatch(createUser.request(data));
+    const onSubmit = async (data: IRegisterData) => {
+        if (await dispatch(createUser.request(data))) {
+            history.push(paths.login);
+        }
     };
 
     return (
