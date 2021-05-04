@@ -1,6 +1,5 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
@@ -10,31 +9,8 @@ import { Container, Input, Button } from './Form.styled';
 
 import { createUser } from '@state/_redux/user/actions';
 import paths from '@shared/paths';
-
-interface IRegisterData {
-    firstName: string;
-    lastName: string;
-    email: string;
-    password: string;
-    confirmPassword: string;
-    terms: boolean;
-}
-
-const schema = yup.object().shape({
-    firstName: yup.string().required('First name is required'),
-    lastName: yup.string().required('Last name is required'),
-    email: yup.string().email().required('Email is required'),
-    password: yup
-        .string()
-        .min(8, 'Password must contain at least 8 characters')
-        .matches(/[a-zA-Z]/, 'Password must be alphanumerical')
-        .matches(/[0-9]/, 'Password must be alphanumerical')
-        .required('Password is required'),
-    confirmPassword: yup
-        .string()
-        .oneOf([yup.ref('password'), null], 'Passwords must match')
-        .required('Password is required'),
-});
+import { schema } from '@domains/Register/validation';
+import { IRegisterData } from '@domains/Register/types';
 
 const Form = () => {
     const dispatch = useDispatch();

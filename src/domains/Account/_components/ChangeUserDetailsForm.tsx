@@ -1,27 +1,18 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useForm } from 'react-hook-form';
-import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import { Grid } from '@material-ui/core';
 
 import { Container, Button, Input } from './ChangePasswordForm.styled';
+import { IChangeUserDetailsData } from '@domains/Account/types';
+import { changeUserDetailsSchema } from '@domains/Account/validation';
 
 interface IProps {
     firstName: string;
     lastName: string;
     email: string;
 }
-
-interface IChangeUserDetailsData {
-    firstName: string;
-    lastName: string;
-}
-
-const schema = yup.object().shape({
-    firstName: yup.string().required('First name is required'),
-    lastName: yup.string().required('Last name is required'),
-});
 
 const ChangeUserDetailsForm: React.FC<IProps> = ({
     firstName,
@@ -32,14 +23,9 @@ const ChangeUserDetailsForm: React.FC<IProps> = ({
         register,
         handleSubmit,
         formState: { errors },
-        setValue,
-    } = useForm({ resolver: yupResolver(schema) });
-
-    useEffect(() => {
-        setValue('firstName', firstName);
-        setValue('lastName', lastName);
-        setValue('email', email);
-    }, [firstName, lastName, email]);
+    } = useForm({
+        resolver: yupResolver(changeUserDetailsSchema({ firstName, lastName })),
+    });
 
     const onSubmit = (data: IChangeUserDetailsData) => console.log(data);
 

@@ -19,7 +19,7 @@ const LandingPage: React.FC<IProps> = () => {
     };
 
     const handleRegisterButton = () => {
-        history.push(paths.login);
+        history.push(paths.register);
     };
 
     return (

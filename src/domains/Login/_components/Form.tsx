@@ -1,6 +1,5 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
@@ -11,18 +10,10 @@ import { Container, Button, Input } from './Form.styled';
 
 import { loginUser } from '@state/_redux/user/actions';
 import paths from '@shared/paths';
+import { schema } from '@domains/Login/validation';
+import { ILoginData } from '@domains/Login/types';
 
 interface IProps {}
-
-interface ILoginData {
-    email: string;
-    password: string;
-}
-
-const schema = yup.object().shape({
-    email: yup.string().email().required('Email is required'),
-    password: yup.string().required('Password is required'),
-});
 
 const Form: React.FC<IProps> = () => {
     const dispatch = useDispatch();

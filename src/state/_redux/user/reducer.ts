@@ -1,15 +1,11 @@
+import { Action } from 'redux';
 import { createReducer } from 'typesafe-actions';
-import { User } from './types';
 import { loginUser } from './actions';
+import { UserModule, initialState } from './module';
 
-type Action = any;
-
-const initialState = {
-    authorized: false,
-};
-const userReducer = createReducer<User, Action>(
-    initialState as User,
-).handleAction(loginUser.success, (state: User, action: Action) => ({
+const userReducer = createReducer<UserModule, Action>(
+    initialState,
+).handleAction(loginUser.success, (state: UserModule, action: Action) => ({
     ...state,
     authorized: true,
 }));

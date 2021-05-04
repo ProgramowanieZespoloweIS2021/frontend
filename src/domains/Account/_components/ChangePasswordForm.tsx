@@ -1,40 +1,21 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import { Grid } from '@material-ui/core';
 
 import { Container, Button, Input } from './ChangePasswordForm.styled';
+import { changePasswordSchema } from '@domains/Account/validation';
+import { IChangePasswordData } from '@domains/Login/types';
 
 interface IProps {}
-
-interface IChangePasswordData {
-    oldPassword: string;
-    newPassword: string;
-    confirmPassword: string;
-}
-
-const schema = yup.object().shape({
-    oldPassword: yup.string().required(),
-    newPassword: yup
-        .string()
-        .min(8, 'Password must contain at least 8 characters')
-        .matches(/[a-zA-Z]/, 'Password must be alphanumerical')
-        .matches(/[0-9]/, 'Password must be alphanumerical')
-        .required('Password is required'),
-    confirmPassword: yup
-        .string()
-        .oneOf([yup.ref('newPassword'), null], 'Passwords must match')
-        .required('Password is required'),
-});
 
 const ChangePasswordForm: React.FC<IProps> = () => {
     const {
         register,
         handleSubmit,
         formState: { errors },
-    } = useForm({ resolver: yupResolver(schema) });
+    } = useForm({ resolver: yupResolver(changePasswordSchema) });
 
     const onSubmit = (data: IChangePasswordData) => console.log(data);
 
