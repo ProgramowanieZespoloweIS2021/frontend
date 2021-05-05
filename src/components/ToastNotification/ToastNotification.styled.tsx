@@ -43,15 +43,15 @@ export const StyledToastContainer = styled(ToastContainer)`
             }
 
             &--warning {
-                background: ${({ theme }) => theme.colors.text};
+                background: ${({ theme }) => theme.colors.app_bg};
             }
 
             &--default {
-                background: ${({ theme }) => theme.colors.text};
+                background: ${({ theme }) => theme.colors.app_bg};
             }
 
             &--success {
-                background: ${({ theme }) => theme.colors.text};
+                background: ${({ theme }) => theme.colors.success};
             }
 
             &--error {

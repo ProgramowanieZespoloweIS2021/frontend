@@ -1,7 +1,12 @@
 import { IChangeUserDetailsData } from '@domains/Account/types';
 import * as yup from 'yup';
 
-import { firstName, lastName, password, confirmPassword } from '@utils/validation';
+import {
+    firstName,
+    lastName,
+    password,
+    confirmPassword,
+} from '@utils/validation';
 
 export const changeUserDetailsSchema = (data: IChangeUserDetailsData) =>
     yup.object().shape({

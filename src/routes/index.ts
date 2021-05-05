@@ -7,6 +7,7 @@ import {
     RegisterPage,
     CartPage,
     AccountPage,
+    OfferAddPage,
 } from '@domains/index';
 import paths from '@shared/paths';
 
@@ -43,6 +44,16 @@ const routerConfig: RouterConfig = [
     {
         routes: [
             {
+                component: OfferAddPage,
+                exact: true,
+                path: paths.offerAdd,
+            },
+        ],
+        layoutComponent: ShopLayout,
+    },
+    {
+        routes: [
+            {
                 component: OfferDetailsPage,
                 exact: true,
                 path: paths.offerDetails,
@@ -50,6 +61,7 @@ const routerConfig: RouterConfig = [
         ],
         layoutComponent: ShopLayout,
     },
+
     {
         routes: [
             {

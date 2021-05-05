@@ -1,17 +1,17 @@
 //TODO: Add proper types when backend will be ready
 export interface IOffer {
-    name: string;
-    shortName: string;
+    title: string;
     description: string;
     user: IUser;
-    thumbnails: [];
+    thumbnails: string[];
     tiers: ITier[];
     tags: ITag[];
 }
 
 //TODO: Export these types to another models, when backend will be ready
 interface ITier {
-    type: string;
+    title: string;
+    description: string;
     price: number;
     deliveryTime: number;
 }
@@ -23,6 +23,15 @@ interface IUser {
     ratesNumber: number;
 }
 
-interface ITag {
+export interface ITag {
     name: string;
+}
+
+export interface IOfferRequestBody {
+    title: string;
+    description: string;
+    ownerId: number;
+    tags: string[];
+    thumbnails: string[];
+    tiers: ITier[];
 }

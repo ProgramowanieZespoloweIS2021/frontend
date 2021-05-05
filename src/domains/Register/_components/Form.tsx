@@ -76,9 +76,15 @@ const Form = () => {
                         variant="outlined"
                         {...register('confirmPassword')}
                     />
-                    <Button variant="contained" color="primary" type="submit">
-                        Create account
-                    </Button>
+                    <Grid container justify="center" spacing={4}>
+                        <Button
+                            variant="contained"
+                            color="primary"
+                            type="submit"
+                        >
+                            Create account
+                        </Button>
+                    </Grid>
                 </form>
             </Grid>
         </Container>
