@@ -1,13 +1,20 @@
 import { compose, createStore, Store } from 'redux';
-import reducers from '@state/_redux/reducers';
 import { persistStore } from 'redux-persist';
+import { StateType } from 'typesafe-actions';
+import reducers from '@state/_redux/reducers';
+import middlewares from '@state/_redux/middlewares';
 
-const configureStore = (): Store<any> => {
+export type TState = StateType<typeof reducers>;
+
+const configureStore = (): Store<TState> => {
     const _WINDOW = window as any;
     const composeEnhancers =
         _WINDOW.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-    return createStore(reducers, composeEnhancers()) as Store<any>;
+    return createStore(
+        reducers,
+        composeEnhancers(middlewares),
+    ) as Store<TState>;
 };
 
 const store = configureStore();

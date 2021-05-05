@@ -44,7 +44,7 @@ export const Navigation: React.FC<IProps> = ({ children }) => {
                 </NavButton>
                 <NavButton
                     color="primary"
-                    onClick={() => history.push(paths.home)}
+                    onClick={() => history.push(paths.account)}
                 >
                     Profile
                 </NavButton>

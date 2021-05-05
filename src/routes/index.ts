@@ -6,6 +6,7 @@ import {
     LoginPage,
     RegisterPage,
     CartPage,
+    AccountPage,
 } from '@domains/index';
 import paths from '@shared/paths';
 
@@ -65,6 +66,16 @@ const routerConfig: RouterConfig = [
                 component: RegisterPage,
                 exact: true,
                 path: paths.register,
+            },
+        ],
+        layoutComponent: ShopLayout,
+    },
+    {
+        routes: [
+            {
+                component: AccountPage,
+                exact: true,
+                path: paths.account,
             },
         ],
         layoutComponent: ShopLayout,

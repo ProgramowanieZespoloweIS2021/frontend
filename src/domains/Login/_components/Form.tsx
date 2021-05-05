@@ -1,39 +1,56 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router';
 
 import { Grid } from '@material-ui/core';
 
 import { Container, Button, Input } from './Form.styled';
 
-interface ILoginData {
-    email: string;
-    password: string;
-}
+import { loginUser } from '@state/_redux/user/actions';
+import paths from '@shared/paths';
+import { schema } from '@domains/Login/validation';
+import { ILoginData } from '@domains/Login/types';
 
-const Form = () => {
+interface IProps {}
+
+const Form: React.FC<IProps> = () => {
+    const dispatch = useDispatch();
+    const history = useHistory();
     const {
         register,
         handleSubmit,
         formState: { errors },
-    } = useForm();
+    } = useForm({ resolver: yupResolver(schema) });
 
-    const onSubmit = (data: ILoginData) => console.log(data);
+    const onSubmit = async (data: ILoginData) => {
+        if (await dispatch(loginUser.request(data))) {
+            history.push(paths.account);
+        }
+    };
 
     return (
         <Container container direction="column" spacing={3}>
             <Grid item>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <Input
-                        id="register-email-input"
+                        error={!!errors.email}
+                        helperText={errors.email && errors.email.message}
+                        id="login-email-input"
                         label="Email"
                         type="email"
-                        {...register('email', { required: true })}
+                        variant="outlined"
+                        {...register('email')}
                     />
                     <Input
-                        id="register-password-input"
+                        error={!!errors.password}
+                        helperText={errors.password && errors.password.message}
+                        id="login-password-input"
                         label="Password"
                         type="password"
-                        {...register('password', { required: true })}
+                        variant="outlined"
+                        {...register('password')}
                     />
                     <Button variant="contained" color="primary" type="submit">
                         Sign in

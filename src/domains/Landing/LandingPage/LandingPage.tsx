@@ -1,13 +1,27 @@
 import React from 'react';
+import { useHistory } from 'react-router';
+
 import { Box, Button, Container, Grid, IconButton } from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import { MainSubtitle, MainTitle } from './LandingPage.styled';
-import { ShowcaseImage } from '@shared/svgs/ShowcaseImage';
 import OffersList from '../OffersList/OffersList';
+import { MainSubtitle, MainTitle } from './LandingPage.styled';
+
+import { ShowcaseImage } from '@shared/svgs/ShowcaseImage';
+import paths from '@shared/paths';
 
 interface IProps {}
 
 const LandingPage: React.FC<IProps> = () => {
+    const history = useHistory();
+
+    const handleLoginButton = () => {
+        history.push(paths.login);
+    };
+
+    const handleRegisterButton = () => {
+        history.push(paths.register);
+    };
+
     return (
         <>
             <Container>
@@ -26,12 +40,20 @@ const LandingPage: React.FC<IProps> = () => {
                             </MainSubtitle>
                             <Box display="flex" flexDirection="row" mt={4}>
                                 <Box mr={4}>
-                                    <Button variant="contained" color="primary">
+                                    <Button
+                                        variant="contained"
+                                        color="primary"
+                                        onClick={handleLoginButton}
+                                    >
                                         Login
                                     </Button>
                                 </Box>
                                 <Box>
-                                    <Button variant="contained" color="primary">
+                                    <Button
+                                        variant="contained"
+                                        color="primary"
+                                        onClick={handleRegisterButton}
+                                    >
                                         Register
                                     </Button>
                                 </Box>
