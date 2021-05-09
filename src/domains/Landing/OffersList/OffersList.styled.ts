@@ -1,6 +1,7 @@
 import { CardActions, CardMedia, Box } from '@material-ui/core';
 import { DefaultText, Header } from '@components/_universal/Typography.styled';
 import styled, { css } from 'styled-components';
+import { Link } from 'react-router-dom';
 
 export const SliderContainer = styled(Box)(
     ({ theme }) => css`
@@ -24,11 +25,18 @@ export const CardImage = styled(CardMedia)(
     `,
 );
 
-export const CardTitle = styled(Header)(
+export const CardLink = styled(Link)(
     ({ theme }) => css`
+        text-decoration: none;
         font-size: ${theme.fontSizes.l}px;
+        color: ${theme.colors.black};
+        &:hover {
+            color: ${theme.colors.primary};
+        }
     `,
 );
+
+export const CardTitle = styled(Header)(({ theme }) => css``);
 
 export const UserRatesNumber = styled(DefaultText)(
     ({ theme }) => css`

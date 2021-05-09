@@ -4,6 +4,7 @@ import {
     Button,
     Card,
     CardContent,
+    Chip,
     Container,
     Divider,
     Grid,
@@ -18,6 +19,7 @@ import {
     CardImage,
     CardTitle,
     SortingLabel,
+    CardLink,
 } from './OffersList.styled';
 import { DefaultText } from '@components/_universal/Typography.styled';
 import { mockOffers } from './mockOffers';
@@ -29,6 +31,7 @@ import {
     selectOffers,
     selectTotalNumberOfOffers,
 } from '@state/_redux/offers/selectors';
+import { Link } from 'react-router-dom';
 
 interface IProps {}
 
@@ -134,14 +137,25 @@ const OffersList: React.FC<IProps> = () => {
                     <Grid container spacing={3} direction="row">
                         {offers.map(
                             (
-                                { name, minimalPrice, tags, thumbnails },
+                                { id, name, minimalPrice, tags, thumbnails },
                                 index,
                             ) => (
                                 <Grid key={index} item xs={3}>
                                     <Card>
                                         <CardImage image={thumbnails[0].url} />
                                         <CardContent>
-                                            <CardTitle>{name}</CardTitle>
+                                            <CardLink to={`/offers/${id}`}>
+                                                {name}
+                                            </CardLink>
+                                            <Box mt={2}>
+                                                {tags.map(({ name }, index) => (
+                                                    <Chip
+                                                        key={index}
+                                                        color="primary"
+                                                        label={name}
+                                                    />
+                                                ))}
+                                            </Box>
                                         </CardContent>
                                         <CardBottomActions>
                                             <DefaultText>
