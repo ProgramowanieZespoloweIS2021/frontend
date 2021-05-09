@@ -16,8 +16,6 @@ export const notify = (contentText: React.ReactNode | string) => {
     };
 };
 
-export const dismissAllNotify = () => toast.dismiss();
-
 const ToastNotification: React.FC<IProps> = () => {
     const customCloseButton = ({ closeToast }: ToastProps) => {
         return (

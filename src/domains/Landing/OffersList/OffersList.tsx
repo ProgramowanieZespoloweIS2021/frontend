@@ -112,13 +112,13 @@ const OffersList: React.FC<IProps> = () => {
                 <Box my={2}>
                     <Grid container spacing={3} direction="row">
                         {mockOffers.map(
-                            ({ name, user, description, tiers }, index) => (
+                            ({ title, user, description, tiers }, index) => (
                                 <Grid key={index} item xs={3}>
                                     <Card>
                                         <styled.CardImage image="https://picsum.photos/seed/picsum/300/200" />
                                         <CardContent>
                                             <styled.CardTitle>
-                                                {name}
+                                                {title}
                                             </styled.CardTitle>
                                             <Box
                                                 display="flex"

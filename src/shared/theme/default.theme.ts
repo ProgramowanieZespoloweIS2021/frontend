@@ -9,6 +9,7 @@ const defaultTheme = {
         text: palette.black,
         primary: palette.turkeyBlue,
         secondary: palette.white,
+        success: palette.successGreen,
         rating: palette.golden,
         optionalText: palette.navyGray,
     },

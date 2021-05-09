@@ -5,6 +5,7 @@ import axios from 'axios';
 import { TState } from '../../../boot/configureStore';
 import { createUser, loginUser } from '@state/_redux/user/actions';
 import { setJwt } from '@utils/jwt';
+import { toast } from 'react-toastify';
 
 const AUTH_SERVICE_URL = process.env.REACT_APP_AUTH_SERVICE_URL;
 
@@ -18,6 +19,7 @@ const creatUserRequest = async (action: AnyAction, dispatch: Dispatch) => {
             surname: lastName,
         });
         dispatch(createUser.success(response));
+        toast.success('Successfully registered!');
         return true;
     } catch (err) {
         dispatch(createUser.failure(err));

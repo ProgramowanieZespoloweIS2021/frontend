@@ -7,7 +7,6 @@ import { resolveEnv } from '@utils/helpers';
 import { RootWrapper } from './App.styled';
 import { Theme } from '@@types/CommonTypes';
 import { ThemeProvider } from 'styled-components';
-import { useSelector } from 'react-redux';
 import RootRoutes from 'src/routes/RootRoutes';
 import themeVariant from '@utils/themeVariant';
 import ToastNotification from '@components/ToastNotification/ToastNotification';

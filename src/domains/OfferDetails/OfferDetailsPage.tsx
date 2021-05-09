@@ -8,8 +8,7 @@ interface IProps {}
 
 //TODO: Change mocks to real api objects
 const mockOffer: IOffer = {
-    name: 'Best Website Design',
-    shortName: 'Website design',
+    title: 'Best Website Design',
     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing',
     user: {
         name: 'John',
@@ -20,17 +19,20 @@ const mockOffer: IOffer = {
     thumbnails: [],
     tiers: [
         {
-            type: 'Low',
+            title: 'Low',
+            description: '',
             price: 17.65,
             deliveryTime: 7,
         },
         {
-            type: 'Medium',
+            title: 'Medium',
+            description: '',
             price: 32.65,
             deliveryTime: 3,
         },
         {
-            type: 'High',
+            title: 'High',
+            description: '',
             price: 52.14,
             deliveryTime: 2,
         },
@@ -49,7 +51,7 @@ const OfferDetailsPage: React.FC<IProps> = () => {
             <Box m={10}>
                 <Grid container spacing={10}>
                     <Grid item md={6}>
-                        <styled.OfferName>{mockOffer.name}</styled.OfferName>
+                        <styled.OfferName>{mockOffer.title}</styled.OfferName>
                         <Grid item md={6}>
                             <styled.UserInfoCard>
                                 <styled.LetterCircle>
@@ -85,7 +87,7 @@ const OfferDetailsPage: React.FC<IProps> = () => {
                                 >
                                     {mockOffer.tiers.map((tierItem, index) => (
                                         <styled.TabButton
-                                            label={tierItem.type}
+                                            label={tierItem.title}
                                             onClick={() => setTabIndex(index)}
                                         />
                                     ))}
@@ -104,9 +106,7 @@ const OfferDetailsPage: React.FC<IProps> = () => {
                                                 >
                                                     <Grid item>
                                                         <styled.OfferShortName>
-                                                            {
-                                                                mockOffer.shortName
-                                                            }
+                                                            {mockOffer.title}
                                                         </styled.OfferShortName>
                                                     </Grid>
 

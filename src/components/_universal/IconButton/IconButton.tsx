@@ -12,7 +12,7 @@ interface IProps {
 
 const IconButton: React.FC<IProps> = ({ className, name, onClick, size }) => {
     return (
-        <ButtonWrapper {...{ className, onClick }}>
+        <ButtonWrapper {...{ className, onClick, size }}>
             <IconManager {...{ size, name }} />
         </ButtonWrapper>
     );

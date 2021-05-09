@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
-import layoutReducer from './layout/reducer';
+import { OffersReducer } from '@state/_redux/offers/reducers';
 import userReducer from './user/reducer';
 
 export default combineReducers({
-    layout: layoutReducer,
+    offers: OffersReducer,
     user: userReducer,
 });

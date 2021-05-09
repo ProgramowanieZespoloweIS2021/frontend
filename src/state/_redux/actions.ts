@@ -1,5 +1,7 @@
-import * as layout from './layout/actions';
+import * as offers from './offers/actions';
+import * as users from './user/actions';
 
 export default {
-    layout,
+    offers,
+    users,
 };

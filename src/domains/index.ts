@@ -4,6 +4,9 @@ export { default as LandingPage } from '@domains/Landing/LandingPage/LandingPage
 // offer views
 export { default as OfferDetailsPage } from '@domains/OfferDetails/OfferDetailsPage';
 
+// offer add
+export { default as OfferAddPage } from '@domains/OfferAdd/OfferAddPage';
+
 // login views
 export { default as LoginPage } from '@domains/Login/LoginPage';
 

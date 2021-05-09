@@ -3,8 +3,7 @@ export {};
 
 export const mockOffers: IOffer[] = [
     {
-        name: 'Best Website Design',
-        shortName: 'Website design',
+        title: 'Best Website Design',
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing',
         user: {
             name: 'John',
@@ -15,17 +14,20 @@ export const mockOffers: IOffer[] = [
         thumbnails: [],
         tiers: [
             {
-                type: 'Low',
+                title: 'Low',
+                description: '',
                 price: 17.65,
                 deliveryTime: 7,
             },
             {
-                type: 'Medium',
+                title: 'Medium',
+                description: '',
                 price: 32.65,
                 deliveryTime: 3,
             },
             {
-                type: 'High',
+                title: 'High',
+                description: '',
                 price: 52.14,
                 deliveryTime: 2,
             },
@@ -33,8 +35,7 @@ export const mockOffers: IOffer[] = [
         tags: [{ name: 'Java' }, { name: 'C#' }],
     },
     {
-        name: 'Best Website Design',
-        shortName: 'Website design',
+        title: 'Best Website Design',
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing',
         user: {
             name: 'John',
@@ -45,17 +46,20 @@ export const mockOffers: IOffer[] = [
         thumbnails: [],
         tiers: [
             {
-                type: 'Low',
+                title: 'Low',
+                description: '',
                 price: 17.65,
                 deliveryTime: 7,
             },
             {
-                type: 'Medium',
+                title: 'Medium',
+                description: '',
                 price: 32.65,
                 deliveryTime: 3,
             },
             {
-                type: 'High',
+                title: 'High',
+                description: '',
                 price: 52.14,
                 deliveryTime: 2,
             },
@@ -63,8 +67,7 @@ export const mockOffers: IOffer[] = [
         tags: [{ name: 'Java' }, { name: 'C#' }],
     },
     {
-        name: 'Best Website Design',
-        shortName: 'Website design',
+        title: 'Best Website Design',
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing',
         user: {
             name: 'John',
@@ -75,17 +78,20 @@ export const mockOffers: IOffer[] = [
         thumbnails: [],
         tiers: [
             {
-                type: 'Low',
+                title: 'Low',
+                description: '',
                 price: 17.65,
                 deliveryTime: 7,
             },
             {
-                type: 'Medium',
+                title: 'Medium',
+                description: '',
                 price: 32.65,
                 deliveryTime: 3,
             },
             {
-                type: 'High',
+                title: 'High',
+                description: '',
                 price: 52.14,
                 deliveryTime: 2,
             },

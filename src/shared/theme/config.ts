@@ -5,6 +5,7 @@ export const palette = {
     turkeyBlue: '#0092CC',
     crimsonRed: '#990000',
     blue: '#00AFF5',
+    successGreen: '#4dcb4d',
     golden: '#F9D350',
 };
 
