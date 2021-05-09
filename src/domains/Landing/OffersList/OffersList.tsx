@@ -12,30 +12,42 @@ import {
     Select,
     TextField,
 } from '@material-ui/core';
-import Rating from '@material-ui/lab/Rating';
 import { Favorite } from '@material-ui/icons';
-import * as styled from './OffersList.styled';
+import {
+    CardBottomActions,
+    CardImage,
+    CardTitle,
+    SortingLabel,
+} from './OffersList.styled';
 import { DefaultText } from '@components/_universal/Typography.styled';
 import { mockOffers } from './mockOffers';
 import { useDispatch, useSelector } from 'react-redux';
 import { useForm, Controller } from 'react-hook-form';
 import { getAllTags, getOffers } from '@state/_redux/offers/actions';
+import {
+    selectAllTags,
+    selectOffers,
+    selectTotalNumberOfOffers,
+} from '@state/_redux/offers/selectors';
 
 interface IProps {}
 
 const OffersList: React.FC<IProps> = () => {
     const { register, handleSubmit, control } = useForm();
+    const dispatch = useDispatch();
 
     const onSubmit = (data: any): void => {
         console.log(data);
     };
 
-    const dispatch = useDispatch();
-
     useEffect(() => {
         dispatch(getAllTags.request(null));
         dispatch(getOffers.request(null));
     }, []);
+
+    const tagOptions = useSelector(selectAllTags);
+    const offers = useSelector(selectOffers);
+    const offersAmount = useSelector(selectTotalNumberOfOffers);
 
     return (
         <>
@@ -103,9 +115,9 @@ const OffersList: React.FC<IProps> = () => {
                         mt={4}
                         mb={2}
                     >
-                        <DefaultText>{`Found ${mockOffers.length} offers`}</DefaultText>
+                        <DefaultText>{`Found ${offersAmount} offers`}</DefaultText>
                         <Box display="flex" alignItems="center">
-                            <styled.SortingLabel>Sort by:</styled.SortingLabel>
+                            <SortingLabel>Sort by:</SortingLabel>
                             <Select
                                 value={10}
                                 onChange={() => console.log('Change')}
@@ -120,43 +132,25 @@ const OffersList: React.FC<IProps> = () => {
                 <Divider />
                 <Box my={2}>
                     <Grid container spacing={3} direction="row">
-                        {mockOffers.map(
-                            ({ title, user, description, tiers }, index) => (
+                        {offers.map(
+                            (
+                                { name, minimalPrice, tags, thumbnails },
+                                index,
+                            ) => (
                                 <Grid key={index} item xs={3}>
                                     <Card>
-                                        <styled.CardImage image="https://picsum.photos/seed/picsum/300/200" />
+                                        <CardImage image={thumbnails[0].url} />
                                         <CardContent>
-                                            <styled.CardTitle>
-                                                {title}
-                                            </styled.CardTitle>
-                                            <Box
-                                                display="flex"
-                                                alignItems="center"
-                                            >
-                                                <Rating
-                                                    name="size-small"
-                                                    size="small"
-                                                    defaultValue={2}
-                                                />
-                                                <styled.UserRatesNumber>
-                                                    {`(${user.ratesNumber})`}
-                                                </styled.UserRatesNumber>
-                                                <styled.CardUsername>
-                                                    {user.name}
-                                                </styled.CardUsername>
-                                            </Box>
-                                            <styled.CardDescription>
-                                                {description}
-                                            </styled.CardDescription>
+                                            <CardTitle>{name}</CardTitle>
                                         </CardContent>
-                                        <styled.CardBottomActions>
+                                        <CardBottomActions>
                                             <DefaultText>
-                                                {`from: ${tiers[0].price} $`}
+                                                {`from: ${minimalPrice} $`}
                                             </DefaultText>
                                             <IconButton aria-label="add to favorites">
                                                 <Favorite />
                                             </IconButton>
-                                        </styled.CardBottomActions>
+                                        </CardBottomActions>
                                     </Card>
                                 </Grid>
                             ),
