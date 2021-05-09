@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
     Box,
     Button,
@@ -17,7 +17,9 @@ import { Favorite } from '@material-ui/icons';
 import * as styled from './OffersList.styled';
 import { DefaultText } from '@components/_universal/Typography.styled';
 import { mockOffers } from './mockOffers';
+import { useDispatch, useSelector } from 'react-redux';
 import { useForm, Controller } from 'react-hook-form';
+import { getAllTags, getOffers } from '@state/_redux/offers/actions';
 
 interface IProps {}
 
@@ -27,6 +29,13 @@ const OffersList: React.FC<IProps> = () => {
     const onSubmit = (data: any): void => {
         console.log(data);
     };
+
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(getAllTags.request(null));
+        dispatch(getOffers.request(null));
+    }, []);
 
     return (
         <>

@@ -7,6 +7,7 @@ import {
 import {
     getAllTagsMiddleware,
     createOfferMiddleware,
+    getOffersMiddleware,
 } from '@state/_redux/offers/middleware';
 
 const middlewares = [
@@ -14,6 +15,7 @@ const middlewares = [
     loginMiddleware,
     getAllTagsMiddleware,
     createOfferMiddleware,
+    getOffersMiddleware,
 ];
 
 export default applyMiddleware(...middlewares);
