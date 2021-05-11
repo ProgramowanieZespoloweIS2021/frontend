@@ -1,3 +1,8 @@
 import { UserModule } from '@state/_redux/user/module';
 
-export const isAuthorized = (state: UserModule): boolean => state.authorized;
+interface IProps {
+    user: UserModule;
+}
+
+export const isAuthorized = ({ user }: IProps): boolean | null =>
+    user.authorized;

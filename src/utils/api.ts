@@ -15,9 +15,9 @@ export const API = {
         axios.post(`${API_URL}/${url}`, data),
 
     getAuth: (serviceUrl?: string, endpointUrl?: string) =>
-        axios.get(`${serviceUrl}/${endpointUrl}`, {
+        axios.get(`${serviceUrl}${endpointUrl}`, {
             headers: {
-                Authorization: `bearer ${getJwt()}`,
+                Authorization: `Bearer ${getJwt()}`,
             },
         }),
 };
