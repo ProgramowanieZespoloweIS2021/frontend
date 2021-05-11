@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { getJwt } from '@utils/jwt';
 
 const API_URL = 'http://localhost:8080';
 
@@ -12,4 +13,11 @@ export const API = {
         }),
     postAuth: (url: string, data: Object) =>
         axios.post(`${API_URL}/${url}`, data),
+
+    getAuth: (serviceUrl?: string, endpointUrl?: string) =>
+        axios.get(`${serviceUrl}/${endpointUrl}`, {
+            headers: {
+                Authorization: `bearer ${getJwt()}`,
+            },
+        }),
 };

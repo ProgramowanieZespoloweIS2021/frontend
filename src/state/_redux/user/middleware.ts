@@ -3,9 +3,14 @@ import { getType } from 'typesafe-actions';
 import axios from 'axios';
 
 import { TState } from '../../../boot/configureStore';
-import { createUser, loginUser } from '@state/_redux/user/actions';
+import { createUser, getUser, loginUser } from '@state/_redux/user/actions';
 import { setJwt } from '@utils/jwt';
 import { toast } from 'react-toastify';
+import { API } from '@utils/api';
+import { createBrowserHistory } from 'history';
+import paths from '@shared/paths';
+
+const history = createBrowserHistory();
 
 const AUTH_SERVICE_URL = process.env.REACT_APP_AUTH_SERVICE_URL;
 
@@ -23,6 +28,17 @@ const creatUserRequest = async (action: AnyAction, dispatch: Dispatch) => {
         return true;
     } catch (err) {
         dispatch(createUser.failure(err));
+        return false;
+    }
+};
+
+const getUserRequest = async (action: AnyAction, dispatch: Dispatch) => {
+    try {
+        const response = await API.getAuth(AUTH_SERVICE_URL, '/auth/user');
+        dispatch(getUser.success(response));
+        return true;
+    } catch (err) {
+        dispatch(getUser.failure(err));
         return false;
     }
 };
@@ -64,6 +80,19 @@ export const loginMiddleware: Middleware<{}, TState> = ({ dispatch }) => (
         await loginRequest(action, dispatch);
     } else if (action.type === getType(loginUser.success)) {
         saveAuthToken(action);
+    }
+    return next(action);
+};
+
+export const getUserMiddleware: Middleware<{}, TState> = ({ dispatch }) => (
+    next,
+) => async (action: AnyAction) => {
+    if (action.type === getType(getUser.request)) {
+        await getUserRequest(action, dispatch);
+    }
+    if (action.type === getType(getUser.failure)) {
+        toast.error('You are unathorized to perform this action.');
+        history.push(paths.home);
     }
     return next(action);
 };

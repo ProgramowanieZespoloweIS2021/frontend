@@ -3,6 +3,7 @@ import { applyMiddleware } from 'redux';
 import {
     createUserMiddleware,
     loginMiddleware,
+    getUserMiddleware,
 } from '@state/_redux/user/middleware';
 import {
     getAllTagsMiddleware,
@@ -14,6 +15,7 @@ const middlewares = [
     loginMiddleware,
     getAllTagsMiddleware,
     createOfferMiddleware,
+    getUserMiddleware,
 ];
 
 export default applyMiddleware(...middlewares);
