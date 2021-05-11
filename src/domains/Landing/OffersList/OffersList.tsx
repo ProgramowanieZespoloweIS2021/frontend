@@ -10,9 +10,9 @@ import {
     Grid,
     IconButton,
     MenuItem,
-    Select,
     TextField,
 } from '@material-ui/core';
+import Select from 'react-select';
 import { Favorite } from '@material-ui/icons';
 import {
     CardBottomActions,
@@ -20,6 +20,8 @@ import {
     CardTitle,
     SortingLabel,
     CardLink,
+    CardChip,
+    Input,
 } from './OffersList.styled';
 import { DefaultText } from '@components/_universal/Typography.styled';
 import { mockOffers } from './mockOffers';
@@ -32,15 +34,28 @@ import {
     selectTotalNumberOfOffers,
 } from '@state/_redux/offers/selectors';
 import { Link } from 'react-router-dom';
+import { ISelectOption } from '@@types/models/SelectOption';
+import { SortField, SortOrder } from '@@types/models/Sort';
+import { ITag } from '@@types/models/Offer';
 
 interface IProps {}
+
+interface IOffersForm {
+    min: number;
+    max: number;
+    sortDirection: string;
+    sortField: string;
+    tags: ISelectOption[];
+}
 
 const OffersList: React.FC<IProps> = () => {
     const { register, handleSubmit, control } = useForm();
     const dispatch = useDispatch();
 
-    const onSubmit = (data: any): void => {
+    const onSubmit = (data: IOffersForm): void => {
         console.log(data);
+        // Dispatch get offers
+        // Get offers
     };
 
     useEffect(() => {
@@ -52,65 +67,111 @@ const OffersList: React.FC<IProps> = () => {
     const offers = useSelector(selectOffers);
     const offersAmount = useSelector(selectTotalNumberOfOffers);
 
+    const sortDirectionOptions: ISelectOption[] = [
+        {
+            value: SortOrder.ASC,
+            label: 'ascending',
+        },
+        {
+            value: SortOrder.DESC,
+            label: 'descending',
+        },
+    ];
+
+    const sortFieldOptions: ISelectOption[] = [
+        {
+            value: SortField.CREATION_TIMESTAMP,
+            label: 'creation time',
+        },
+        {
+            value: SortField.LOWEST_PRICE,
+            label: 'lowest price',
+        },
+        {
+            value: SortField.TITLE,
+            label: 'title',
+        },
+    ];
+
     return (
         <>
             <Container>
                 <form onSubmit={handleSubmit(onSubmit)}>
-                    <Box mb={4} display="flex">
-                        <Box flex="1" mr={4}>
-                            <TextField
-                                fullWidth={true}
-                                {...register('offerName')}
-                                label="Search offer"
-                                name="offerName"
-                                placeholder="Offer name"
-                                type="search"
-                                variant="outlined"
+                    <Input
+                        {...register('min')}
+                        label="min"
+                        name="min"
+                        placeholder="min"
+                        variant="outlined"
+                    />
+                    <Input
+                        {...register('max')}
+                        label="max"
+                        name="max"
+                        placeholder="max"
+                        variant="outlined"
+                    />
+                    {tagOptions && (
+                        <Controller
+                            control={control}
+                            name="tags"
+                            render={({
+                                field: { onChange, onBlur, value, name, ref },
+                                fieldState: {
+                                    invalid,
+                                    isTouched,
+                                    isDirty,
+                                    error,
+                                },
+                                formState,
+                            }) => (
+                                <Select
+                                    isMulti
+                                    options={tagOptions}
+                                    onChange={onChange}
+                                />
+                            )}
+                        />
+                    )}
+                    <Controller
+                        control={control}
+                        name="sortField"
+                        render={({
+                            field: { onChange, onBlur, value, name, ref },
+                            fieldState: { invalid, isTouched, isDirty, error },
+                            formState,
+                        }) => (
+                            <Select
+                                options={sortFieldOptions}
+                                className="basic-multi-select"
+                                classNamePrefix="select"
+                                onChange={onChange}
                             />
-                        </Box>
-                        <Button
-                            variant={'contained'}
-                            color={'secondary'}
-                            type="submit"
-                        >
-                            Search
-                        </Button>
-                    </Box>
-                    <Box display="flex">
-                        <Box mr={2}>
-                            <TextField
-                                {...register('min')}
-                                label="min"
-                                name="min"
-                                placeholder="min"
-                                variant="outlined"
+                        )}
+                    />
+                    <Controller
+                        control={control}
+                        name="sortDirection"
+                        render={({
+                            field: { onChange, onBlur, value, name, ref },
+                            fieldState: { invalid, isTouched, isDirty, error },
+                            formState,
+                        }) => (
+                            <Select
+                                options={sortDirectionOptions}
+                                className="basic-multi-select"
+                                classNamePrefix="select"
+                                onChange={onChange}
                             />
-                        </Box>
-                        <Box mr={3}>
-                            <TextField
-                                {...register('max')}
-                                label="max"
-                                name="max"
-                                placeholder="max"
-                                variant="outlined"
-                            />
-                        </Box>
-                        <Box display="flex" alignItems="center">
-                            <Controller
-                                name="tag"
-                                render={({ field }) => (
-                                    <Select {...field}>
-                                        <MenuItem value={'Java'}>Java</MenuItem>
-                                        <MenuItem value={'Python'}>
-                                            Python
-                                        </MenuItem>
-                                    </Select>
-                                )}
-                                control={control}
-                                defaultValue={'Java'}
-                            />
-                        </Box>
-                    </Box>
+                        )}
+                    />
+                    <Button
+                        variant={'contained'}
+                        color={'secondary'}
+                        type="submit"
+                    >
+                        Search
+                    </Button>
                     <Box
                         display="flex"
                         alignItems="center"
@@ -119,17 +180,6 @@ const OffersList: React.FC<IProps> = () => {
                         mb={2}
                     >
                         <DefaultText>{`Found ${offersAmount} offers`}</DefaultText>
-                        <Box display="flex" alignItems="center">
-                            <SortingLabel>Sort by:</SortingLabel>
-                            <Select
-                                value={10}
-                                onChange={() => console.log('Change')}
-                            >
-                                <MenuItem value={10}>Default</MenuItem>
-                                <MenuItem value={20}>High value</MenuItem>
-                                <MenuItem value={30}>Low value</MenuItem>
-                            </Select>
-                        </Box>
                     </Box>
                 </form>
                 <Divider />
@@ -149,7 +199,7 @@ const OffersList: React.FC<IProps> = () => {
                                             </CardLink>
                                             <Box mt={2}>
                                                 {tags.map(({ name }, index) => (
-                                                    <Chip
+                                                    <CardChip
                                                         key={index}
                                                         color="primary"
                                                         label={name}

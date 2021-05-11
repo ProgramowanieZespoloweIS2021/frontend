@@ -1,4 +1,10 @@
-import { CardActions, CardMedia, Box } from '@material-ui/core';
+import {
+    CardActions,
+    CardMedia,
+    Box,
+    Chip,
+    TextField,
+} from '@material-ui/core';
 import { DefaultText, Header } from '@components/_universal/Typography.styled';
 import styled, { css } from 'styled-components';
 import { Link } from 'react-router-dom';
@@ -10,6 +16,18 @@ export const SliderContainer = styled(Box)(
         justify-content: center;
         width: 15rem;
         margin-right: 2rem;
+    `,
+);
+
+export const Input = styled(TextField)(
+    ({ theme }) => css`
+        width: 100%;
+        && {
+            margin: 4px 0;
+        }
+        & label {
+            color: ${theme.colors.primary};
+        }
     `,
 );
 
@@ -37,6 +55,13 @@ export const CardLink = styled(Link)(
 );
 
 export const CardTitle = styled(Header)(({ theme }) => css``);
+
+export const CardChip = styled(Chip)(
+    ({ theme }) => css`
+        margin-right: 5px;
+        margin-bottom: 5px;
+    `,
+);
 
 export const UserRatesNumber = styled(DefaultText)(
     ({ theme }) => css`

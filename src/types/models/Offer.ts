@@ -54,3 +54,11 @@ export interface IOfferRequestBody {
     thumbnails: string[];
     tiers: ITier[];
 }
+
+export interface IOfferSortFilterParams {
+    direction: string;
+    field: string;
+    minPrice: number;
+    maxPrice: number;
+    tags: ITag[];
+}
