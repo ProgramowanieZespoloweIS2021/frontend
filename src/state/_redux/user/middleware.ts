@@ -7,10 +7,8 @@ import { createUser, getUser, loginUser } from '@state/_redux/user/actions';
 import { setJwt } from '@utils/jwt';
 import { toast } from 'react-toastify';
 import { API } from '@utils/api';
-import { createBrowserHistory } from 'history';
 import paths from '@shared/paths';
-
-const history = createBrowserHistory();
+import { history } from '@utils/history';
 
 const AUTH_SERVICE_URL = process.env.REACT_APP_AUTH_SERVICE_URL;
 
