@@ -47,10 +47,12 @@ export const getOffersRequest = async (
         if (action.payload) {
             const data: IOfferSortFilterParams = action.payload;
             const tags = data.tags.map((tag) => tag.name);
+
             const params = {
                 order_by: `${data.direction}:${data.field}`,
                 min_price: `gt:${data.minPrice}`,
             };
+
             const response = await API.get('offers', params);
             console.log(response);
             dispatch(getOffers.success(response.data));

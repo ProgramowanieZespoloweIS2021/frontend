@@ -4,6 +4,8 @@ import {
     Box,
     Chip,
     TextField,
+    FormHelperText,
+    Select,
 } from '@material-ui/core';
 import { DefaultText, Header } from '@components/_universal/Typography.styled';
 import styled, { css } from 'styled-components';
@@ -23,10 +25,26 @@ export const Input = styled(TextField)(
     ({ theme }) => css`
         width: 100%;
         && {
-            margin: 4px 0;
+            margin-bottom: 8px;
         }
         & label {
             color: ${theme.colors.primary};
+        }
+    `,
+);
+
+export const Dropdown = styled(Select)(
+    ({ theme }) => css`
+        width: 100%;
+        margin-bottom: 5px;
+    `,
+);
+
+export const HelperText = styled(FormHelperText)(
+    ({ theme }) => css`
+        && {
+            color: ${theme.colors.black};
+            margin-bottom: 5px;
         }
     `,
 );

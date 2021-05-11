@@ -4,27 +4,21 @@ import {
     Button,
     Card,
     CardContent,
-    Chip,
     Container,
     Divider,
     Grid,
     IconButton,
-    MenuItem,
-    TextField,
 } from '@material-ui/core';
 import Select from 'react-select';
 import { Favorite } from '@material-ui/icons';
 import {
     CardBottomActions,
     CardImage,
-    CardTitle,
-    SortingLabel,
     CardLink,
     CardChip,
     Input,
 } from './OffersList.styled';
 import { DefaultText } from '@components/_universal/Typography.styled';
-import { mockOffers } from './mockOffers';
 import { useDispatch, useSelector } from 'react-redux';
 import { useForm, Controller } from 'react-hook-form';
 import { getAllTags, getOffers } from '@state/_redux/offers/actions';
@@ -33,10 +27,9 @@ import {
     selectOffers,
     selectTotalNumberOfOffers,
 } from '@state/_redux/offers/selectors';
-import { Link } from 'react-router-dom';
 import { ISelectOption } from '@@types/models/SelectOption';
-import { SortField, SortOrder } from '@@types/models/Sort';
 import { IOfferSortFilterParams, ITag } from '@@types/models/Offer';
+import { sortDirectionOptions, sortFieldOptions } from './_components/options';
 
 interface IProps {}
 
@@ -53,7 +46,6 @@ const OffersList: React.FC<IProps> = () => {
     const dispatch = useDispatch();
 
     const onSubmit = (data: IOffersForm): void => {
-        console.log(data);
         const { min, max, sortDirection, sortField, tags } = data;
         const requestParams: IOfferSortFilterParams = {
             direction: sortDirection.value,
@@ -74,32 +66,6 @@ const OffersList: React.FC<IProps> = () => {
     const offers = useSelector(selectOffers);
     const offersAmount = useSelector(selectTotalNumberOfOffers);
 
-    const sortDirectionOptions: ISelectOption[] = [
-        {
-            value: SortOrder.ASC,
-            label: 'ascending',
-        },
-        {
-            value: SortOrder.DESC,
-            label: 'descending',
-        },
-    ];
-
-    const sortFieldOptions: ISelectOption[] = [
-        {
-            value: SortField.CREATION_TIMESTAMP,
-            label: 'creation time',
-        },
-        {
-            value: SortField.LOWEST_PRICE,
-            label: 'lowest price',
-        },
-        {
-            value: SortField.TITLE,
-            label: 'title',
-        },
-    ];
-
     return (
         <>
             <Container>
@@ -118,10 +84,40 @@ const OffersList: React.FC<IProps> = () => {
                         placeholder="max"
                         variant="outlined"
                     />
-                    {tagOptions && (
+                    <Box mb={1}>
+                        {tagOptions && (
+                            <Controller
+                                control={control}
+                                name="tags"
+                                render={({
+                                    field: {
+                                        onChange,
+                                        onBlur,
+                                        value,
+                                        name,
+                                        ref,
+                                    },
+                                    fieldState: {
+                                        invalid,
+                                        isTouched,
+                                        isDirty,
+                                        error,
+                                    },
+                                    formState,
+                                }) => (
+                                    <Select
+                                        isMulti
+                                        options={tagOptions}
+                                        onChange={onChange}
+                                    />
+                                )}
+                            />
+                        )}
+                    </Box>
+                    <Box mb={1}>
                         <Controller
                             control={control}
-                            name="tags"
+                            name="sortField"
                             render={({
                                 field: { onChange, onBlur, value, name, ref },
                                 fieldState: {
@@ -133,45 +129,37 @@ const OffersList: React.FC<IProps> = () => {
                                 formState,
                             }) => (
                                 <Select
-                                    isMulti
-                                    options={tagOptions}
+                                    options={sortFieldOptions}
+                                    className="basic-multi-select"
+                                    classNamePrefix="select"
                                     onChange={onChange}
                                 />
                             )}
                         />
-                    )}
-                    <Controller
-                        control={control}
-                        name="sortField"
-                        render={({
-                            field: { onChange, onBlur, value, name, ref },
-                            fieldState: { invalid, isTouched, isDirty, error },
-                            formState,
-                        }) => (
-                            <Select
-                                options={sortFieldOptions}
-                                className="basic-multi-select"
-                                classNamePrefix="select"
-                                onChange={onChange}
-                            />
-                        )}
-                    />
-                    <Controller
-                        control={control}
-                        name="sortDirection"
-                        render={({
-                            field: { onChange, onBlur, value, name, ref },
-                            fieldState: { invalid, isTouched, isDirty, error },
-                            formState,
-                        }) => (
-                            <Select
-                                options={sortDirectionOptions}
-                                className="basic-multi-select"
-                                classNamePrefix="select"
-                                onChange={onChange}
-                            />
-                        )}
-                    />
+                    </Box>
+                    <Box mb={1}>
+                        <Controller
+                            control={control}
+                            name="sortDirection"
+                            render={({
+                                field: { onChange, onBlur, value, name, ref },
+                                fieldState: {
+                                    invalid,
+                                    isTouched,
+                                    isDirty,
+                                    error,
+                                },
+                                formState,
+                            }) => (
+                                <Select
+                                    options={sortDirectionOptions}
+                                    className="basic-multi-select"
+                                    classNamePrefix="select"
+                                    onChange={onChange}
+                                />
+                            )}
+                        />
+                    </Box>
                     <Button
                         variant={'contained'}
                         color={'secondary'}
