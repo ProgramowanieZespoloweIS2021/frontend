@@ -8,6 +8,7 @@ import { API } from '@utils/api';
 import { TState } from '../../../boot/configureStore';
 import { getType } from 'typesafe-actions';
 import { toast } from 'react-toastify';
+import { IOfferSortFilterParams } from '@@types/models/Offer';
 
 export const getAllTagsRequest = async (
     action: AnyAction,
@@ -42,8 +43,19 @@ export const getOffersRequest = async (
     action: AnyAction,
     dispatch: Dispatch,
 ) => {
-    // TODO: Add GET url params for sorting, pagination, filtering
     try {
+        if (action.payload) {
+            const data: IOfferSortFilterParams = action.payload;
+            const tags = data.tags.map((tag) => tag.name);
+            const params = {
+                order_by: `${data.direction}:${data.field}`,
+                min_price: `gt:${data.minPrice}`,
+            };
+            const response = await API.get('offers', params);
+            console.log(response);
+            dispatch(getOffers.success(response.data));
+            return;
+        }
         const response = await API.get('offers');
         console.log(response);
         dispatch(getOffers.success(response.data));

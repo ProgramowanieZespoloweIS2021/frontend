@@ -36,15 +36,15 @@ import {
 import { Link } from 'react-router-dom';
 import { ISelectOption } from '@@types/models/SelectOption';
 import { SortField, SortOrder } from '@@types/models/Sort';
-import { ITag } from '@@types/models/Offer';
+import { IOfferSortFilterParams, ITag } from '@@types/models/Offer';
 
 interface IProps {}
 
 interface IOffersForm {
     min: number;
     max: number;
-    sortDirection: string;
-    sortField: string;
+    sortDirection: ISelectOption;
+    sortField: ISelectOption;
     tags: ISelectOption[];
 }
 
@@ -54,8 +54,15 @@ const OffersList: React.FC<IProps> = () => {
 
     const onSubmit = (data: IOffersForm): void => {
         console.log(data);
-        // Dispatch get offers
-        // Get offers
+        const { min, max, sortDirection, sortField, tags } = data;
+        const requestParams: IOfferSortFilterParams = {
+            direction: sortDirection.value,
+            field: sortField.value,
+            minPrice: min,
+            maxPrice: max,
+            tags: tags.map((tag) => ({ name: tag.value })),
+        };
+        dispatch(getOffers.request(requestParams));
     };
 
     useEffect(() => {
