@@ -1,3 +1,5 @@
+import { ITag } from '@@types/models/Offer';
+
 export const delay = (ms: number): Promise<void> => {
     return new Promise((resolve) => setTimeout(resolve, ms));
 };
@@ -5,6 +7,15 @@ export const delay = (ms: number): Promise<void> => {
 export function resolveEnv(name: string): any {
     return (window as any)?.__env__?.[name] || process.env[name];
 }
+
+export const createTagsUrl = (tags: ITag[]) => {
+    let tagsUrl = '';
+    tags.forEach((tag) => {
+        tagsUrl += `${tag.name},`;
+    });
+    tagsUrl = tagsUrl.slice(0, -1);
+    return tagsUrl;
+};
 
 /**
  * Shuffles array in place. ES6 version

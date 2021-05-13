@@ -9,6 +9,7 @@ import { TState } from '../../../boot/configureStore';
 import { getType } from 'typesafe-actions';
 import { toast } from 'react-toastify';
 import { IOfferSortFilterParams } from '@@types/models/Offer';
+import { createTagsUrl } from '@utils/helpers';
 
 export const getAllTagsRequest = async (
     action: AnyAction,
@@ -46,24 +47,17 @@ export const getOffersRequest = async (
     try {
         if (action.payload) {
             const data: IOfferSortFilterParams = action.payload;
-
-            const tags = data.tags.map((tag) => {
-                let tagString = '';
-                tagString += `${tag},`;
-            });
-
+            const tagsUrl = createTagsUrl(data.tags);
             const params = {
                 order_by: `${data.direction}:${data.field}`,
                 min_price: `gt:${data.minPrice},lt:${data.maxPrice}`,
+                tags: tagsUrl,
             };
-
             const response = await API.get('offers', params);
-            console.log(response);
             dispatch(getOffers.success(response.data));
             return;
         }
         const response = await API.get('offers');
-        console.log(response);
         dispatch(getOffers.success(response.data));
     } catch (err) {
         dispatch(getOffers.failure(err));

@@ -21,18 +21,6 @@ export const SliderContainer = styled(Box)(
     `,
 );
 
-export const Input = styled(TextField)(
-    ({ theme }) => css`
-        width: 100%;
-        && {
-            margin-bottom: 8px;
-        }
-        & label {
-            color: ${theme.colors.primary};
-        }
-    `,
-);
-
 export const Dropdown = styled(Select)(
     ({ theme }) => css`
         width: 100%;
