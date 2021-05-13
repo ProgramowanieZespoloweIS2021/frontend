@@ -13,16 +13,10 @@ import paths from '@shared/paths';
 
 interface IRouteConfig extends RouteProps {
     path: string;
-}
-interface IMainRouteConfig extends IRouteConfig {
-    subRoutes?: IAppSubRoutes;
-}
-export interface IAppRoutes {
-    layoutComponent: React.ElementType;
-    routes?: IMainRouteConfig[];
+    isProtected?: boolean;
 }
 
-export interface IAppSubRoutes {
+export interface IAppRoutes {
     layoutComponent: React.ElementType;
     routes?: IRouteConfig[];
 }
@@ -47,6 +41,7 @@ const routerConfig: RouterConfig = [
                 component: OfferAddPage,
                 exact: true,
                 path: paths.offerAdd,
+                isProtected: true,
             },
         ],
         layoutComponent: ShopLayout,
@@ -88,6 +83,7 @@ const routerConfig: RouterConfig = [
                 component: AccountPage,
                 exact: true,
                 path: paths.account,
+                isProtected: true,
             },
         ],
         layoutComponent: ShopLayout,
