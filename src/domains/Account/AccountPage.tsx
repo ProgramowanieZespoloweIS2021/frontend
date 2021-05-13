@@ -6,8 +6,6 @@ import { Container, LoginHeader } from './AccountPage.styled';
 import ChangePasswordForm from './_components/ChangePasswordForm';
 import ChangeUserDetailsForm from './_components/ChangeUserDetailsForm';
 
-import { useProtectedRoute } from '@utils/hooks/useProtectedRoute';
-
 interface IProps {}
 
 const USER = {
@@ -17,8 +15,6 @@ const USER = {
 };
 
 const AccountPage: React.FC<IProps> = () => {
-    useProtectedRoute();
-
     return (
         <>
             <Grid container justify="center" alignItems="center" spacing={4}>

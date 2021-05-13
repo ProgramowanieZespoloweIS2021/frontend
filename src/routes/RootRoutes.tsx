@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import routerConfig from './index';
+import { AuthWrapper } from '@routes/AuthWrapper';
 
 const RootRouter = () => {
     return (
@@ -12,18 +13,19 @@ const RootRouter = () => {
                             <Switch>
                                 {routes?.map(
                                     (
-                                        { component, subRoutes, ...rest },
+                                        { component, isProtected, ...rest },
                                         routeIndex,
                                     ) => (
                                         <Route
                                             key={routeIndex}
                                             render={(props) => {
                                                 const Component = component as React.ElementType;
-                                                return (
-                                                    <Component
-                                                        {...props}
-                                                        {...subRoutes}
-                                                    />
+                                                return isProtected ? (
+                                                    <AuthWrapper>
+                                                        <Component {...props} />
+                                                    </AuthWrapper>
+                                                ) : (
+                                                    <Component {...props} />
                                                 );
                                             }}
                                             {...rest}

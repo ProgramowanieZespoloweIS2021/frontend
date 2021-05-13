@@ -3,9 +3,9 @@ export type User = {
 };
 
 export type UserModule = {
-    authorized: boolean;
+    authorized: boolean | null;
 };
 
 export const initialState: UserModule = {
-    authorized: false,
+    authorized: null,
 };
