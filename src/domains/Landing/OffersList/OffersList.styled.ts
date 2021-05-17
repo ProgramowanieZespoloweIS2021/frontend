@@ -1,6 +1,15 @@
-import { CardActions, CardMedia, Box } from '@material-ui/core';
+import {
+    CardActions,
+    CardMedia,
+    Box,
+    Chip,
+    TextField,
+    FormHelperText,
+    Select,
+} from '@material-ui/core';
 import { DefaultText, Header } from '@components/_universal/Typography.styled';
 import styled, { css } from 'styled-components';
+import { Link } from 'react-router-dom';
 
 export const SliderContainer = styled(Box)(
     ({ theme }) => css`
@@ -9,6 +18,22 @@ export const SliderContainer = styled(Box)(
         justify-content: center;
         width: 15rem;
         margin-right: 2rem;
+    `,
+);
+
+export const Dropdown = styled(Select)(
+    ({ theme }) => css`
+        width: 100%;
+        margin-bottom: 5px;
+    `,
+);
+
+export const HelperText = styled(FormHelperText)(
+    ({ theme }) => css`
+        && {
+            color: ${theme.colors.black};
+            margin-bottom: 5px;
+        }
     `,
 );
 
@@ -24,9 +49,23 @@ export const CardImage = styled(CardMedia)(
     `,
 );
 
-export const CardTitle = styled(Header)(
+export const CardLink = styled(Link)(
     ({ theme }) => css`
+        text-decoration: none;
         font-size: ${theme.fontSizes.l}px;
+        color: ${theme.colors.black};
+        &:hover {
+            color: ${theme.colors.primary};
+        }
+    `,
+);
+
+export const CardTitle = styled(Header)(({ theme }) => css``);
+
+export const CardChip = styled(Chip)(
+    ({ theme }) => css`
+        margin-right: 5px;
+        margin-bottom: 5px;
     `,
 );
 

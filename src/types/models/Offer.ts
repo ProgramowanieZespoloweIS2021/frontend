@@ -8,6 +8,25 @@ export interface IOffer {
     tags: ITag[];
 }
 
+export interface IOfferReport {
+    totalNumberOfOffers: number;
+    offers: IOfferBrief[];
+}
+
+export interface IOfferBrief {
+    id: number;
+    ownerId: number;
+    name: string;
+    minimalPrice: number;
+    tags: ITag[];
+    thumbnails: IThumbnail[];
+}
+
+export interface IThumbnail {
+    id: number;
+    url: string;
+}
+
 //TODO: Export these types to another models, when backend will be ready
 interface ITier {
     title: string;
@@ -34,4 +53,12 @@ export interface IOfferRequestBody {
     tags: string[];
     thumbnails: string[];
     tiers: ITier[];
+}
+
+export interface IOfferSortFilterParams {
+    direction: string;
+    field: string;
+    minPrice: number;
+    maxPrice: number;
+    tags: ITag[];
 }

@@ -15,3 +15,13 @@ export const selectAllTags = createSelector(
             label: name,
         })),
 );
+
+export const selectOffers = createSelector(
+    selectOffersModule,
+    (offersReducer) => offersReducer.offers,
+);
+
+export const selectTotalNumberOfOffers = createSelector(
+    selectOffersModule,
+    (offersReducer) => offersReducer.totalNumberOfOffers,
+);
