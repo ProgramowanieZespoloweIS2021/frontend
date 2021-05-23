@@ -2,6 +2,7 @@ import { applyMiddleware } from 'redux';
 
 import {
     createUserMiddleware,
+    logoutUserMiddleware,
     loginMiddleware,
     getUserMiddleware,
 } from '@state/_redux/user/middleware';
@@ -18,6 +19,7 @@ const middlewares = [
     createOfferMiddleware,
     getOffersMiddleware,
     getUserMiddleware,
+    logoutUserMiddleware,
 ];
 
 export default applyMiddleware(...middlewares);

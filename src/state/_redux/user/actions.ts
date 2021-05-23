@@ -23,3 +23,9 @@ export const getUser = createAsyncAction(
     'GET_USER_SUCCESS',
     'GET_USER_FAILURE',
 )<PayloadDefault, AxiosResponse<User>, PayloadDefault>();
+
+export const logoutUser = createAsyncAction(
+    'LOGOUT_USER_REQUEST',
+    'LOGOUT_USER_SUCCESS',
+    'LOGOUT_USER_FAILURE',
+)<null, AxiosResponse<null>, null>();

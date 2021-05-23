@@ -1,5 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router';
+import { useSelector } from 'react-redux';
 
 import { Box, Button, Container, Grid, IconButton } from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
@@ -8,11 +9,13 @@ import { MainSubtitle, MainTitle } from './LandingPage.styled';
 
 import { ShowcaseImage } from '@shared/svgs/ShowcaseImage';
 import paths from '@shared/paths';
+import { isAuthorized } from '@state/_redux/user/selectors';
 
 interface IProps {}
 
 const LandingPage: React.FC<IProps> = () => {
     const history = useHistory();
+    const isUserAuthorized = useSelector(isAuthorized);
 
     const handleLoginButton = () => {
         history.push(paths.login);
@@ -20,6 +23,10 @@ const LandingPage: React.FC<IProps> = () => {
 
     const handleRegisterButton = () => {
         history.push(paths.register);
+    };
+
+    const handleAddOfferButton = () => {
+        history.push(paths.offerAdd);
     };
 
     return (
@@ -38,26 +45,39 @@ const LandingPage: React.FC<IProps> = () => {
                                 Do you need app, website or design? Hire the
                                 best developers and let them make it for you.
                             </MainSubtitle>
-                            <Box display="flex" flexDirection="row" mt={4}>
-                                <Box mr={4}>
+                            {!isUserAuthorized && (
+                                <Box display="flex" flexDirection="row" mt={4}>
+                                    <Box mr={4}>
+                                        <Button
+                                            variant="contained"
+                                            color="primary"
+                                            onClick={handleLoginButton}
+                                        >
+                                            Login
+                                        </Button>
+                                    </Box>
+                                    <Box>
+                                        <Button
+                                            variant="contained"
+                                            color="primary"
+                                            onClick={handleRegisterButton}
+                                        >
+                                            Register
+                                        </Button>
+                                    </Box>
+                                </Box>
+                            )}
+                            {isUserAuthorized && (
+                                <Box display="flex" flexDirection="row" mt={4}>
                                     <Button
                                         variant="contained"
                                         color="primary"
-                                        onClick={handleLoginButton}
+                                        onClick={handleAddOfferButton}
                                     >
-                                        Login
+                                        Add offer
                                     </Button>
                                 </Box>
-                                <Box>
-                                    <Button
-                                        variant="contained"
-                                        color="primary"
-                                        onClick={handleRegisterButton}
-                                    >
-                                        Register
-                                    </Button>
-                                </Box>
-                            </Box>
+                            )}
                         </Grid>
                         <Grid item xs={6}>
                             <Box display="flex" justifyContent="center">
