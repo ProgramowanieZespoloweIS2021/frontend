@@ -8,13 +8,11 @@ import { Grid } from '@material-ui/core';
 import { Container, Input, Button } from './Form.styled';
 
 import { createUser } from '@state/_redux/user/actions';
-import paths from '@shared/paths';
 import { schema } from '@domains/Register/validation';
 import { IRegisterData } from '@domains/Register/types';
 
 const Form = () => {
     const dispatch = useDispatch();
-    const history = useHistory();
     const {
         register,
         handleSubmit,
@@ -22,9 +20,7 @@ const Form = () => {
     } = useForm({ resolver: yupResolver(schema) });
 
     const onSubmit = async (data: IRegisterData) => {
-        if (await dispatch(createUser.request(data))) {
-            history.push(paths.login);
-        }
+        dispatch(createUser.request(data));
     };
 
     return (

@@ -27,10 +27,12 @@ const creatUserRequest = async (action: AnyAction, dispatch: Dispatch) => {
             surname: lastName,
         });
         dispatch(createUser.success(response));
+        history.push(paths.login);
         toast.success('Successfully registered!');
         return true;
     } catch (err) {
         dispatch(createUser.failure(err));
+        toast.error('Error occurred while creating account');
         return false;
     }
 };
@@ -55,6 +57,7 @@ const loginRequest = async (action: AnyAction, dispatch: Dispatch) => {
         });
         dispatch(loginUser.success(response));
         history.push(paths.account);
+        toast.success('Successfully logged in!');
         return true;
     } catch (err) {
         dispatch(loginUser.failure(err));
@@ -65,7 +68,7 @@ const loginRequest = async (action: AnyAction, dispatch: Dispatch) => {
 
 const logoutRequest = async (action: AnyAction, dispatch: Dispatch) => {
     try {
-        const response = await API.postAuth(`/auth/logout`);
+        const response = await API.getAuth(AUTH_SERVICE_URL, '/auth/logout');
         dispatch(logoutUser.success(response));
         return true;
     } catch (err) {
