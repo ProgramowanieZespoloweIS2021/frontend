@@ -3,11 +3,11 @@ import {
     Logo,
     NavButton,
     NavButtonsWrapper,
+    NavIconButton,
     Wrapper,
 } from './Navigation.styled';
 import paths from '@shared/paths';
 import { useHistory } from 'react-router';
-import IconButton from '@components/_universal/IconButton/IconButton';
 
 interface IProps {}
 
@@ -48,7 +48,7 @@ export const Navigation: React.FC<IProps> = ({ children }) => {
                 >
                     Profile
                 </NavButton>
-                <IconButton
+                <NavIconButton
                     size={32}
                     name="ShoppingCart"
                     onClick={() => history.push(paths.cart)}
