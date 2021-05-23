@@ -4,6 +4,7 @@ import {
     Button as ButtonMui,
     Grid,
     Checkbox as CheckboxMui,
+    Box,
 } from '@material-ui/core';
 import IconButton from '@components/_universal/IconButton/IconButton';
 

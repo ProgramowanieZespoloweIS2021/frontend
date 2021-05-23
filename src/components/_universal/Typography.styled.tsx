@@ -20,7 +20,7 @@ export const textStylesCss = css<ITextProps>`
     color: ${({ theme, color }) =>
         color ? theme.colors[color] : theme.colors.text};
     font-family: ${({ theme, fontFamily }) =>
-        fontFamily ? theme.fontFamily[fontFamily] : theme.fontFamily.open_sans};
+        fontFamily ? theme.fontFamily[fontFamily] : theme.fontFamily.roboto};
     font-style: ${({ italic }) => (italic ? 'italic' : 'normal')};
     font-weight: ${({ theme, fontWeight }) =>
         fontWeight ? theme.fontWeights[fontWeight] : theme.fontWeights.regular};

@@ -32,12 +32,14 @@ const muiTheme = createMuiTheme({
         MuiButton: {
             root: {
                 fontWeight: theme.fontWeights.semiBold,
+                color: theme.colors.white,
             },
-            contained: {
-                fontSize: theme.fontSizes.xs,
-                fontWeight: theme.fontWeights.semiBold,
-                borderRadius: 30,
-                padding: '11px 34px',
+            outlinedPrimary: {
+                color: theme.colors.white,
+                background: theme.colors.primary,
+                '&:hover': {
+                    color: theme.colors.primary,
+                },
             },
             containedPrimary: {
                 color: theme.colors.white,
@@ -46,6 +48,29 @@ const muiTheme = createMuiTheme({
                 padding: '19px 34px',
             },
         },
+        // MuiInput: {
+        //     root: {
+        //         background: theme.colors.white,
+        //     },
+        //     input: {
+        //         background: theme.colors.white,
+        //     },
+        // },
+        // MuiInputLabel: {
+        //     root: {
+        //         color: theme.colors.white,
+        //     },
+        // },
+        // MuiTextField: {
+        //     root: {
+        //         background: '#36a1cc',
+        //     },
+        // },
+        // MuiFormControl: {
+        //     root: {
+        //         background: '#36a1cc',
+        //     },
+        // },
     },
 });
 

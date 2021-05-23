@@ -103,7 +103,7 @@ const CartPage: React.FC<IProps> = () => {
                         </CartPaymentItem>
                         <CartPaymentItem item sm={6} md={6} xs={12}>
                             <PriceText>Price 92,88 $</PriceText>
-                            <Button variant="contained" color="primary">
+                            <Button variant="outlined" color="primary">
                                 Checkout
                             </Button>
                         </CartPaymentItem>

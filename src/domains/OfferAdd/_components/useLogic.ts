@@ -20,7 +20,12 @@ export type IAddOfferForm = Omit<IOffer, 'user' | 'tags'> & {
 };
 
 export const useLogic = () => {
-    const { register, handleSubmit, control } = useForm<IAddOfferForm>({
+    const {
+        register,
+        handleSubmit,
+        control,
+        formState: { errors },
+    } = useForm<IAddOfferForm>({
         resolver: yupResolver(addOfferFormValidation),
         mode: 'onSubmit',
     });
@@ -42,6 +47,7 @@ export const useLogic = () => {
         register,
         handleSubmit,
         control,
+        errors,
         tiersIndexes,
         setTiersIndexes,
         thumbnailIndexes,

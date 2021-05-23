@@ -40,7 +40,7 @@ const LandingPage: React.FC<IProps> = () => {
                         justify="center"
                     >
                         <Grid item xs={6}>
-                            <MainTitle>Professional IT Products</MainTitle>
+                            <MainTitle>Freelancers for hire</MainTitle>
                             <MainSubtitle>
                                 Do you need app, website or design? Hire the
                                 best developers and let them make it for you.
@@ -49,7 +49,7 @@ const LandingPage: React.FC<IProps> = () => {
                                 <Box display="flex" flexDirection="row" mt={4}>
                                     <Box mr={4}>
                                         <Button
-                                            variant="contained"
+                                            variant="outlined"
                                             color="primary"
                                             onClick={handleLoginButton}
                                         >
@@ -58,7 +58,7 @@ const LandingPage: React.FC<IProps> = () => {
                                     </Box>
                                     <Box>
                                         <Button
-                                            variant="contained"
+                                            variant="outlined"
                                             color="primary"
                                             onClick={handleRegisterButton}
                                         >
@@ -70,7 +70,7 @@ const LandingPage: React.FC<IProps> = () => {
                             {isUserAuthorized && (
                                 <Box display="flex" flexDirection="row" mt={4}>
                                     <Button
-                                        variant="contained"
+                                        variant="outlined"
                                         color="primary"
                                         onClick={handleAddOfferButton}
                                     >

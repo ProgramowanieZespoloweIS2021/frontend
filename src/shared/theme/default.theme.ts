@@ -2,7 +2,7 @@ import { palette, global, shadows } from './config';
 
 const defaultTheme = {
     colors: {
-        app_bg: palette.white,
+        app_bg: palette.aliceBlue,
         white: palette.white,
         black: palette.black,
         error: palette.crimsonRed,
