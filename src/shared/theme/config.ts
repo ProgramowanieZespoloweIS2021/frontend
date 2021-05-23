@@ -7,6 +7,7 @@ export const palette = {
     blue: '#00AFF5',
     successGreen: '#4dcb4d',
     golden: '#F9D350',
+    aliceBlue: 'aliceblue',
 };
 
 export const shadows = {
@@ -49,6 +50,7 @@ export const global = {
     },
 
     fontFamily: {
+        roboto: `'Roboto', sans-serif`,
         open_sans: `'Open Sans', sans-serif`,
     },
     cursors: {

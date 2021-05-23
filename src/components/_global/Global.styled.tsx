@@ -6,7 +6,7 @@ export const GlobalStyled = createGlobalStyle`
 
     * {
         box-sizing: border-box;
-        font-family: 'Open Sans', sans-serif;
+        font-family: 'Roboto', sans-serif;
     }
 
     html {

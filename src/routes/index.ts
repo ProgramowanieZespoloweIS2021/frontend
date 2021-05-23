@@ -18,6 +18,7 @@ interface IRouteConfig extends RouteProps {
 
 export interface IAppRoutes {
     layoutComponent: React.ElementType;
+    pageName?: string;
     routes?: IRouteConfig[];
 }
 
@@ -41,10 +42,11 @@ const routerConfig: RouterConfig = [
                 component: OfferAddPage,
                 exact: true,
                 path: paths.offerAdd,
-                isProtected: true,
+                // isProtected: true,
             },
         ],
         layoutComponent: ShopLayout,
+        pageName: 'Add offer',
     },
     {
         routes: [
@@ -66,6 +68,7 @@ const routerConfig: RouterConfig = [
             },
         ],
         layoutComponent: ShopLayout,
+        pageName: 'Login',
     },
     {
         routes: [
@@ -76,6 +79,7 @@ const routerConfig: RouterConfig = [
             },
         ],
         layoutComponent: ShopLayout,
+        pageName: 'Register',
     },
     {
         routes: [

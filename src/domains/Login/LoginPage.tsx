@@ -2,16 +2,9 @@ import React from 'react';
 import { useHistory } from 'react-router';
 import { Grid } from '@material-ui/core';
 import Form from './_components/Form';
-import {
-    Container,
-    LoginHeader,
-    Divider,
-    InfoText,
-    RegisterWrapper,
-    Button,
-    Wrapper,
-} from './LoginPage.styled';
+import { InfoText, Button } from './LoginPage.styled';
 import paths from '@shared/paths';
+import { SectionContainer } from '@components/_form-elements/SectionContainer';
 
 interface IProps {}
 
@@ -24,25 +17,25 @@ const LoginPage: React.FC<IProps> = () => {
 
     return (
         <>
-            <Wrapper container justify="center" spacing={4}>
-                <Grid item sm={6} md={3} xs={12}>
-                    <Container elevation={2}>
-                        <LoginHeader>Login</LoginHeader>
+            <Grid container justify="center" spacing={4}>
+                <Grid item sm={6}>
+                    <SectionContainer>
                         <Form />
-                        <Divider />
-                        <RegisterWrapper>
-                            <InfoText>If you are new here</InfoText>
-                            <Button
-                                variant="outlined"
-                                color="primary"
-                                onClick={handleRegisterButton}
-                            >
-                                Create account
-                            </Button>
-                        </RegisterWrapper>
-                    </Container>
+                    </SectionContainer>
                 </Grid>
-            </Wrapper>
+                <Grid item sm={6}>
+                    <SectionContainer>
+                        <InfoText>If you are new here</InfoText>
+                        <Button
+                            variant="outlined"
+                            color="primary"
+                            onClick={handleRegisterButton}
+                        >
+                            Create account
+                        </Button>
+                    </SectionContainer>
+                </Grid>
+            </Grid>
         </>
     );
 };

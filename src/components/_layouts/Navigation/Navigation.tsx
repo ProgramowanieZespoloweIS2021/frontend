@@ -5,6 +5,7 @@ import {
     NavButtonsWrapper,
     NavIconButton,
     Wrapper,
+    HomeLink,
 } from './Navigation.styled';
 import paths from '@shared/paths';
 import { useHistory } from 'react-router';
@@ -27,7 +28,9 @@ export const Navigation: React.FC<IProps> = () => {
 
     return (
         <Wrapper>
-            <Logo>Software Factory</Logo>
+            <HomeLink to={paths.home}>
+                <Logo>Software Factory</Logo>
+            </HomeLink>
             <NavButtonsWrapper>
                 <NavButton
                     color="primary"
