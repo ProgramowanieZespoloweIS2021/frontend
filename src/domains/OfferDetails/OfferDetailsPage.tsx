@@ -1,4 +1,5 @@
 import React from 'react';
+import { useParams } from 'react-router-dom';
 import * as styled from './OfferDetailsPage.styled';
 import { AppBar, Box, Button, Grid, Tabs } from '@material-ui/core';
 import { IconManager } from '@components/_universal';
@@ -40,11 +41,21 @@ const mockOffer: IOffer = {
     tags: [{ name: 'Java' }, { name: 'C#' }],
 };
 
+interface UrlParams {
+    id: string;
+}
+
 //TODO: Maybe separate tabs component? (waiting for API model structure)
 //TODO: Thumbnails carousel component (backend)
 //TODO: Connect contact, toCard buttons
 const OfferDetailsPage: React.FC<IProps> = () => {
     const [tabIndex, setTabIndex] = React.useState(0);
+    const { id } = useParams<UrlParams>();
+
+    const handleAddToCart = () => {
+        // Get id from url
+        // Add to cart by id
+    };
 
     return (
         <>
@@ -185,10 +196,8 @@ const OfferDetailsPage: React.FC<IProps> = () => {
                                                     <Button
                                                         variant={'contained'}
                                                         color={'secondary'}
-                                                        onClick={() =>
-                                                            console.log(
-                                                                'tocart',
-                                                            )
+                                                        onClick={
+                                                            handleAddToCart
                                                         }
                                                     >
                                                         <styled.IconMargin
