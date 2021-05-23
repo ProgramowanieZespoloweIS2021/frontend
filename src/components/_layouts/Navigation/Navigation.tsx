@@ -42,40 +42,34 @@ export const Navigation: React.FC<IProps> = () => {
                     Offers
                 </NavButton>
                 {isUserAuthorized && (
-                    <NavButton
-                        color="primary"
-                        onClick={() => history.push(paths.home)}
-                    >
-                        Orders
-                    </NavButton>
-                )}
-                {isUserAuthorized && (
-                    <NavButton
-                        color="primary"
-                        onClick={() => history.push(paths.home)}
-                    >
-                        Messages
-                    </NavButton>
-                )}
-                {isUserAuthorized && (
-                    <NavButton
-                        color="primary"
-                        onClick={() => history.push(paths.account)}
-                    >
-                        Profile
-                    </NavButton>
-                )}
-                {isUserAuthorized && (
-                    <NavButton color="primary" onClick={handleLogout}>
-                        Logout
-                    </NavButton>
-                )}
-                {isUserAuthorized && (
-                    <NavIconButton
-                        size={32}
-                        name="ShoppingCart"
-                        onClick={() => history.push(paths.cart)}
-                    />
+                    <>
+                        <NavButton
+                            color="primary"
+                            onClick={() => history.push(paths.home)}
+                        >
+                            Orders
+                        </NavButton>
+                        <NavButton
+                            color="primary"
+                            onClick={() => history.push(paths.home)}
+                        >
+                            Messages
+                        </NavButton>
+                        <NavButton
+                            color="primary"
+                            onClick={() => history.push(paths.account)}
+                        >
+                            Profile
+                        </NavButton>
+                        <NavButton color="primary" onClick={handleLogout}>
+                            Logout
+                        </NavButton>
+                        <NavIconButton
+                            size={32}
+                            name="ShoppingCart"
+                            onClick={() => history.push(paths.cart)}
+                        />
+                    </>
                 )}
             </NavButtonsWrapper>
         </Wrapper>
