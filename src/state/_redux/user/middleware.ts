@@ -70,6 +70,7 @@ const logoutRequest = async (action: AnyAction, dispatch: Dispatch) => {
     try {
         const response = await API.getAuth(AUTH_SERVICE_URL, '/auth/logout');
         dispatch(logoutUser.success(response));
+        history.push(paths.home);
         return true;
     } catch (err) {
         dispatch(logoutUser.failure(err));
