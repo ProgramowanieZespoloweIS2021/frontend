@@ -54,9 +54,11 @@ const loginRequest = async (action: AnyAction, dispatch: Dispatch) => {
             password,
         });
         dispatch(loginUser.success(response));
+        history.push(paths.account);
         return true;
     } catch (err) {
         dispatch(loginUser.failure(err));
+        toast.error('Wrong credentials');
         return false;
     }
 };

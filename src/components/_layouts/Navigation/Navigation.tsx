@@ -10,7 +10,7 @@ import paths from '@shared/paths';
 import { useHistory } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import { removeJwt } from '@utils/jwt';
-import { logoutUser } from '@state/_redux/user/actions';
+import { getUser, logoutUser } from '@state/_redux/user/actions';
 import { isAuthorized } from '@state/_redux/user/selectors';
 
 interface IProps {}
@@ -23,6 +23,7 @@ export const Navigation: React.FC<IProps> = () => {
     const handleLogout = async () => {
         await dispatch(logoutUser.request(null));
         removeJwt();
+        await dispatch(getUser.request(''));
     };
 
     return (

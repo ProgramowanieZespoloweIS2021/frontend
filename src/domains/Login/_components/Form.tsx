@@ -26,7 +26,7 @@ const Form: React.FC<IProps> = () => {
 
     const onSubmit = async (data: ILoginData) => {
         if (await dispatch(loginUser.request(data))) {
-            history.push(paths.account);
+
         }
     };
 
