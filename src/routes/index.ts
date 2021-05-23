@@ -42,7 +42,7 @@ const routerConfig: RouterConfig = [
                 component: OfferAddPage,
                 exact: true,
                 path: paths.offerAdd,
-                // isProtected: true,
+                isProtected: true,
             },
         ],
         layoutComponent: ShopLayout,
