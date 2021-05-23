@@ -48,4 +48,15 @@ export const Button = styled(ButtonMui)`
     width: 100%;
 `;
 
+export const Wrapper = styled(Grid)(
+    ({ theme }) => css`
+        height: 100%;
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        top: 0;
+    `,
+);
+
 export {};

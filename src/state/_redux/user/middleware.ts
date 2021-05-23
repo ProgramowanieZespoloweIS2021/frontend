@@ -3,7 +3,12 @@ import { getType } from 'typesafe-actions';
 import axios from 'axios';
 
 import { TState } from '../../../boot/configureStore';
-import { createUser, getUser, loginUser } from '@state/_redux/user/actions';
+import {
+    createUser,
+    getUser,
+    loginUser,
+    logoutUser,
+} from '@state/_redux/user/actions';
 import { setJwt } from '@utils/jwt';
 import { toast } from 'react-toastify';
 import { API } from '@utils/api';
@@ -22,10 +27,12 @@ const creatUserRequest = async (action: AnyAction, dispatch: Dispatch) => {
             surname: lastName,
         });
         dispatch(createUser.success(response));
+        history.push(paths.login);
         toast.success('Successfully registered!');
         return true;
     } catch (err) {
         dispatch(createUser.failure(err));
+        toast.error('Error occurred while creating account');
         return false;
     }
 };
@@ -49,9 +56,24 @@ const loginRequest = async (action: AnyAction, dispatch: Dispatch) => {
             password,
         });
         dispatch(loginUser.success(response));
+        history.push(paths.account);
+        toast.success('Successfully logged in!');
         return true;
     } catch (err) {
         dispatch(loginUser.failure(err));
+        toast.error('Wrong credentials');
+        return false;
+    }
+};
+
+const logoutRequest = async (action: AnyAction, dispatch: Dispatch) => {
+    try {
+        const response = await API.getAuth(AUTH_SERVICE_URL, '/auth/logout');
+        dispatch(logoutUser.success(response));
+        history.push(paths.home);
+        return true;
+    } catch (err) {
+        dispatch(logoutUser.failure(err));
         return false;
     }
 };
@@ -67,6 +89,15 @@ export const createUserMiddleware: Middleware<{}, TState> = ({ dispatch }) => (
 ) => async (action) => {
     if (action.type === getType(createUser.request)) {
         await creatUserRequest(action, dispatch);
+    }
+    return next(action);
+};
+
+export const logoutUserMiddleware: Middleware<{}, TState> = ({ dispatch }) => (
+    next,
+) => async (action) => {
+    if (action.type === getType(logoutUser.request)) {
+        await logoutRequest(action, dispatch);
     }
     return next(action);
 };

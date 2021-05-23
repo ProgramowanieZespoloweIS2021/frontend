@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components';
 import { Header } from '@components/_universal/Typography.styled';
 import { Button } from '@material-ui/core';
+import IconButton from '@components/_universal/IconButton/IconButton';
 
 export const Wrapper = styled.div(
     ({ theme }) => css`
@@ -33,5 +34,11 @@ export const NavButtonsWrapper = styled.div`
 export const NavButton = styled(Button)(
     ({ theme }) => css`
         margin-right: 10px;
+    `,
+);
+
+export const NavIconButton = styled(IconButton)(
+    ({ theme }) => css`
+        background-color: transparent;
     `,
 );

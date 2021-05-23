@@ -12,7 +12,7 @@ export const Input = styled(TextField)(
         width: 100%;
 
         && {
-            margin: 4px 0;
+            margin: 12px 0;
         }
 
         & label {
@@ -25,7 +25,7 @@ export const Button = styled(ButtonMui)`
     width: 100%;
 
     && {
-        margin-top: 16px;
+        margin-top: 24px;
     }
 `;
 

@@ -9,6 +9,7 @@ import {
     InfoText,
     RegisterWrapper,
     Button,
+    Wrapper,
 } from './LoginPage.styled';
 import paths from '@shared/paths';
 
@@ -23,7 +24,7 @@ const LoginPage: React.FC<IProps> = () => {
 
     return (
         <>
-            <Grid container justify="center" spacing={4}>
+            <Wrapper container justify="center" spacing={4}>
                 <Grid item sm={6} md={3} xs={12}>
                     <Container elevation={2}>
                         <LoginHeader>Login</LoginHeader>
@@ -32,7 +33,7 @@ const LoginPage: React.FC<IProps> = () => {
                         <RegisterWrapper>
                             <InfoText>If you are new here</InfoText>
                             <Button
-                                variant="contained"
+                                variant="outlined"
                                 color="primary"
                                 onClick={handleRegisterButton}
                             >
@@ -41,7 +42,7 @@ const LoginPage: React.FC<IProps> = () => {
                         </RegisterWrapper>
                     </Container>
                 </Grid>
-            </Grid>
+            </Wrapper>
         </>
     );
 };

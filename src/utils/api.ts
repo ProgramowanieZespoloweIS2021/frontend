@@ -12,8 +12,12 @@ export const API = {
             },
             params,
         }),
-    postAuth: (url: string, data: Object) =>
-        axios.post(`${API_URL}/${url}`, data),
+    postAuth: (url: string, data?: Object) =>
+        axios.post(`${API_URL}${url}`, data, {
+            headers: {
+                Authorization: `Bearer ${getJwt()}`,
+            },
+        }),
 
     getAuth: (serviceUrl?: string, endpointUrl?: string) =>
         axios.get(`${serviceUrl}${endpointUrl}`, {

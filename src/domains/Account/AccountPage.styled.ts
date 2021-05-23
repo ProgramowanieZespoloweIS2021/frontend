@@ -1,6 +1,6 @@
 import { Header } from '@components/_universal/Typography.styled';
 import styled, { css } from 'styled-components';
-import { Paper, TextField } from '@material-ui/core';
+import {Grid, Paper, TextField} from '@material-ui/core';
 
 export const Container = styled(Paper)(
     ({ theme }) => css`
@@ -26,6 +26,17 @@ export const Input = styled(TextField)(
         & label {
             color: ${theme.colors.primary};
         }
+    `,
+);
+
+export const Wrapper = styled(Grid)(
+    ({ theme }) => css`
+        height: 100%;
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        top: 0;
     `,
 );
 

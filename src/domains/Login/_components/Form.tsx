@@ -26,7 +26,7 @@ const Form: React.FC<IProps> = () => {
 
     const onSubmit = async (data: ILoginData) => {
         if (await dispatch(loginUser.request(data))) {
-            history.push(paths.account);
+
         }
     };
 
@@ -52,11 +52,18 @@ const Form: React.FC<IProps> = () => {
                         variant="outlined"
                         {...register('password')}
                     />
-                    <Button variant="contained" color="primary" type="submit">
+                    <Button
+                        variant="outlined"
+                        color="primary"
+                        type="submit"
+                    >
                         Sign in
                     </Button>
                 </form>
-                <Button variant="text" color="primary">
+                <Button
+                    variant="text"
+                    color="primary"
+                >
                     Forgot password?
                 </Button>
             </Grid>
