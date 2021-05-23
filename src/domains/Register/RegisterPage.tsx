@@ -33,7 +33,7 @@ const RegisterPage: React.FC<IProps> = () => {
                         <LoginWrapper>
                             <InfoText>Do you already have account?</InfoText>
                             <Button
-                                variant="contained"
+                                variant="outlined"
                                 color="primary"
                                 onClick={handleLoginButton}
                             >
