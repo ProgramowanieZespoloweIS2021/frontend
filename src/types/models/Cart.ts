@@ -15,13 +15,13 @@ export interface ICartItemDetails {
     tierPrice: number;
 }
 
-export interface ICartItemRequest {
+export interface ICartItem {
     offerId: number;
     tierId: number;
     description: string;
 }
 
-export interface ICartSubmissionRequest {
+export interface ICartSubmission {
     cartId: number;
     buyerId: number;
 }
