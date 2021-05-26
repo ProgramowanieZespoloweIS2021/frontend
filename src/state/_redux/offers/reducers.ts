@@ -1,17 +1,23 @@
 import { createReducer } from 'typesafe-actions';
-import { IOfferBrief, ITag } from '@@types/models/Offer';
-import { getAllTags, getOffers } from '@state/_redux/offers/actions';
+import { IOfferBrief, IOfferDetails, ITag } from '@@types/models/Offer';
+import {
+    getAllTags,
+    getOffers,
+    getOfferDetails,
+} from '@state/_redux/offers/actions';
 
 export type TOffersReducer = {
     tags: ITag[];
     totalNumberOfOffers: number;
     offers: IOfferBrief[];
+    offerDetails: IOfferDetails | null;
 };
 
 const initialState: TOffersReducer = {
     tags: [],
     totalNumberOfOffers: 0,
     offers: [],
+    offerDetails: null,
 };
 
 export const OffersReducer = createReducer(initialState)
@@ -26,4 +32,8 @@ export const OffersReducer = createReducer(initialState)
             totalNumberOfOffers,
             offers,
         }),
-    );
+    )
+    .handleAction(getOfferDetails.success, (state, { payload }) => ({
+        ...state,
+        offerDetails: payload,
+    }));

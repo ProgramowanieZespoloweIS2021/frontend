@@ -8,6 +8,18 @@ export interface IOffer {
     tags: ITag[];
 }
 
+export interface IOfferDetails {
+    id: number;
+    ownerId: number;
+    title: string;
+    description: string;
+    creationTimestamp: Date;
+    tiers: ITier[];
+    tags: ITag[];
+    thumbnails: IThumbnail[];
+    archived: boolean;
+}
+
 export interface IOfferReport {
     totalNumberOfOffers: number;
     offers: IOfferBrief[];
@@ -29,6 +41,7 @@ export interface IThumbnail {
 
 //TODO: Export these types to another models, when backend will be ready
 interface ITier {
+    id: number;
     title: string;
     description: string;
     price: number;

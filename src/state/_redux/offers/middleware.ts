@@ -1,6 +1,7 @@
 import {
     createOffer,
     getAllTags,
+    getOfferDetails,
     getOffers,
 } from '@state/_redux/offers/actions';
 import { AnyAction, Dispatch, Middleware } from 'redux';
@@ -66,6 +67,20 @@ export const getOffersRequest = async (
     }
 };
 
+export const getOfferDetailsRequest = async (
+    action: AnyAction,
+    dispatch: Dispatch,
+) => {
+    const offerId: number = action.payload;
+    console.log('Offer request');
+    try {
+        const response = await API.get(API_URL, `offers/${offerId}`);
+        dispatch(getOfferDetails.success(response.data));
+    } catch (err) {
+        dispatch(getOfferDetails.failure(err));
+    }
+};
+
 export const getAllTagsMiddleware: Middleware<{}, TState> = ({ dispatch }) => (
     next,
 ) => async (action: AnyAction) => {
@@ -89,6 +104,15 @@ export const getOffersMiddleware: Middleware<{}, TState> = ({ dispatch }) => (
 ) => async (action: AnyAction) => {
     if (action.type === getType(getOffers.request)) {
         await getOffersRequest(action, dispatch);
+    }
+    return next(action);
+};
+
+export const getOfferDetailsMiddleware: Middleware<{}, TState> = ({
+    dispatch,
+}) => (next) => async (action: AnyAction) => {
+    if (action.type === getType(getOfferDetails.request)) {
+        await getOfferDetailsRequest(action, dispatch);
     }
     return next(action);
 };

@@ -10,6 +10,7 @@ import {
     getAllTagsMiddleware,
     createOfferMiddleware,
     getOffersMiddleware,
+    getOfferDetailsMiddleware,
 } from '@state/_redux/offers/middleware';
 import {
     addItemToCartMiddleware,
@@ -28,6 +29,7 @@ const middlewares = [
     createEmptyCartMiddleware,
     getCartMiddleware,
     addItemToCartMiddleware,
+    getOfferDetailsMiddleware,
 ];
 
 export default applyMiddleware(...middlewares);

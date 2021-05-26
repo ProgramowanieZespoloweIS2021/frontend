@@ -1,5 +1,6 @@
 import { createAsyncAction } from 'typesafe-actions';
 import {
+    IOfferDetails,
     IOfferReport,
     IOfferRequestBody,
     IOfferSortFilterParams,
@@ -17,6 +18,12 @@ export const getOffers = createAsyncAction(
     'GET_OFFERS_SUCCESS',
     'GET_OFFERS_FAILURE',
 )<IOfferSortFilterParams | null, IOfferReport, string>();
+
+export const getOfferDetails = createAsyncAction(
+    'GET_OFFER_DETAILS_REQUEST',
+    'GET_OFFER_DETAILS_SUCCESS',
+    'GET_OFFER_DETAILS_FAILURE',
+)<number, IOfferDetails, string>();
 
 export const createOffer = createAsyncAction(
     'CREATE_OFFER_REQUEST',
