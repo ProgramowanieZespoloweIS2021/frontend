@@ -4,6 +4,9 @@ import * as styled from './OfferDetailsPage.styled';
 import { AppBar, Box, Button, Grid, Tabs } from '@material-ui/core';
 import { IconManager } from '@components/_universal';
 import { IOffer } from '@@types/models/Offer';
+import { ICartItem } from '@@types/models/Cart';
+import { addItemToCart } from '@state/_redux/cart/actions';
+import { useDispatch } from 'react-redux';
 
 interface IProps {}
 
@@ -51,10 +54,18 @@ interface UrlParams {
 const OfferDetailsPage: React.FC<IProps> = () => {
     const [tabIndex, setTabIndex] = React.useState(0);
     const { id } = useParams<UrlParams>();
+    const dispatch = useDispatch();
+
+    // TODO -> get Offer details with tiers!
 
     const handleAddToCart = () => {
-        // Get id from url
-        // Add to cart by id
+        const tierId = tabIndex + 1;
+        const cartItem: ICartItem = {
+            offerId: parseInt(id),
+            tierId,
+            description: 'new offer',
+        };
+        dispatch(addItemToCart.request(cartItem));
     };
 
     return (

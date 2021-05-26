@@ -17,7 +17,7 @@ export const addItemToCart = createAsyncAction(
     'ADD_ITEM_TO_CART_REQUEST',
     'ADD_ITEM_TO_CART_SUCCESS',
     'ADD_ITEM_TO_CART_FAILURE',
-)<null, ICartItem, string>();
+)<ICartItem, null, string>();
 
 export const deleteItemFromCart = createAsyncAction(
     'DELETE_ITEM_FROM_CART_REQUEST',

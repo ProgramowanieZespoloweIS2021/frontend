@@ -12,6 +12,7 @@ import {
     getOffersMiddleware,
 } from '@state/_redux/offers/middleware';
 import {
+    addItemToCartMiddleware,
     createEmptyCartMiddleware,
     getCartMiddleware,
 } from '@state/_redux/cart/middleware';
@@ -26,6 +27,7 @@ const middlewares = [
     logoutUserMiddleware,
     createEmptyCartMiddleware,
     getCartMiddleware,
+    addItemToCartMiddleware,
 ];
 
 export default applyMiddleware(...middlewares);
