@@ -72,7 +72,6 @@ export const getOfferDetailsRequest = async (
     dispatch: Dispatch,
 ) => {
     const offerId: number = action.payload;
-    console.log('Offer request');
     try {
         const response = await API.get(API_URL, `offers/${offerId}`);
         dispatch(getOfferDetails.success(response.data));

@@ -1,15 +1,13 @@
-import { ICartItem, ICartItemDetails } from '@@types/models/Cart';
 import { API } from '@utils/api';
 import { AnyAction, Dispatch, Middleware } from 'redux';
 import { TState } from 'src/boot/configureStore';
 import { getType } from 'typesafe-actions';
 import { addItemToCart, createEmptyCart, getCart } from './actions';
 import { toast } from 'react-toastify';
+import { ICartItemRequest } from '@@types/models/Cart';
 export {};
 
 const serviceUrl = 'http://localhost:8082';
-// TODO: get card id from reducer
-const cartId = 1;
 
 export const createEmptyCartRequest = async (
     action: AnyAction,
@@ -24,6 +22,7 @@ export const createEmptyCartRequest = async (
 };
 
 export const getCartRequest = async (action: AnyAction, dispatch: Dispatch) => {
+    const cartId: number = action.payload;
     try {
         const response = await API.getAuth(serviceUrl, `/carts/${cartId}`);
         dispatch(getCart.success(response.data));
@@ -36,12 +35,12 @@ export const addItemToCartRequest = async (
     action: AnyAction,
     dispatch: Dispatch,
 ) => {
-    const item: ICartItem = action.payload;
+    const { cartId, cartItem }: ICartItemRequest = action.payload;
     try {
         const response = await API.postAuth(
             serviceUrl,
             `carts/${cartId}/items`,
-            item,
+            cartItem,
         );
         toast.success(response.data);
         dispatch(addItemToCart.success(null));

@@ -16,3 +16,8 @@ export const selectCart = createSelector(
     selectCartModule,
     (cartReducer) => cartReducer.cart,
 );
+
+export const selectCartId = createSelector(
+    selectCartModule,
+    (cartReducer) => cartReducer.cartId,
+);

@@ -15,6 +15,11 @@ export interface ICartItemDetails {
     tierPrice: number;
 }
 
+export interface ICartItemRequest {
+    cartId: number;
+    cartItem: ICartItem;
+}
+
 export interface ICartItem {
     offerId: number;
     tierId: number;

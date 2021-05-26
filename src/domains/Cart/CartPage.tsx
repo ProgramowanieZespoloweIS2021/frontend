@@ -25,15 +25,16 @@ import {
 import React, { useEffect } from 'react';
 import { getCart } from '@state/_redux/cart/actions';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectItems, selectCart } from '@state/_redux/cart/selectors';
+import { selectCart, selectCartId } from '@state/_redux/cart/selectors';
 
 interface IProps {}
 
 const CartPage: React.FC<IProps> = () => {
     const dispatch = useDispatch();
+    const cartId = useSelector(selectCartId);
 
     useEffect(() => {
-        dispatch(getCart.request(null));
+        dispatch(getCart.request(cartId));
     }, []);
 
     const handleDelete = (offerId: number) => {

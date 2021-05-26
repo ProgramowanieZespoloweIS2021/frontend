@@ -1,4 +1,4 @@
-import { ICart, ICartItem } from '@@types/models/Cart';
+import { ICart, ICartItem, ICartItemRequest } from '@@types/models/Cart';
 import { createAsyncAction } from 'typesafe-actions';
 
 export const createEmptyCart = createAsyncAction(
@@ -11,13 +11,13 @@ export const getCart = createAsyncAction(
     'GET_CART_REQUEST',
     'GET_CART_SUCCESS',
     'GET_CART_FAILURE',
-)<null, ICart, string>();
+)<number, ICart, string>();
 
 export const addItemToCart = createAsyncAction(
     'ADD_ITEM_TO_CART_REQUEST',
     'ADD_ITEM_TO_CART_SUCCESS',
     'ADD_ITEM_TO_CART_FAILURE',
-)<ICartItem, null, string>();
+)<ICartItemRequest, null, string>();
 
 export const deleteItemFromCart = createAsyncAction(
     'DELETE_ITEM_FROM_CART_REQUEST',

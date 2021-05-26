@@ -3,52 +3,14 @@ import { useParams } from 'react-router-dom';
 import * as styled from './OfferDetailsPage.styled';
 import { AppBar, Box, Button, Grid, Tabs } from '@material-ui/core';
 import { IconManager } from '@components/_universal';
-import { IOffer } from '@@types/models/Offer';
-import { ICartItem } from '@@types/models/Cart';
+import { ICartItemRequest } from '@@types/models/Cart';
 import { addItemToCart } from '@state/_redux/cart/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { getOfferDetails } from '@state/_redux/offers/actions';
 import { selectOfferDetails } from '@state/_redux/offers/selectors';
+import { selectCartId } from '@state/_redux/cart/selectors';
 
 interface IProps {}
-
-//TODO: Change mocks to real api objects
-const mockOffer: IOffer = {
-    title: 'Best Website Design',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing',
-    user: {
-        name: 'John',
-        lastName: 'Doe',
-        averageRate: 5.0,
-        ratesNumber: 210,
-    },
-    thumbnails: [],
-    tiers: [
-        {
-            id: 1,
-            title: 'Low',
-            description: '',
-            price: 17.65,
-            deliveryTime: 7,
-        },
-        {
-            id: 2,
-            title: 'Medium',
-            description: '',
-            price: 32.65,
-            deliveryTime: 3,
-        },
-        {
-            id: 3,
-            title: 'High',
-            description: '',
-            price: 52.14,
-            deliveryTime: 2,
-        },
-    ],
-    tags: [{ name: 'Java' }, { name: 'C#' }],
-};
-
 interface UrlParams {
     id: string;
 }
@@ -67,16 +29,18 @@ const OfferDetailsPage: React.FC<IProps> = () => {
     }, []);
 
     const offerDetails = useSelector(selectOfferDetails);
-    console.log(offerDetails);
+    const cartId = useSelector(selectCartId);
 
     const handleAddToCart = (tierId: number) => {
-        const cartItem: ICartItem = {
-            offerId,
-            tierId,
-            description: 'new offer',
+        const cartItemRequest: ICartItemRequest = {
+            cartId,
+            cartItem: {
+                offerId,
+                tierId,
+                description: 'new offer',
+            },
         };
-        console.log(cartItem);
-        dispatch(addItemToCart.request(cartItem));
+        dispatch(addItemToCart.request(cartItemRequest));
     };
 
     return (
@@ -88,23 +52,6 @@ const OfferDetailsPage: React.FC<IProps> = () => {
                             <styled.OfferName>
                                 {offerDetails.title}
                             </styled.OfferName>
-                            {/* <Grid item md={6}>
-                                <styled.UserInfoCard>
-                                    <styled.LetterCircle>
-                                        {mockOffer.user.name[0]}
-                                    </styled.LetterCircle>
-                                    <styled.UserName>
-                                        {`${mockOffer.user.name} ${mockOffer.user.lastName}`}
-                                    </styled.UserName>
-                                    <IconManager size={12} name="Star" />
-                                    <styled.RateValueText>
-                                        {mockOffer.user.averageRate}
-                                    </styled.RateValueText>
-                                    <styled.RateCountText>
-                                        ({mockOffer.user.ratesNumber})
-                                    </styled.RateCountText>
-                                </styled.UserInfoCard>
-                            </Grid> */}
                             <styled.OfferThumbnail />
                             <styled.OfferName>Description</styled.OfferName>
                             <styled.OfferDescription>
