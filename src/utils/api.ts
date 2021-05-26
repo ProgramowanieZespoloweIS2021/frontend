@@ -23,4 +23,11 @@ export const API = {
                 Authorization: `Bearer ${getJwt()}`,
             },
         }),
+
+    deleteAuth: (serviceUrl?: string, endpointUrl?: string) =>
+        axios.delete(`${serviceUrl}${endpointUrl}`, {
+            headers: {
+                Authorization: `Bearer ${getJwt()}`,
+            },
+        }),
 };

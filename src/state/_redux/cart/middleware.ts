@@ -2,7 +2,12 @@ import { API } from '@utils/api';
 import { AnyAction, Dispatch, Middleware } from 'redux';
 import { TState } from 'src/boot/configureStore';
 import { getType } from 'typesafe-actions';
-import { addItemToCart, createEmptyCart, getCart } from './actions';
+import {
+    addItemToCart,
+    createEmptyCart,
+    deleteItemFromCart,
+    getCart,
+} from './actions';
 import { toast } from 'react-toastify';
 import { ICartItemRequest } from '@@types/models/Cart';
 export {};
@@ -49,6 +54,20 @@ export const addItemToCartRequest = async (
     }
 };
 
+export const deleteItemFromCartRequest = async (
+    action: AnyAction,
+    dispatch: Dispatch,
+) => {
+    const { cartId, itemId } = action.payload;
+    try {
+        await API.deleteAuth(serviceUrl, `/carts/${cartId}/items/${itemId}`);
+        toast.success('Item was deleted from cart!');
+        dispatch(deleteItemFromCart.success(null));
+    } catch (err) {
+        dispatch(deleteItemFromCart.failure(err));
+    }
+};
+
 export const createEmptyCartMiddleware: Middleware<{}, TState> = ({
     dispatch,
 }) => (next) => async (action: AnyAction) => {
@@ -72,6 +91,15 @@ export const addItemToCartMiddleware: Middleware<{}, TState> = ({
 }) => (next) => async (action: AnyAction) => {
     if (action.type === getType(addItemToCart.request)) {
         await addItemToCartRequest(action, dispatch);
+    }
+    return next(action);
+};
+
+export const deleteItemFromCartMiddleware: Middleware<{}, TState> = ({
+    dispatch,
+}) => (next) => async (action: AnyAction) => {
+    if (action.type === getType(deleteItemFromCart.request)) {
+        await deleteItemFromCartRequest(action, dispatch);
     }
     return next(action);
 };

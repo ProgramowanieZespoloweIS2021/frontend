@@ -23,7 +23,7 @@ import {
     PriceText,
 } from './CartPage.styled';
 import React, { useEffect } from 'react';
-import { getCart } from '@state/_redux/cart/actions';
+import { deleteItemFromCart, getCart } from '@state/_redux/cart/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectCart, selectCartId } from '@state/_redux/cart/selectors';
 
@@ -37,8 +37,9 @@ const CartPage: React.FC<IProps> = () => {
         dispatch(getCart.request(cartId));
     }, []);
 
-    const handleDelete = (offerId: number) => {
-        console.log(offerId);
+    const handleDelete = (itemId: number) => {
+        dispatch(deleteItemFromCart.request({ cartId, itemId }));
+        dispatch(getCart.request(cartId));
     };
 
     const cart = useSelector(selectCart);

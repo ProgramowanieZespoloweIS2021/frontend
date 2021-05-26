@@ -23,4 +23,4 @@ export const deleteItemFromCart = createAsyncAction(
     'DELETE_ITEM_FROM_CART_REQUEST',
     'DELETE_ITEM_FROM_CART_SUCCESS',
     'DELETE_ITEM_FROM_CART_FAILURE',
-)<null, ICartItem, string>();
+)<{ cartId: number; itemId: number }, null, string>();

@@ -1,7 +1,12 @@
 import { ICart, ICartItemDetails } from '@@types/models/Cart';
 import StateManager from 'react-select';
 import { Action, createReducer } from 'typesafe-actions';
-import { addItemToCart, createEmptyCart, getCart } from './actions';
+import {
+    addItemToCart,
+    createEmptyCart,
+    deleteItemFromCart,
+    getCart,
+} from './actions';
 
 export type TCartReducer = {
     cartId: number;
@@ -27,5 +32,8 @@ export const cartReducer = createReducer<TCartReducer, Action>(initialState)
         cart: payload,
     }))
     .handleAction(addItemToCart.success, (state) => ({
+        ...state,
+    }))
+    .handleAction(deleteItemFromCart.success, (state) => ({
         ...state,
     }));
