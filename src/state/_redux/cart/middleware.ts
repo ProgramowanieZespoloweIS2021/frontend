@@ -5,7 +5,7 @@ import { getType } from 'typesafe-actions';
 import { createEmptyCart, getCart } from './actions';
 export {};
 
-const serviceUrl = 'http://localhost:8084';
+const serviceUrl = 'http://localhost:8082';
 
 export const createEmptyCartRequest = async (
     action: AnyAction,

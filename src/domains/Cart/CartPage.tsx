@@ -13,19 +13,36 @@ import {
     FormControlLabel,
     Radio,
     Button,
+    IconButton,
 } from '@material-ui/core';
+import DeleteIcon from '@material-ui/icons/Delete';
 import {
     CartPaymentContainer,
     CartTitle,
     CartPaymentItem,
-    TableImageCell,
     PriceText,
 } from './CartPage.styled';
-import React from 'react';
+import React, { useEffect } from 'react';
+import { getCart } from '@state/_redux/cart/actions';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectItems, selectCart } from '@state/_redux/cart/selectors';
 
 interface IProps {}
 
 const CartPage: React.FC<IProps> = () => {
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(getCart.request(null));
+    }, []);
+
+    const handleDelete = (offerId: number) => {
+        console.log(offerId);
+    };
+
+    const cart = useSelector(selectCart);
+    const { items, totalPrice } = cart;
+
     return (
         <>
             <Container>
@@ -34,36 +51,41 @@ const CartPage: React.FC<IProps> = () => {
                     <Table>
                         <TableHead>
                             <TableRow>
+                                <TableCell>Product</TableCell>
+                                <TableCell>Tier</TableCell>
+                                <TableCell>Tier title</TableCell>
+                                <TableCell>Price</TableCell>
                                 <TableCell></TableCell>
-                                <TableCell align="center">Product</TableCell>
-                                <TableCell align="center">Price</TableCell>
-                                <TableCell align="center">Quantity</TableCell>
-                                <TableCell align="center">Total</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            <TableRow>
-                                <TableImageCell>
-                                    <img src="https://picsum.photos/150" />
-                                </TableImageCell>
-                                <TableCell align="center">
-                                    Create Website
-                                </TableCell>
-                                <TableCell align="center">48,99 $</TableCell>
-                                <TableCell align="center">1</TableCell>
-                                <TableCell align="center">48,99 $</TableCell>
-                            </TableRow>
-                            <TableRow>
-                                <TableImageCell>
-                                    <img src="https://picsum.photos/150" />
-                                </TableImageCell>
-                                <TableCell align="center">
-                                    Create Website
-                                </TableCell>
-                                <TableCell align="center">48,99 $</TableCell>
-                                <TableCell align="center">1</TableCell>
-                                <TableCell align="center">48,99 $</TableCell>
-                            </TableRow>
+                            {items.map(
+                                (
+                                    {
+                                        id,
+                                        offerTitle,
+                                        tierId,
+                                        tierTitle,
+                                        tierPrice,
+                                    },
+                                    index,
+                                ) => (
+                                    <TableRow key={index}>
+                                        <TableCell>{offerTitle}</TableCell>
+                                        <TableCell>{tierId}</TableCell>
+                                        <TableCell>{tierTitle}</TableCell>
+                                        <TableCell>{tierPrice}</TableCell>
+                                        <TableCell>
+                                            <IconButton
+                                                aria-label="delete"
+                                                onClick={() => handleDelete(id)}
+                                            >
+                                                <DeleteIcon fontSize="small" />
+                                            </IconButton>
+                                        </TableCell>
+                                    </TableRow>
+                                ),
+                            )}
                         </TableBody>
                     </Table>
                 </TableContainer>
@@ -102,7 +124,7 @@ const CartPage: React.FC<IProps> = () => {
                             </FormControl>
                         </CartPaymentItem>
                         <CartPaymentItem item sm={6} md={6} xs={12}>
-                            <PriceText>Price 92,88 $</PriceText>
+                            <PriceText>Price {totalPrice} $</PriceText>
                             <Button variant="outlined" color="primary">
                                 Checkout
                             </Button>

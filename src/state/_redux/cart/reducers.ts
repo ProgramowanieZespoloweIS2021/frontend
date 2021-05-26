@@ -3,13 +3,17 @@ import { Action, createReducer } from 'typesafe-actions';
 import { createEmptyCart, getCart } from './actions';
 
 export type TCartReducer = {
-    cartId: number | null;
-    cart: ICart | null;
+    cartId: number;
+    cart: ICart;
 };
 
 const initialState: TCartReducer = {
-    cartId: null,
-    cart: null,
+    cartId: 0,
+    cart: {
+        id: 0,
+        totalPrice: 0,
+        items: [],
+    },
 };
 
 export const cartReducer = createReducer<TCartReducer, Action>(initialState)
