@@ -39,7 +39,6 @@ const CartPage: React.FC<IProps> = () => {
 
     const handleDelete = (itemId: number) => {
         dispatch(deleteItemFromCart.request({ cartId, itemId }));
-        dispatch(getCart.request(cartId));
     };
 
     const cart = useSelector(selectCart);

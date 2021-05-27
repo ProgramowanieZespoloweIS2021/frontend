@@ -34,6 +34,10 @@ export const cartReducer = createReducer<TCartReducer, Action>(initialState)
     .handleAction(addItemToCart.success, (state) => ({
         ...state,
     }))
-    .handleAction(deleteItemFromCart.success, (state) => ({
+    .handleAction(deleteItemFromCart.success, (state, { payload }) => ({
         ...state,
+        cart: {
+            ...state.cart,
+            items: [...state.cart.items].filter((item) => item.id !== payload),
+        },
     }));

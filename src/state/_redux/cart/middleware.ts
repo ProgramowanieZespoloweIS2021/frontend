@@ -7,9 +7,10 @@ import {
     createEmptyCart,
     deleteItemFromCart,
     getCart,
+    submitCart,
 } from './actions';
 import { toast } from 'react-toastify';
-import { ICartItemRequest } from '@@types/models/Cart';
+import { ICartItemRequest, ICartSubmission } from '@@types/models/Cart';
 export {};
 
 const serviceUrl = 'http://localhost:8082';
@@ -62,9 +63,23 @@ export const deleteItemFromCartRequest = async (
     try {
         await API.deleteAuth(serviceUrl, `/carts/${cartId}/items/${itemId}`);
         toast.success('Item was deleted from cart!');
-        dispatch(deleteItemFromCart.success(null));
+        dispatch(deleteItemFromCart.success(itemId));
     } catch (err) {
         dispatch(deleteItemFromCart.failure(err));
+    }
+};
+
+export const submitCartRequest = async (
+    action: AnyAction,
+    dispatch: Dispatch,
+) => {
+    const cartSubmission: ICartSubmission = action.payload;
+    try {
+        await API.postAuth(serviceUrl, '/carts/submission', cartSubmission);
+        toast.success('Cart was submitted');
+        dispatch(submitCart.success(null));
+    } catch (err) {
+        dispatch(submitCart.failure(err));
     }
 };
 
@@ -100,6 +115,15 @@ export const deleteItemFromCartMiddleware: Middleware<{}, TState> = ({
 }) => (next) => async (action: AnyAction) => {
     if (action.type === getType(deleteItemFromCart.request)) {
         await deleteItemFromCartRequest(action, dispatch);
+    }
+    return next(action);
+};
+
+export const submitCartMiddleware: Middleware<{}, TState> = ({ dispatch }) => (
+    next,
+) => async (action: AnyAction) => {
+    if (action.type === getType(submitCart.request)) {
+        await submitCartRequest(action, dispatch);
     }
     return next(action);
 };
