@@ -41,6 +41,10 @@ const CartPage: React.FC<IProps> = () => {
         dispatch(deleteItemFromCart.request({ cartId, itemId }));
     };
 
+    const handleSubmission = () => {
+        console.log('Cart submission');
+    };
+
     const cart = useSelector(selectCart);
     const { items, totalPrice } = cart;
 
@@ -126,7 +130,11 @@ const CartPage: React.FC<IProps> = () => {
                         </CartPaymentItem>
                         <CartPaymentItem item sm={6} md={6} xs={12}>
                             <PriceText>Price {totalPrice} $</PriceText>
-                            <Button variant="outlined" color="primary">
+                            <Button
+                                variant="outlined"
+                                color="primary"
+                                onClick={() => handleSubmission()}
+                            >
                                 Checkout
                             </Button>
                         </CartPaymentItem>
