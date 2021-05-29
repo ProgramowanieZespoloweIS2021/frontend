@@ -10,7 +10,15 @@ import {
     getAllTagsMiddleware,
     createOfferMiddleware,
     getOffersMiddleware,
+    getOfferDetailsMiddleware,
 } from '@state/_redux/offers/middleware';
+import {
+    addItemToCartMiddleware,
+    createEmptyCartMiddleware,
+    deleteItemFromCartMiddleware,
+    getCartMiddleware,
+    submitCartMiddleware,
+} from '@state/_redux/cart/middleware';
 
 const middlewares = [
     createUserMiddleware,
@@ -20,6 +28,12 @@ const middlewares = [
     getOffersMiddleware,
     getUserMiddleware,
     logoutUserMiddleware,
+    createEmptyCartMiddleware,
+    getCartMiddleware,
+    addItemToCartMiddleware,
+    getOfferDetailsMiddleware,
+    deleteItemFromCartMiddleware,
+    submitCartMiddleware,
 ];
 
 export default applyMiddleware(...middlewares);

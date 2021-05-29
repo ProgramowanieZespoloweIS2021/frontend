@@ -25,3 +25,8 @@ export const selectTotalNumberOfOffers = createSelector(
     selectOffersModule,
     (offersReducer) => offersReducer.totalNumberOfOffers,
 );
+
+export const selectOfferDetails = createSelector(
+    selectOffersModule,
+    (offersReducer) => offersReducer.offerDetails,
+);

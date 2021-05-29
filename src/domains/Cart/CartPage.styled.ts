@@ -16,6 +16,7 @@ export const CartTitle = styled(Header)(
 
 export const PriceText = styled(DefaultText)(
     ({ theme }) => css`
+        font-weight: ${theme.fontWeights.bold};
         margin-bottom: 10px;
     `,
 );

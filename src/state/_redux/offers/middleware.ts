@@ -1,6 +1,7 @@
 import {
     createOffer,
     getAllTags,
+    getOfferDetails,
     getOffers,
 } from '@state/_redux/offers/actions';
 import { AnyAction, Dispatch, Middleware } from 'redux';
@@ -11,12 +12,14 @@ import { toast } from 'react-toastify';
 import { IOfferSortFilterParams } from '@@types/models/Offer';
 import { createTagsUrl } from '@utils/helpers';
 
+const API_URL = 'http://localhost:8080';
+
 export const getAllTagsRequest = async (
     action: AnyAction,
     dispatch: Dispatch,
 ) => {
     try {
-        const response = await API.get('offers/tags');
+        const response = await API.get(API_URL, 'offers/tags');
         dispatch(getAllTags.success(response.data));
     } catch (err) {
         dispatch(getAllTags.failure(err));
@@ -30,7 +33,7 @@ export const createOfferRequest = async (
 ) => {
     const data = action.payload;
     try {
-        const response = await API.postAuth('offers', data);
+        const response = await API.postAuth(API_URL, 'offers', data);
         dispatch(createOffer.success(response.data));
         toast.success('Offer has been added.');
         return true;
@@ -53,14 +56,27 @@ export const getOffersRequest = async (
                 min_price: `gt:${data.minPrice},lt:${data.maxPrice}`,
                 tags: tagsUrl,
             };
-            const response = await API.get('offers', params);
+            const response = await API.get(API_URL, 'offers', params);
             dispatch(getOffers.success(response.data));
             return;
         }
-        const response = await API.get('offers');
+        const response = await API.get(API_URL, 'offers');
         dispatch(getOffers.success(response.data));
     } catch (err) {
         dispatch(getOffers.failure(err));
+    }
+};
+
+export const getOfferDetailsRequest = async (
+    action: AnyAction,
+    dispatch: Dispatch,
+) => {
+    const offerId: number = action.payload;
+    try {
+        const response = await API.get(API_URL, `offers/${offerId}`);
+        dispatch(getOfferDetails.success(response.data));
+    } catch (err) {
+        dispatch(getOfferDetails.failure(err));
     }
 };
 
@@ -87,6 +103,15 @@ export const getOffersMiddleware: Middleware<{}, TState> = ({ dispatch }) => (
 ) => async (action: AnyAction) => {
     if (action.type === getType(getOffers.request)) {
         await getOffersRequest(action, dispatch);
+    }
+    return next(action);
+};
+
+export const getOfferDetailsMiddleware: Middleware<{}, TState> = ({
+    dispatch,
+}) => (next) => async (action: AnyAction) => {
+    if (action.type === getType(getOfferDetails.request)) {
+        await getOfferDetailsRequest(action, dispatch);
     }
     return next(action);
 };
