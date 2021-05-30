@@ -52,7 +52,9 @@ const OfferDetailsPage: React.FC<IProps> = () => {
                             <styled.OfferName>
                                 {offerDetails.title}
                             </styled.OfferName>
-                            <styled.OfferThumbnail />
+                            <styled.OfferThumbnail
+                                url={offerDetails.thumbnails[0].url}
+                            />
                             <styled.OfferName>Description</styled.OfferName>
                             <styled.OfferDescription>
                                 {offerDetails.description}
