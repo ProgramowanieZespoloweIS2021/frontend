@@ -127,7 +127,12 @@ const Form: React.FC<IProps> = () => {
                         )}
                     />
                 </Box>
-                <Button variant={'contained'} color={'secondary'} type="submit">
+                <Button
+                    variant="contained"
+                    color="secondary"
+                    type="submit"
+                    onClick={handleSubmit(onSubmit)}
+                >
                     Search
                 </Button>
             </form>
