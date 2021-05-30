@@ -51,24 +51,26 @@ const Form: React.FC<IProps> = () => {
     return (
         <>
             <form onSubmit={handleSubmit(onSubmit)}>
-                <Input
-                    error={!!errors.min}
-                    helperText={errors.min && errors.min.message}
-                    {...register('min')}
-                    label="min"
-                    name="min"
-                    placeholder="min"
-                    variant="outlined"
-                />
-                <Input
-                    error={!!errors.max}
-                    helperText={errors.max && errors.max.message}
-                    {...register('max')}
-                    label="max"
-                    name="max"
-                    placeholder="max"
-                    variant="outlined"
-                />
+                <Box display="flex">
+                    <Input
+                        error={!!errors.min}
+                        helperText={errors.min && errors.min.message}
+                        {...register('min')}
+                        label="min"
+                        name="min"
+                        placeholder="min"
+                        variant="outlined"
+                    />
+                    <Input
+                        error={!!errors.max}
+                        helperText={errors.max && errors.max.message}
+                        {...register('max')}
+                        label="max"
+                        name="max"
+                        placeholder="max"
+                        variant="outlined"
+                    />
+                </Box>
                 <Box mb={1}>
                     {tagOptions && (
                         <Controller

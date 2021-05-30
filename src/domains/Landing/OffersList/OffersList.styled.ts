@@ -86,9 +86,16 @@ export const CardUsername = styled(DefaultText)(
 
 export const CardDescription = styled(DefaultText)(({ theme }) => css``);
 
+export const CardPriceText = styled(DefaultText)(
+    ({ theme }) => css`
+        margin-top: 10px;
+    `,
+);
+
 export const CardBottomActions = styled(CardActions)(
     ({ theme }) => css`
         display: flex;
         justify-content: space-between;
+        padding: 16px;
     `,
 );

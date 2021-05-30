@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { useHistory } from 'react-router';
 import { useSelector } from 'react-redux';
 
@@ -27,6 +27,14 @@ const LandingPage: React.FC<IProps> = () => {
 
     const handleAddOfferButton = () => {
         history.push(paths.offerAdd);
+    };
+
+    const offersRef = useRef<HTMLDivElement>(null);
+
+    const scrollToOffers = () => {
+        if (offersRef.current) {
+            offersRef.current.scrollIntoView();
+        }
     };
 
     return (
@@ -85,13 +93,18 @@ const LandingPage: React.FC<IProps> = () => {
                             </Box>
                         </Grid>
                         <Box mt={20}>
-                            <IconButton color="primary">
+                            <IconButton
+                                color="primary"
+                                onClick={() => scrollToOffers()}
+                            >
                                 <ExpandMoreIcon fontSize="large" />
                             </IconButton>
                         </Box>
                     </Grid>
                 </Box>
-                <OffersList />
+                <div ref={offersRef}>
+                    <OffersList />
+                </div>
             </Container>
         </>
     );

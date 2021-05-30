@@ -10,5 +10,8 @@ export const Input = styled(TextField)(
         & label {
             color: ${theme.colors.primary};
         }
+        &:first-child {
+            margin-right: 5px;
+        }
     `,
 );

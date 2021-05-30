@@ -6,14 +6,12 @@ import {
     Container,
     Divider,
     Grid,
-    IconButton,
 } from '@material-ui/core';
-import { Favorite } from '@material-ui/icons';
 import {
-    CardBottomActions,
     CardImage,
     CardLink,
     CardChip,
+    CardPriceText,
 } from './OffersList.styled';
 import { DefaultText } from '@components/_universal/Typography.styled';
 import { useDispatch, useSelector } from 'react-redux';
@@ -74,15 +72,10 @@ const OffersList: React.FC<IProps> = () => {
                                                     />
                                                 ))}
                                             </Box>
-                                        </CardContent>
-                                        <CardBottomActions>
-                                            <DefaultText>
+                                            <CardPriceText>
                                                 {`from: ${minimalPrice} $`}
-                                            </DefaultText>
-                                            <IconButton aria-label="add to favorites">
-                                                <Favorite />
-                                            </IconButton>
-                                        </CardBottomActions>
+                                            </CardPriceText>
+                                        </CardContent>
                                     </Card>
                                 </Grid>
                             ),
