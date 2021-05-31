@@ -7,4 +7,5 @@ export default {
     register: '/register',
     cart: '/cart',
     account: '/account',
+    messages: '/messages',
 };

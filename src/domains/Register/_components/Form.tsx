@@ -2,7 +2,6 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router';
 
 import { Grid } from '@material-ui/core';
 import { Container, Input, Button } from './Form.styled';

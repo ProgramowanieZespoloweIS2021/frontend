@@ -8,6 +8,7 @@ import {
     CartPage,
     AccountPage,
     OfferAddPage,
+    MessagesPage,
 } from '@domains/index';
 import paths from '@shared/paths';
 
@@ -87,6 +88,17 @@ const routerConfig: RouterConfig = [
                 component: AccountPage,
                 exact: true,
                 path: paths.account,
+                isProtected: true,
+            },
+        ],
+        layoutComponent: ShopLayout,
+    },
+    {
+        routes: [
+            {
+                component: MessagesPage,
+                exact: true,
+                path: paths.messages,
                 isProtected: true,
             },
         ],

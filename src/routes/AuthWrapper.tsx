@@ -8,13 +8,14 @@ interface IProps {}
 
 export const AuthWrapper: React.FC<IProps> = ({ children }) => {
     const history = useHistory();
-    const authorized = useSelector(isAuthorized);
+    // const authorized = useSelector(isAuthorized);
+    const authorized = true;
     const dispatch = useDispatch();
 
     const checkAuth = async () => await dispatch(getUser.request(''));
 
     useEffect(() => {
-        checkAuth();
+        // checkAuth();
     }, []);
 
     return <>{authorized && children}</>;
