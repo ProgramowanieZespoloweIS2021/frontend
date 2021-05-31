@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { DateContainer, Container } from './Message.styled';
+
 interface IMessage {
     message: string;
 
@@ -15,13 +17,13 @@ const getDate = (date: Date) => {
 
 const Message = ({ message, createdAt }: IMessage) => {
     return (
-        <div>
-            <div>
+        <Container>
+            <DateContainer>
                 <div>{getDate(createdAt)}</div>
                 <div>{createdAt.toLocaleTimeString()}</div>
-            </div>
+            </DateContainer>
             <div>{message}</div>
-        </div>
+        </Container>
     );
 };
 

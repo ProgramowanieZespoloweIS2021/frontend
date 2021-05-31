@@ -8,7 +8,7 @@ import { MessagesList, PeopleList, MessagesContainer } from './MessagesPage.styl
 
 interface IProps {}
 
-const PEOPLE = [{}, {}];
+const PEOPLE = [{ email: 'mail@user.xd', id: 1 }, { email: 'mail@user.xd', id: 2 }];
 const MESSAGES = [
     { message: 'Message number 1', createdAt: new Date() },
     { message: 'Message number 2', createdAt: new Date() },
@@ -20,8 +20,8 @@ const MessagesPage: React.FC<IProps> = () => {
             <Grid container justify="center" spacing={4}>
                 <Grid item sm={2}>
                     <PeopleList>
-                        {PEOPLE.map(() => (
-                            <Person />
+                        {PEOPLE.map((person) => (
+                            <Person {...person} />
                         ))}
                     </PeopleList>
                 </Grid>
@@ -31,7 +31,7 @@ const MessagesPage: React.FC<IProps> = () => {
                             {MESSAGES.map((message) => (
                                 <Message {...message} />
                             ))}
-                        </MessagesList >
+                        </MessagesList>
                         <SendForm />
                     </MessagesContainer>
                 </Grid>

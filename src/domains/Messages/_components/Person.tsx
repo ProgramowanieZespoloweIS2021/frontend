@@ -1,8 +1,16 @@
 import React from 'react';
 
-const Person = () => {
+import { Container } from './Person.styled';
+
+interface IPerson {
+    email: string;
+}
+
+const Person = ({ email }: IPerson) => {
     return (
-        <div>person</div>
+        <Container variant="text" color="primary">
+            {email}
+        </Container>
     );
 };
 

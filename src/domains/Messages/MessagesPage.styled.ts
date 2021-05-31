@@ -6,6 +6,7 @@ export const MessagesList = styled.div(
     ({ theme }) => css`
         height: 400px;
         padding: 8px;
+        overflow-y: scroll;
     `,
 );
 
