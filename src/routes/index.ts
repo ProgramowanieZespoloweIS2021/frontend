@@ -103,6 +103,7 @@ const routerConfig: RouterConfig = [
             },
         ],
         layoutComponent: ShopLayout,
+        pageName: 'Messages',
     },
     {
         routes: [
