@@ -2,9 +2,11 @@ import { combineReducers } from 'redux';
 import { OffersReducer } from '@state/_redux/offers/reducers';
 import userReducer from './user/reducer';
 import { cartReducer } from './cart/reducers';
+import { OrdersReducer } from '@state/_redux/orders/reducers';
 
 export default combineReducers({
     offers: OffersReducer,
+    orders: OrdersReducer,
     user: userReducer,
     cart: cartReducer,
 });

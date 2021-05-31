@@ -48,7 +48,7 @@ export const Navigation: React.FC<IProps> = () => {
                         </NavButton>
                         <NavButton
                             color="primary"
-                            onClick={() => history.push(paths.home)}
+                            onClick={() => history.push(paths.orders)}
                         >
                             Orders
                         </NavButton>

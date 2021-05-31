@@ -10,6 +10,7 @@ import {
     OfferAddPage,
     MyOffersPage,
     OfferEditPage,
+    MyOrdersPage,
 } from '@domains/index';
 import paths from '@shared/paths';
 
@@ -73,6 +74,18 @@ const routerConfig: RouterConfig = [
         ],
         layoutComponent: ShopLayout,
         pageName: 'My Offers',
+    },
+    {
+        routes: [
+            {
+                component: MyOrdersPage,
+                exact: true,
+                path: paths.orders,
+                isProtected: true,
+            },
+        ],
+        layoutComponent: ShopLayout,
+        pageName: 'My Orders',
     },
     {
         routes: [

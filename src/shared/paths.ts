@@ -8,4 +8,5 @@ export default {
     cart: '/cart',
     account: '/account',
     myOffers: '/my-offers',
+    orders: '/orders',
 };
