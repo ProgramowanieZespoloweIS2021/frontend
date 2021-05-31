@@ -3,7 +3,7 @@ import {
     IOfferDetails,
     IOfferReport,
     IOfferRequestBody,
-    IOfferSortFilterParams,
+    IOfferParams,
     ITag,
 } from '@@types/models/Offer';
 
@@ -17,7 +17,7 @@ export const getOffers = createAsyncAction(
     'GET_OFFERS_REQUEST',
     'GET_OFFERS_SUCCESS',
     'GET_OFFERS_FAILURE',
-)<IOfferSortFilterParams | null, IOfferReport, string>();
+)<IOfferParams, IOfferReport, string>();
 
 export const getOfferDetails = createAsyncAction(
     'GET_OFFER_DETAILS_REQUEST',

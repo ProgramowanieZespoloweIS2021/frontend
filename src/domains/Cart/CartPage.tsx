@@ -45,6 +45,12 @@ const CartPage: React.FC<IProps> = () => {
         console.log('Cart submission');
     };
 
+    // const calculateItemsTotalPrice = () => {
+    //     return items.reduce((item) => {
+    //         item.
+    //     }, 0);
+    // }
+
     const cart = useSelector(selectCart);
     const { items, totalPrice } = cart;
 
@@ -101,33 +107,6 @@ const CartPage: React.FC<IProps> = () => {
                         direction="row"
                         justify="center"
                     >
-                        <CartPaymentItem item sm={6} md={6} xs={12}>
-                            <Header>Delivery</Header>
-                            <FormControl component="fieldset">
-                                <RadioGroup
-                                    aria-label="payment"
-                                    name="payment"
-                                    value="payu"
-                                    onChange={() => console.log('Change')}
-                                >
-                                    <FormControlLabel
-                                        value="payu"
-                                        control={<Radio />}
-                                        label="Payu"
-                                    />
-                                    <FormControlLabel
-                                        value="transfer"
-                                        control={<Radio />}
-                                        label="Transfer"
-                                    />
-                                    <FormControlLabel
-                                        value="bank"
-                                        control={<Radio />}
-                                        label="Bank"
-                                    />
-                                </RadioGroup>
-                            </FormControl>
-                        </CartPaymentItem>
                         <CartPaymentItem item sm={6} md={6} xs={12}>
                             <PriceText>Price {totalPrice} $</PriceText>
                             <Button
