@@ -1,4 +1,3 @@
-//TODO: Add proper types when backend will be ready
 export interface IOffer {
     title: string;
     description: string;

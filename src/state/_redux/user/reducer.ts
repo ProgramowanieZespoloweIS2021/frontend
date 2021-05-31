@@ -1,6 +1,6 @@
 import { Action } from 'redux';
 import { createReducer } from 'typesafe-actions';
-import {loginUser, getUser, logoutUser} from './actions';
+import { loginUser, getUser, logoutUser } from './actions';
 import { UserModule, initialState } from './module';
 
 const userReducer = createReducer<UserModule, Action>(initialState)

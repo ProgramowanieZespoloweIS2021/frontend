@@ -8,6 +8,8 @@ import {
     CartPage,
     AccountPage,
     OfferAddPage,
+    MyOffersPage,
+    OfferEditPage,
 } from '@domains/index';
 import paths from '@shared/paths';
 
@@ -47,6 +49,30 @@ const routerConfig: RouterConfig = [
         ],
         layoutComponent: ShopLayout,
         pageName: 'Add offer',
+    },
+    {
+        routes: [
+            {
+                component: OfferEditPage,
+                exact: true,
+                path: paths.offerEdit,
+                isProtected: true,
+            },
+        ],
+        layoutComponent: ShopLayout,
+        pageName: 'Edit offer',
+    },
+    {
+        routes: [
+            {
+                component: MyOffersPage,
+                exact: true,
+                path: paths.myOffers,
+                isProtected: true,
+            },
+        ],
+        layoutComponent: ShopLayout,
+        pageName: 'My Offers',
     },
     {
         routes: [
