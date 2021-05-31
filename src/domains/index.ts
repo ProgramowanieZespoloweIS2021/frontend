@@ -7,6 +7,9 @@ export { default as OfferDetailsPage } from '@domains/OfferDetails/OfferDetailsP
 // my offers
 export { MyOffersPage } from '@domains/MyOffers/MyOffersPage';
 
+// my orders
+export { MyOrdersPage } from '@domains/MyOrders/MyOrdersPage';
+
 // offer add
 export { default as OfferAddPage } from '@domains/OfferAdd/OfferAddPage';
 
