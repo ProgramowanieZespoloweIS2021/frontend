@@ -19,6 +19,12 @@ export const getOffers = createAsyncAction(
     'GET_OFFERS_FAILURE',
 )<IOfferParams, IOfferReport, string>();
 
+export const getMyOffers = createAsyncAction(
+    'GET_MY_OFFERS_REQUEST',
+    'GET_MY_OFFERS_SUCCESS',
+    'GET_MY_OFFERS_FAILURE',
+)<number, IOfferReport, string>();
+
 export const getOfferDetails = createAsyncAction(
     'GET_OFFER_DETAILS_REQUEST',
     'GET_OFFER_DETAILS_SUCCESS',
@@ -30,3 +36,15 @@ export const createOffer = createAsyncAction(
     'CREATE_OFFER_SUCCESS',
     'CREATE_OFFER_FAILURE',
 )<IOfferRequestBody, string, string>();
+
+export const updateOffer = createAsyncAction(
+    'UPDATE_OFFER_REQUEST',
+    'UPDATE_OFFER_SUCCESS',
+    'UPDATE_OFFER_FAILURE',
+)<IOfferRequestBody, string, string>();
+
+export const deleteOffer = createAsyncAction(
+    'DELETE_OFFER_REQUEST',
+    'DELETE_OFFER_SUCCESS',
+    'DELETE_OFFER_FAILURE',
+)<number, number, number>();

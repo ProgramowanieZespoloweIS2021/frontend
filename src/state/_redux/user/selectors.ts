@@ -6,3 +6,5 @@ interface IProps {
 
 export const isAuthorized = ({ user }: IProps): boolean | null =>
     user.authorized;
+
+export const selectUserDetails = ({ user }: IProps): UserModule => user;

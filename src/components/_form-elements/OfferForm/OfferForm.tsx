@@ -1,6 +1,6 @@
-import React from 'react';
-import { Controller } from 'react-hook-form';
-import { Box, Grid } from '@material-ui/core';
+import React, { useEffect, useState } from 'react';
+import { Controller, useForm } from 'react-hook-form';
+import { Box, Grid, Omit } from '@material-ui/core';
 
 import {
     Container,
@@ -9,28 +9,59 @@ import {
     TierContainer,
     TierInput,
     CancelIcon,
-} from './Form.styled';
+} from './OfferForm.styled';
 import Select from 'react-select';
-import { useLogic } from '@domains/OfferAdd/_components/useLogic';
 import { SectionContainer } from '@components/_form-elements/SectionContainer';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { addOfferFormValidation } from '@components/_form-elements/OfferForm/validation';
+import { useDispatch, useSelector } from 'react-redux';
+import { getAllTags } from '@state/_redux/offers/actions';
+import { selectAllTags } from '@state/_redux/offers/selectors';
+import { IOffer } from '@@types/models/Offer';
 
-const Form = () => {
+interface IProps {
+    onSubmit: (data: IAddOfferForm) => void;
+    defaultValues?: Partial<IAddOfferForm>;
+}
+
+type SelectOption = {
+    label: string;
+    value: string;
+};
+
+export type IAddOfferForm = Omit<IOffer, 'user' | 'tags'> & {
+    tags: SelectOption[];
+    ownerId: number;
+};
+// TODO: Somehow, because of defaultValues, edit not working... :(
+export const OfferForm: React.FC<IProps> = ({ onSubmit, defaultValues }) => {
     const {
-        thumbnailIndexes,
-        setTiersIndexes,
-        tiersIndexes,
-        setThumbnailIndexes,
-        control,
-        handleSubmit,
-        onSubmit,
         register,
-        tagOptions,
-        errors,
-    } = useLogic();
+        handleSubmit,
+        control,
+        formState: { errors },
+    } = useForm<IAddOfferForm>({
+        defaultValues: defaultValues && defaultValues,
+        resolver: yupResolver(addOfferFormValidation),
+        mode: 'onSubmit',
+    });
+    const dispatch = useDispatch();
+    const [tiersIndexes, setTiersIndexes] = useState<number[]>([]);
+    const [thumbnailIndexes, setThumbnailIndexes] = useState<number[]>([]);
 
-    //TODO: Connect errors
+    useEffect(() => {
+        dispatch(getAllTags.request(null));
+    }, []);
+
+    const tagOptions = useSelector(selectAllTags);
+
     return (
-        <form onSubmit={handleSubmit(onSubmit, (e) => console.log(e))}>
+        <form
+            onSubmit={handleSubmit(
+                (formValues) => onSubmit(formValues),
+                (e) => console.log(e),
+            )}
+        >
             <Container container spacing={6}>
                 <Grid item md={6}>
                     <SectionContainer>
@@ -41,6 +72,7 @@ const Form = () => {
                             variant="outlined"
                             error={!!errors.title}
                             helperText={errors.title && errors.title.message}
+                            defaultValue={defaultValues && defaultValues.title}
                             {...register('title')}
                         />
                         <Input
@@ -51,6 +83,9 @@ const Form = () => {
                             rows={6}
                             rowsMax={12}
                             error={!!errors.description}
+                            defaultValue={
+                                defaultValues && defaultValues.description
+                            }
                             helperText={
                                 errors.description && errors.description.message
                             }
@@ -62,15 +97,8 @@ const Form = () => {
                                 control={control}
                                 name="tags"
                                 render={({
-                                    field: {
-                                        onChange,
-                                        onBlur,
-                                        value,
-                                        name,
-                                        ref,
-                                    },
+                                    field: { onChange },
                                     fieldState: { error },
-                                    formState,
                                 }) => (
                                     <>
                                         <Select
@@ -210,11 +238,9 @@ const Form = () => {
             </Container>
             <Box display="flex" justifyContent="center">
                 <Button variant="outlined" color="primary" type="submit">
-                    Create offer
+                    {defaultValues ? 'Update offer ' : 'Create offer'}
                 </Button>
             </Box>
         </form>
     );
 };
-
-export default Form;

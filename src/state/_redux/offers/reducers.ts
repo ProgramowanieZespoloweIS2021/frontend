@@ -4,6 +4,8 @@ import {
     getAllTags,
     getOffers,
     getOfferDetails,
+    getMyOffers,
+    deleteOffer,
 } from '@state/_redux/offers/actions';
 
 export type TOffersReducer = {
@@ -26,7 +28,7 @@ export const OffersReducer = createReducer(initialState)
         tags: payload,
     }))
     .handleAction(
-        getOffers.success,
+        [getOffers.success, getMyOffers.success],
         (state, { payload: { totalNumberOfOffers, offers } }) => ({
             ...state,
             totalNumberOfOffers,
@@ -36,4 +38,8 @@ export const OffersReducer = createReducer(initialState)
     .handleAction(getOfferDetails.success, (state, { payload }) => ({
         ...state,
         offerDetails: payload,
+    }))
+    .handleAction(deleteOffer.success, (state, { payload }) => ({
+        ...state,
+        offers: state.offers.filter((offer) => offer.id !== payload),
     }));

@@ -56,11 +56,12 @@ export const RateCountText = styled(DefaultText)(
     `,
 );
 
-export const OfferThumbnail = styled.div(
-    ({ theme }) => css`
+export const OfferThumbnail = styled.div<{ url: string }>(
+    ({ theme, url }) => css`
         width: 100%;
         height: 400px;
-        background-color: ${theme.colors.primary};
+        background-image: url(${url});
+        background-size: cover;
         box-shadow: ${theme.default_shadow};
         margin-bottom: 40px;
     `,
