@@ -12,7 +12,7 @@ import { API } from '@utils/api';
 import { TState } from '../../../boot/configureStore';
 import { getType } from 'typesafe-actions';
 import { toast } from 'react-toastify';
-import { IOfferSortFilterParams } from '@@types/models/Offer';
+import { IOfferParams } from '@@types/models/Offer';
 import { createTagsUrl } from '@utils/helpers';
 import { history } from '@utils/history';
 import paths from '@shared/paths';
@@ -85,19 +85,25 @@ export const getOffersRequest = async (
     dispatch: Dispatch,
 ) => {
     try {
-        if (action.payload) {
-            const data: IOfferSortFilterParams = action.payload;
-            const tagsUrl = createTagsUrl(data.tags);
+        const {
+            pagination: { limit, offset },
+            sortFilter,
+        }: IOfferParams = action.payload;
+        if (sortFilter) {
+            const { direction, field, maxPrice, minPrice, tags } = sortFilter;
+            const tagsUrl = createTagsUrl(tags);
             const params = {
-                order_by: `${data.direction}:${data.field}`,
-                min_price: `gt:${data.minPrice},lt:${data.maxPrice}`,
+                limit,
+                offset,
+                order_by: `${direction}:${field}`,
+                min_price: `gt:${minPrice},lt:${maxPrice}`,
                 tags: tagsUrl,
             };
             const response = await API.get(API_URL, 'offers', params);
             dispatch(getOffers.success(response.data));
             return;
         }
-        const response = await API.get(API_URL, 'offers');
+        const response = await API.get(API_URL, 'offers', { limit, offset });
         dispatch(getOffers.success(response.data));
     } catch (err) {
         dispatch(getOffers.failure(err));

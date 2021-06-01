@@ -1,4 +1,3 @@
-import { Header } from '@components/_universal/Typography.styled';
 import {
     Container,
     TableContainer,
@@ -8,10 +7,6 @@ import {
     TableBody,
     TableRow,
     Grid,
-    FormControl,
-    RadioGroup,
-    FormControlLabel,
-    Radio,
     Button,
     IconButton,
 } from '@material-ui/core';
@@ -26,6 +21,7 @@ import React, { useEffect } from 'react';
 import { deleteItemFromCart, getCart } from '@state/_redux/cart/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectCart, selectCartId } from '@state/_redux/cart/selectors';
+import { ICartItemDetails } from '@@types/models/Cart';
 
 interface IProps {}
 
@@ -45,8 +41,15 @@ const CartPage: React.FC<IProps> = () => {
         console.log('Cart submission');
     };
 
+    const calculateItemsTotalPrice = (items: ICartItemDetails[]) => {
+        return items.reduce(
+            (totalPrice, item) => totalPrice + item.tierPrice,
+            0,
+        );
+    };
+
     const cart = useSelector(selectCart);
-    const { items, totalPrice } = cart;
+    const { items } = cart;
 
     return (
         <>
@@ -102,34 +105,9 @@ const CartPage: React.FC<IProps> = () => {
                         justify="center"
                     >
                         <CartPaymentItem item sm={6} md={6} xs={12}>
-                            <Header>Delivery</Header>
-                            <FormControl component="fieldset">
-                                <RadioGroup
-                                    aria-label="payment"
-                                    name="payment"
-                                    value="payu"
-                                    onChange={() => console.log('Change')}
-                                >
-                                    <FormControlLabel
-                                        value="payu"
-                                        control={<Radio />}
-                                        label="Payu"
-                                    />
-                                    <FormControlLabel
-                                        value="transfer"
-                                        control={<Radio />}
-                                        label="Transfer"
-                                    />
-                                    <FormControlLabel
-                                        value="bank"
-                                        control={<Radio />}
-                                        label="Bank"
-                                    />
-                                </RadioGroup>
-                            </FormControl>
-                        </CartPaymentItem>
-                        <CartPaymentItem item sm={6} md={6} xs={12}>
-                            <PriceText>Price {totalPrice} $</PriceText>
+                            <PriceText>
+                                Price {calculateItemsTotalPrice(items)} $
+                            </PriceText>
                             <Button
                                 variant="outlined"
                                 color="primary"
