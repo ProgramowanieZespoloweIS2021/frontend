@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Grid } from '@material-ui/core';
+import { Button, Grid } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -9,7 +9,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import { useHistory } from 'react-router';
-import { getOrders } from '@state/_redux/orders/actions';
+import { getOrders, updateOrder } from '@state/_redux/orders/actions';
 import { selectOrders } from '@state/_redux/orders/selectors';
 
 interface IProps {}
@@ -24,6 +24,10 @@ export const MyOrdersPage: React.FC<IProps> = () => {
         dispatch(getOrders.request(null));
     }, []);
 
+    const handleUpdateOrder = () => {
+        dispatch(updateOrder.request(null));
+    };
+
     return (
         <Grid container justify="center" spacing={4}>
             <TableContainer component={Paper}>
@@ -33,34 +37,49 @@ export const MyOrdersPage: React.FC<IProps> = () => {
                             <TableCell>Buyer</TableCell>
                             <TableCell>Seller</TableCell>
                             <TableCell>Description</TableCell>
-                            <TableCell align="right">State</TableCell>
+                            <TableCell>State</TableCell>
+                            <TableCell align="right">Update</TableCell>
                         </TableRow>
                     </TableHead>
-                    <TableBody>
-                        {ordersList.map(
-                            ({ id, buyer, seller, state, description }) => (
-                                <TableRow key={id}>
-                                    <TableCell component="th" scope="row">
-                                        {buyer.firstName}
-                                    </TableCell>
-                                    <TableCell component="th" scope="row">
-                                        {seller.firstName}
-                                    </TableCell>
-                                    <TableCell component="th" scope="row">
-                                        {description}
-                                    </TableCell>
+                    {!!ordersList.length && (
+                        <TableBody>
+                            {ordersList.map(
+                                ({ id, buyer, seller, state, description }) => (
+                                    <TableRow key={id}>
+                                        <TableCell component="th" scope="row">
+                                            {buyer.firstName}
+                                        </TableCell>
+                                        <TableCell component="th" scope="row">
+                                            {seller.firstName}
+                                        </TableCell>
+                                        <TableCell component="th" scope="row">
+                                            {description}
+                                        </TableCell>
 
-                                    <TableCell
-                                        align="right"
-                                        component="th"
-                                        scope="row"
-                                    >
-                                        {state}
-                                    </TableCell>
-                                </TableRow>
-                            ),
-                        )}
-                    </TableBody>
+                                        <TableCell component="th" scope="row">
+                                            {state}
+                                        </TableCell>
+
+                                        <TableCell
+                                            align="right"
+                                            component="th"
+                                            scope="row"
+                                        >
+                                            <Button
+                                                variant={'contained'}
+                                                color={'secondary'}
+                                                onClick={() =>
+                                                    handleUpdateOrder()
+                                                }
+                                            >
+                                                Update
+                                            </Button>
+                                        </TableCell>
+                                    </TableRow>
+                                ),
+                            )}
+                        </TableBody>
+                    )}
                 </Table>
             </TableContainer>
         </Grid>
