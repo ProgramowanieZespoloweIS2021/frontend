@@ -81,7 +81,7 @@ export const submitCartRequest = async (
 ) => {
     const cartSubmission: ICartSubmission = action.payload;
     try {
-        await API.postAuth(serviceUrl, '/carts/submission', cartSubmission);
+        await API.postAuth(serviceUrl, 'carts/submission', cartSubmission);
         toast.success('Cart was submitted');
         dispatch(submitCart.success(null));
     } catch (err) {
