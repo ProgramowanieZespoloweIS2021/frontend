@@ -4,7 +4,7 @@ import * as styled from './OfferDetailsPage.styled';
 import { AppBar, Box, Button, Grid, Tabs } from '@material-ui/core';
 import { IconManager } from '@components/_universal';
 import { ICartItemRequest } from '@@types/models/Cart';
-import { addItemToCart } from '@state/_redux/cart/actions';
+import { addItemToCart, createCart } from '@state/_redux/cart/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { getOfferDetails } from '@state/_redux/offers/actions';
 import { selectOfferDetails } from '@state/_redux/offers/selectors';
@@ -15,9 +15,6 @@ interface UrlParams {
     id: string;
 }
 
-//TODO: Maybe separate tabs component? (waiting for API model structure)
-//TODO: Thumbnails carousel component (backend)
-//TODO: Connect contact, toCard buttons
 const OfferDetailsPage: React.FC<IProps> = () => {
     const [tabIndex, setTabIndex] = React.useState(0);
     const { id } = useParams<UrlParams>();
@@ -25,6 +22,7 @@ const OfferDetailsPage: React.FC<IProps> = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
+        dispatch(createCart.request(null));
         dispatch(getOfferDetails.request(offerId));
     }, []);
 

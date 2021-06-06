@@ -9,7 +9,6 @@ import {
     loginUser,
     logoutUser,
 } from '@state/_redux/user/actions';
-import { createEmptyCart } from '@state/_redux/cart/actions';
 import { setJwt } from '@utils/jwt';
 import { toast } from 'react-toastify';
 import { API } from '@utils/api';
@@ -58,8 +57,6 @@ const loginRequest = async (action: AnyAction, dispatch: Dispatch) => {
             password,
         });
         dispatch(loginUser.success(response));
-        // Create empty cart in login stage
-        dispatch(createEmptyCart.request(null));
         history.push(paths.account);
         toast.success('Successfully logged in!');
         return true;

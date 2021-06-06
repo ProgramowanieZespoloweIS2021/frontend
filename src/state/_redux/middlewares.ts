@@ -17,7 +17,7 @@ import {
 } from '@state/_redux/offers/middleware';
 import {
     addItemToCartMiddleware,
-    createEmptyCartMiddleware,
+    createCartMiddleware,
     deleteItemFromCartMiddleware,
     getCartMiddleware,
     submitCartMiddleware,
@@ -33,7 +33,7 @@ const middlewares = [
     getOffersMiddleware,
     getUserMiddleware,
     logoutUserMiddleware,
-    createEmptyCartMiddleware,
+    createCartMiddleware,
     getCartMiddleware,
     addItemToCartMiddleware,
     getOfferDetailsMiddleware,
