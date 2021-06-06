@@ -15,6 +15,7 @@ import { toast } from 'react-toastify';
 import { API } from '@utils/api';
 import paths from '@shared/paths';
 import { history } from '@utils/history';
+import { clearStorage } from '@utils/storage';
 
 const AUTH_SERVICE_URL =
     process.env.REACT_APP_AUTH_SERVICE_URL || 'http://localhost:8084';
@@ -74,6 +75,7 @@ const logoutRequest = async (action: AnyAction, dispatch: Dispatch) => {
         const response = await API.getAuth(AUTH_SERVICE_URL, '/auth/logout');
         dispatch(logoutUser.success(response));
         history.push(paths.home);
+        clearStorage();
         return true;
     } catch (err) {
         dispatch(logoutUser.failure(err));
