@@ -4,11 +4,12 @@ import { Container } from './Person.styled';
 
 interface IPerson {
     email: string;
+    onClick: () => void;
 }
 
-const Person = ({ email }: IPerson) => {
+const Person = ({ email, onClick }: IPerson) => {
     return (
-        <Container variant="text" color="primary">
+        <Container variant="text" color="primary" onClick={onClick}>
             {email}
         </Container>
     );

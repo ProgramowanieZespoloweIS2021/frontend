@@ -19,6 +19,18 @@ export interface IChatMessage {
     recipientsIds: null;
 }
 
+export interface IGetContactsRequestPayload {
+    userId: number;
+    pageOffset?: number;
+    pageSize?: number;
+}
+
+export interface IGetMessagesRequestPayload {
+    chatId: number;
+    pageOffset?: number;
+    pageSize?: number;
+}
+
 export interface ChatModule {
     messages: IChatMessage[];
     contacts: IChat[];
