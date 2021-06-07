@@ -22,9 +22,3 @@ export const getMessages = createAsyncAction(
     'GET_CHAT_MESSAGES_SUCCESS',
     'GET_CHAT_MESSAGES_FAILURE',
 )<PayloadDefault, AxiosResponse<IChatMessage[]>, PayloadDefault>();
-
-export const setMessageRead = createAsyncAction(
-    'GET_CHAT_MESSAGES_REQUEST',
-    'GET_CHAT_MESSAGES_SUCCESS',
-    'GET_CHAT_MESSAGES_FAILURE',
-)<{ id: number, senderId: number, messageStatus: string }, AxiosResponse<IChatMessage>, PayloadDefault>();

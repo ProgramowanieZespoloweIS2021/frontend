@@ -10,6 +10,10 @@ export const API = {
             },
             params,
         }),
+
+    post: (apiUrl: string, endpointUrl: string, data?: Object) =>
+        axios.post(`${apiUrl}${endpointUrl}`, data),
+
     postAuth: (apiUrl: string, endpointUrl: string, data?: Object) =>
         axios.post(`${apiUrl}/${endpointUrl}`, data, {
             headers: {

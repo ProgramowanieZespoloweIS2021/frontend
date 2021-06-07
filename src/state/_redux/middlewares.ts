@@ -19,6 +19,11 @@ import {
     getCartMiddleware,
     submitCartMiddleware,
 } from '@state/_redux/cart/middleware';
+import {
+    createChatMiddleware,
+    getContactsMiddleware,
+    getMessagesMiddleware,
+} from '@state/_redux/chat/middleware';
 
 const middlewares = [
     createUserMiddleware,
@@ -34,6 +39,9 @@ const middlewares = [
     getOfferDetailsMiddleware,
     deleteItemFromCartMiddleware,
     submitCartMiddleware,
+    createChatMiddleware,
+    getContactsMiddleware,
+    getMessagesMiddleware,
 ];
 
 export default applyMiddleware(...middlewares);

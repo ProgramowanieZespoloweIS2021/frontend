@@ -1,132 +1,86 @@
 import { Middleware, AnyAction, Dispatch } from 'redux';
 import { getType } from 'typesafe-actions';
-import axios from 'axios';
+import { toast } from 'react-toastify';
 
 import { TState } from '../../../boot/configureStore';
 import {
-    createUser,
-    getUser,
-    loginUser,
-    logoutUser,
-} from '@state/_redux/user/actions';
-import { createEmptyCart } from '@state/_redux/cart/actions';
-import { setJwt } from '@utils/jwt';
-import { toast } from 'react-toastify';
+    getMessages,
+    getChatList,
+    createChat,
+} from '@state/_redux/chat/actions';
 import { API } from '@utils/api';
-import paths from '@shared/paths';
-import { history } from '@utils/history';
 
-const AUTH_SERVICE_URL =
-    process.env.REACT_APP_AUTH_SERVICE_URL || 'http://localhost:8084';
+const CHAT_SERVICE_URL =
+    process.env.REACT_APP_CHAT_SERVICE_URL || 'http://localhost:8086';
 
-const creatUserRequest = async (action: AnyAction, dispatch: Dispatch) => {
-    const { email, firstName, lastName, password } = action.payload;
+const getMessagesRequest = async (action: AnyAction, dispatch: Dispatch) => {
     try {
-        const response = await axios.post(`${AUTH_SERVICE_URL}/auth/user`, {
-            email,
-            password,
-            firstName,
-            surname: lastName,
-        });
-        dispatch(createUser.success(response));
-        history.push(paths.login);
-        toast.success('Successfully registered!');
+        const response = await API.get(
+            CHAT_SERVICE_URL,
+            `/messages/${action.payload.chatId}?pageOffset=${action.payload.pageOffset}&pageSize=${action.payload.pageSize}`,
+        );
+        dispatch(getMessages.success(response));
         return true;
     } catch (err) {
-        console.log(err);
-        dispatch(createUser.failure(err));
-        toast.error('Error occurred while creating account');
+        toast('Cannot fetch messages');
+        dispatch(getMessages.failure(err));
         return false;
     }
 };
 
-const getUserRequest = async (action: AnyAction, dispatch: Dispatch) => {
+const getChatListRequest = async (action: AnyAction, dispatch: Dispatch) => {
     try {
-        const response = await API.getAuth(AUTH_SERVICE_URL, '/auth/user');
-        dispatch(getUser.success(response));
+        const response = await API.get(
+            CHAT_SERVICE_URL,
+            `/chats/${action.payload.userId}?pageOffset=${action.payload.pageOffset}&pageSize=${action.payload.pageSize}`,
+        );
+        dispatch(getChatList.success(response));
         return true;
     } catch (err) {
-        dispatch(getUser.failure(err));
+        toast('Cannot fetch list of contacts');
+        dispatch(getChatList.failure(err));
         return false;
     }
 };
 
-const loginRequest = async (action: AnyAction, dispatch: Dispatch) => {
-    const { email, password } = action.payload;
+const createChatRequest = async (action: AnyAction, dispatch: Dispatch) => {
     try {
-        const response = await axios.post(`${AUTH_SERVICE_URL}/auth/login`, {
-            email,
-            password,
-        });
-        dispatch(loginUser.success(response));
-        // Create empty cart in login stage
-        dispatch(createEmptyCart.request(null));
-        history.push(paths.account);
-        toast.success('Successfully logged in!');
+        const response = await API.post(
+            CHAT_SERVICE_URL,
+            'chats/createRoom',
+            action.payload,
+        );
+        dispatch(createChat.success(response));
         return true;
     } catch (err) {
-        dispatch(loginUser.failure(err));
-        toast.error('Wrong credentials');
+        dispatch(createChat.failure(err));
         return false;
     }
 };
 
-const logoutRequest = async (action: AnyAction, dispatch: Dispatch) => {
-    try {
-        const response = await API.getAuth(AUTH_SERVICE_URL, '/auth/logout');
-        dispatch(logoutUser.success(response));
-        history.push(paths.home);
-        return true;
-    } catch (err) {
-        dispatch(logoutUser.failure(err));
-        return false;
-    }
-};
-
-const saveAuthToken = (action: AnyAction) => {
-    const tokenRaw = action.payload.headers.authorization;
-    const [, token] = tokenRaw.split(' ');
-    setJwt(token);
-};
-
-export const createUserMiddleware: Middleware<{}, TState> = ({ dispatch }) => (
-    next,
-) => async (action) => {
-    if (action.type === getType(createUser.request)) {
-        await creatUserRequest(action, dispatch);
-    }
-    return next(action);
-};
-
-export const logoutUserMiddleware: Middleware<{}, TState> = ({ dispatch }) => (
-    next,
-) => async (action) => {
-    if (action.type === getType(logoutUser.request)) {
-        await logoutRequest(action, dispatch);
-    }
-    return next(action);
-};
-
-export const loginMiddleware: Middleware<{}, TState> = ({ dispatch }) => (
+export const getMessagesMiddleware: Middleware<{}, TState> = ({ dispatch }) => (
     next,
 ) => async (action: AnyAction) => {
-    if (action.type === getType(loginUser.request)) {
-        await loginRequest(action, dispatch);
-    } else if (action.type === getType(loginUser.success)) {
-        saveAuthToken(action);
+    if (action.type === getType(getMessages.request)) {
+        await getMessagesRequest(action, dispatch);
     }
     return next(action);
 };
 
-export const getUserMiddleware: Middleware<{}, TState> = ({ dispatch }) => (
+export const getContactsMiddleware: Middleware<{}, TState> = ({ dispatch }) => (
     next,
 ) => async (action: AnyAction) => {
-    if (action.type === getType(getUser.request)) {
-        await getUserRequest(action, dispatch);
+    if (action.type === getType(getChatList.request)) {
+        await getChatListRequest(action, dispatch);
     }
-    if (action.type === getType(getUser.failure)) {
-        toast.error('You are unathorized to perform this action.');
-        history.push(paths.home);
+    return next(action);
+};
+
+export const createChatMiddleware: Middleware<{}, TState> = ({ dispatch }) => (
+    next,
+) => async (action: AnyAction) => {
+    if (action.type === getType(createChat.request)) {
+        await createChatRequest(action, dispatch);
     }
     return next(action);
 };
