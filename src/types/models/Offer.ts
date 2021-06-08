@@ -1,4 +1,3 @@
-//TODO: Add proper types when backend will be ready
 export interface IOffer {
     title: string;
     description: string;
@@ -68,10 +67,20 @@ export interface IOfferRequestBody {
     tiers: ITier[];
 }
 
-export interface IOfferSortFilterParams {
+export interface IOfferPagination {
+    limit: number;
+    offset: number;
+}
+
+export interface IOfferSortFilter {
     direction: string;
     field: string;
     minPrice: number;
     maxPrice: number;
     tags: ITag[];
+}
+
+export interface IOfferParams {
+    pagination: IOfferPagination;
+    sortFilter: IOfferSortFilter | null;
 }

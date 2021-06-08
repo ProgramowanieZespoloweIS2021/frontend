@@ -29,9 +29,8 @@ const creatUserRequest = async (action: AnyAction, dispatch: Dispatch) => {
             surname: lastName,
         });
         dispatch(createUser.success(response));
-        history.push(paths.login);
         toast.success('Successfully registered!');
-        return true;
+        history.push(paths.login);
     } catch (err) {
         console.log(err);
         dispatch(createUser.failure(err));

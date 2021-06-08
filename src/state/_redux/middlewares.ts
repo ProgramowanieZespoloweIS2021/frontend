@@ -11,6 +11,9 @@ import {
     createOfferMiddleware,
     getOffersMiddleware,
     getOfferDetailsMiddleware,
+    getMyOffersMiddleware,
+    deleteOfferMiddleware,
+    updateOfferMiddleware,
 } from '@state/_redux/offers/middleware';
 import {
     addItemToCartMiddleware,
@@ -24,6 +27,8 @@ import {
     getContactsMiddleware,
     getMessagesMiddleware,
 } from '@state/_redux/chat/middleware';
+
+import { getOrdersMiddleware } from '@state/_redux/orders/middleware';
 
 const middlewares = [
     createUserMiddleware,
@@ -39,6 +44,10 @@ const middlewares = [
     getOfferDetailsMiddleware,
     deleteItemFromCartMiddleware,
     submitCartMiddleware,
+    getMyOffersMiddleware,
+    deleteOfferMiddleware,
+    updateOfferMiddleware,
+    getOrdersMiddleware,
     createChatMiddleware,
     getContactsMiddleware,
     getMessagesMiddleware,

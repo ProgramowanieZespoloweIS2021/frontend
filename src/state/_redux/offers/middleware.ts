@@ -1,16 +1,21 @@
 import {
     createOffer,
+    deleteOffer,
     getAllTags,
+    getMyOffers,
     getOfferDetails,
     getOffers,
+    updateOffer,
 } from '@state/_redux/offers/actions';
 import { AnyAction, Dispatch, Middleware } from 'redux';
 import { API } from '@utils/api';
 import { TState } from '../../../boot/configureStore';
 import { getType } from 'typesafe-actions';
 import { toast } from 'react-toastify';
-import { IOfferSortFilterParams } from '@@types/models/Offer';
+import { IOfferParams } from '@@types/models/Offer';
 import { createTagsUrl } from '@utils/helpers';
+import { history } from '@utils/history';
+import paths from '@shared/paths';
 
 const API_URL = 'http://localhost:8080';
 
@@ -26,7 +31,6 @@ export const getAllTagsRequest = async (
     }
 };
 
-// TODO: Add authorization
 export const createOfferRequest = async (
     action: AnyAction,
     dispatch: Dispatch,
@@ -36,9 +40,42 @@ export const createOfferRequest = async (
         const response = await API.postAuth(API_URL, 'offers', data);
         dispatch(createOffer.success(response.data));
         toast.success('Offer has been added.');
-        return true;
+        history.push(paths.myOffers);
     } catch (err) {
         dispatch(createOffer.failure(err));
+        return false;
+    }
+};
+
+export const updateOfferRequest = async (
+    action: AnyAction,
+    dispatch: Dispatch,
+) => {
+    const data = action.payload;
+    try {
+        const response = await API.postAuth(API_URL, `offers/${data.id}`, data);
+        dispatch(updateOffer.success(response.data));
+        toast.success('Offer has been updated.');
+        history.push(paths.myOffers);
+    } catch (err) {
+        dispatch(updateOffer.failure(err));
+        return false;
+    }
+};
+
+export const deleteOfferRequest = async (
+    action: AnyAction,
+    dispatch: Dispatch,
+) => {
+    const id = action.payload;
+    try {
+        const response = await API.deleteAuth(API_URL, `/offers/${id}`);
+        dispatch(deleteOffer.success(response.data));
+        toast.success('Offer has been deleted.');
+        return true;
+    } catch (err) {
+        dispatch(deleteOffer.failure(err));
+        console.log(err);
         return false;
     }
 };
@@ -48,13 +85,40 @@ export const getOffersRequest = async (
     dispatch: Dispatch,
 ) => {
     try {
-        if (action.payload) {
-            const data: IOfferSortFilterParams = action.payload;
-            const tagsUrl = createTagsUrl(data.tags);
+        const {
+            pagination: { limit, offset },
+            sortFilter,
+        }: IOfferParams = action.payload;
+        if (sortFilter) {
+            const { direction, field, maxPrice, minPrice, tags } = sortFilter;
+            const tagsUrl = createTagsUrl(tags);
             const params = {
-                order_by: `${data.direction}:${data.field}`,
-                min_price: `gt:${data.minPrice},lt:${data.maxPrice}`,
+                limit,
+                offset,
+                order_by: `${direction}:${field}`,
+                min_price: `gt:${minPrice},lt:${maxPrice}`,
                 tags: tagsUrl,
+            };
+            const response = await API.get(API_URL, 'offers', params);
+            dispatch(getOffers.success(response.data));
+            return;
+        }
+        const response = await API.get(API_URL, 'offers', { limit, offset });
+        dispatch(getOffers.success(response.data));
+    } catch (err) {
+        dispatch(getOffers.failure(err));
+    }
+};
+
+export const getMyOffersRequest = async (
+    action: AnyAction,
+    dispatch: Dispatch,
+) => {
+    try {
+        if (action.payload) {
+            const userId = action.payload;
+            const params = {
+                owner_id: `eq:${userId}`,
             };
             const response = await API.get(API_URL, 'offers', params);
             dispatch(getOffers.success(response.data));
@@ -98,11 +162,38 @@ export const createOfferMiddleware: Middleware<{}, TState> = ({ dispatch }) => (
     return next(action);
 };
 
+export const deleteOfferMiddleware: Middleware<{}, TState> = ({ dispatch }) => (
+    next,
+) => async (action: AnyAction) => {
+    if (action.type === getType(deleteOffer.request)) {
+        await deleteOfferRequest(action, dispatch);
+    }
+    return next(action);
+};
+
+export const updateOfferMiddleware: Middleware<{}, TState> = ({ dispatch }) => (
+    next,
+) => async (action: AnyAction) => {
+    if (action.type === getType(updateOffer.request)) {
+        await updateOfferRequest(action, dispatch);
+    }
+    return next(action);
+};
+
 export const getOffersMiddleware: Middleware<{}, TState> = ({ dispatch }) => (
     next,
 ) => async (action: AnyAction) => {
     if (action.type === getType(getOffers.request)) {
         await getOffersRequest(action, dispatch);
+    }
+    return next(action);
+};
+
+export const getMyOffersMiddleware: Middleware<{}, TState> = ({ dispatch }) => (
+    next,
+) => async (action: AnyAction) => {
+    if (action.type === getType(getMyOffers.request)) {
+        await getMyOffersRequest(action, dispatch);
     }
     return next(action);
 };

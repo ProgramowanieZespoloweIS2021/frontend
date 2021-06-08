@@ -5,7 +5,6 @@ import { useDispatch } from 'react-redux';
 
 import { Grid } from '@material-ui/core';
 import { Container, Input, Button } from './Form.styled';
-
 import { createUser } from '@state/_redux/user/actions';
 import { schema } from '@domains/Register/validation';
 import { IRegisterData } from '@domains/Register/types';
@@ -71,11 +70,7 @@ const Form = () => {
                         variant="outlined"
                         {...register('confirmPassword')}
                     />
-                    <Button
-                        variant="outlined"
-                        color="primary"
-                        type="submit"
-                    >
+                    <Button variant="outlined" color="primary" type="submit">
                         Create account
                     </Button>
                 </form>

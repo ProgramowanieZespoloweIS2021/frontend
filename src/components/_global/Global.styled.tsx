@@ -12,6 +12,7 @@ export const GlobalStyled = createGlobalStyle`
     html {
         height: 100%;
         overflow-x: hidden;
+        scroll-behavior: smooth;
     }
 
     body {
