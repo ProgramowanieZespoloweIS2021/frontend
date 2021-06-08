@@ -1,17 +1,13 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React from 'react';
+import { useSelector } from 'react-redux';
 import { isAuthorized } from '@state/_redux/user/selectors';
-import { getUser } from '@state/_redux/user/actions';
 
-interface IProps {}
+interface IProps {
+    children: any;
+}
 
 export const AuthWrapper: React.FC<IProps> = ({ children }) => {
     const authorized = useSelector(isAuthorized);
-    const dispatch = useDispatch();
 
-    useEffect(() => {
-        dispatch(getUser.request(''));
-    }, []);
-
-    return <>{authorized !== null && children}</>;
+    return authorized && children;
 };

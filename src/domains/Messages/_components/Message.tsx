@@ -16,11 +16,12 @@ const getDate = (date: Date) => {
 };
 
 const Message = ({ message, createdAt }: IMessage) => {
+    const date = new Date(createdAt);
     return (
         <Container>
             <DateContainer>
-                <div>{getDate(createdAt)}</div>
-                <div>{createdAt.toLocaleTimeString()}</div>
+                <div>{getDate(date)}</div>
+                <div>{date.toLocaleTimeString()}</div>
             </DateContainer>
             <div>{message}</div>
         </Container>

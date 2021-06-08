@@ -24,7 +24,7 @@ const userReducer = createReducer<UserModule, Action>(initialState)
     }))
     .handleAction(getUser.failure, () => ({
         ...initialState,
-        authorized: true,
+        authorized: false,
     }));
 
 export default userReducer;

@@ -1,4 +1,4 @@
-import { createAsyncAction } from 'typesafe-actions';
+import { createAsyncAction, createAction } from 'typesafe-actions';
 import { AxiosResponse } from 'axios';
 
 import {
@@ -28,3 +28,5 @@ export const getMessages = createAsyncAction(
     'GET_CHAT_MESSAGES_SUCCESS',
     'GET_CHAT_MESSAGES_FAILURE',
 )<IGetMessagesRequestPayload, AxiosResponse<IChatMessage[]>, PayloadDefault>();
+
+export const addMessage = createAction('ADD')<IChatMessage>();

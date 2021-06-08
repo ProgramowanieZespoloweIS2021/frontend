@@ -1,10 +1,6 @@
 import { Action } from 'redux';
 import { createReducer } from 'typesafe-actions';
-import {
-    createChat,
-    getChatList,
-    getMessages,
-} from './actions';
+import { createChat, getChatList, getMessages, addMessage } from './actions';
 import { ChatModule, initialState } from './module';
 
 export const chatReducer = createReducer<ChatModule, Action>(initialState)
@@ -19,5 +15,8 @@ export const chatReducer = createReducer<ChatModule, Action>(initialState)
     .handleAction(getMessages.success, (state: ChatModule, { payload }) => ({
         ...state,
         messages: payload.data,
+    }))
+    .handleAction(addMessage, (state: ChatModule, { payload }) => ({
+        ...state,
+        messages: [...state.messages, payload],
     }));
-

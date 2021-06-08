@@ -13,25 +13,35 @@ import {
 } from './MessagesPage.styled';
 
 import * as chatSelectors from '@state/_redux/chat/selectors';
+import * as userSelectors from '@state/_redux/user/selectors';
 import * as chatActions from '@state/_redux/chat/actions';
-import { IChatUser } from '@state/_redux/chat/module';
+import { IChat, IChatUser } from '@state/_redux/chat/module';
+import { useStomp } from '@domains/Messages/useStomp';
+import { addMessage } from '@state/_redux/chat/actions';
 
 interface IProps {}
 
 const MessagesPage: React.FC<IProps> = () => {
-    const userId = 1;
     const dispatch = useDispatch();
-    const [selectedContact, setSelectedContact] = useState<number | null>(null);
+    const [selectedContact, setSelectedContact] = useState<IChat | null>(null);
     const messages = useSelector(chatSelectors.getMessages);
     const contacts = useSelector(chatSelectors.getContacts);
+    const user = useSelector(userSelectors.selectUserDetails);
+    const [sendStompMessage, setOnMessage] = useStomp({
+        url: 'ws://localhost:8086/ws',
+        topic: `/user/${user.id}/queue/messages`,
+        sendChannel: '/app/chat',
+    });
 
     useEffect(() => {
-        dispatch(
-            chatActions.getChatList.request({
-                userId,
-                pageOffset: messages.length,
-            }),
-        );
+        if (user && user.id) {
+            dispatch(
+                chatActions.getChatList.request({
+                    userId: user.id,
+                    pageOffset: messages.length,
+                }),
+            );
+        }
     }, []);
 
     useEffect(() => {
@@ -39,15 +49,39 @@ const MessagesPage: React.FC<IProps> = () => {
             dispatch(
                 chatActions.getMessages.request({
                     // @ts-ignore
-                    chatId: selectedContact,
+                    chatId: selectedContact.id,
                     pageOffset: messages.length,
                 }),
             );
+            // @ts-ignore
+            setOnMessage((data) => {
+                const message = JSON.parse(data.body);
+                console.log(message);
+                if (message.chatId === selectedContact?.id) {
+                    dispatch(
+                        chatActions.getMessages.request({
+                            chatId: selectedContact?.id,
+                        }),
+                    );
+                }
+            });
         }
-    }, [selectedContact]);
+    }, [selectedContact?.id]);
 
-    const handleSelectContact = (contactId: number) => {
-        setSelectedContact(contactId);
+    const handleSelectContact = (contact: IChat) => {
+        setSelectedContact(contact);
+    };
+
+    const handleMessageSubmit = (content: string) => {
+        if (selectedContact && user && user.id) {
+            const senderId = user.id;
+            const chatId = selectedContact.id;
+            // @ts-ignore
+            const message = sendStompMessage({ content, senderId, chatId });
+            if (message) {
+                dispatch(addMessage(message));
+            }
+        }
     };
 
     return (
@@ -57,15 +91,15 @@ const MessagesPage: React.FC<IProps> = () => {
                     <PeopleList>
                         {contacts.map((c) => {
                             const contact = c.users.find(
-                                (u) => u.id !== userId,
+                                (u) => u.id !== user.id,
                             ) as IChatUser;
                             return (
-                                <Person
-                                    email={contact.nickname}
-                                    onClick={() =>
-                                        handleSelectContact(contact.id)
-                                    }
-                                />
+                                contact && (
+                                    <Person
+                                        email={contact.nickname}
+                                        onClick={() => handleSelectContact(c)}
+                                    />
+                                )
                             );
                         })}
                     </PeopleList>
@@ -80,7 +114,7 @@ const MessagesPage: React.FC<IProps> = () => {
                                 />
                             ))}
                         </MessagesList>
-                        <SendForm />
+                        <SendForm onSubmit={handleMessageSubmit} />
                     </MessagesContainer>
                 </Grid>
             </Grid>

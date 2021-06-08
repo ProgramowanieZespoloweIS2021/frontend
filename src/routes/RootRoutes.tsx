@@ -24,12 +24,14 @@ const RootRouter = () => {
                                                 key={routeIndex}
                                                 render={(props) => {
                                                     const Component = component as React.ElementType;
-                                                    return (
+                                                    return isProtected ? (
                                                         <AuthWrapper>
                                                             <Component
                                                                 {...props}
                                                             />
                                                         </AuthWrapper>
+                                                    ) : (
+                                                        <Component {...props} />
                                                     );
                                                 }}
                                                 {...rest}

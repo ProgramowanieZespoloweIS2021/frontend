@@ -10,13 +10,13 @@ export interface IChat {
 }
 
 export interface IChatMessage {
-    id: number;
+    id?: number;
     chatId: number;
     content: string;
     timestamp: Date;
-    messageStatus: string;
+    messageStatus?: string;
     senderId: number;
-    recipientsIds: null;
+    recipientsIds?: null;
 }
 
 export interface IGetContactsRequestPayload {

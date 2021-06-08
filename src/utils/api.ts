@@ -12,7 +12,6 @@ export const API = {
         }),
 
     post: async (apiUrl: string, endpointUrl: string, data?: Object) => {
-        console.log(`${apiUrl}${endpointUrl}`);
         return axios.post(`${apiUrl}${endpointUrl}`, data);
     },
 

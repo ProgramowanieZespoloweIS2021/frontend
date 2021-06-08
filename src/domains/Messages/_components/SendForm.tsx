@@ -1,25 +1,34 @@
-import React from 'react';
-import { useForm } from 'react-hook-form';
+import React, { useState } from 'react';
 
 import { Input, SendButton, Form } from './Form.styled';
 
-const SendForm = () => {
-    const { register, handleSubmit } = useForm();
+interface IProps {
+    onSubmit: (message: string) => void;
+}
 
-    const onSend = () => {};
+const SendForm = ({ onSubmit }: IProps) => {
+    const [content, setContent] = useState<string>('');
+
+    const onSend = () => {
+        onSubmit(content);
+    };
+
+    const handleChange = (e: any) => {
+        setContent(e.target.value);
+    };
 
     return (
         <div>
-            <Form onSubmit={handleSubmit(onSend)}>
+            <Form>
                 <Input
                     id="messages-message-input"
-                    label="Type message..."
+                    label="Type message"
                     type="text"
                     variant="outlined"
                     color="primary"
-                    {...register('message')}
+                    onChange={handleChange}
                 />
-                <SendButton variant="outlined" color="primary">
+                <SendButton variant="outlined" color="primary" onClick={onSend}>
                     Send
                 </SendButton>
             </Form>
