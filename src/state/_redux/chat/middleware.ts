@@ -51,9 +51,10 @@ const createChatRequest = async (action: AnyAction, dispatch: Dispatch) => {
     try {
         const response = await API.post(
             CHAT_SERVICE_URL,
-            'chats/createRoom',
+            '/chats/createRoom',
             action.payload,
         );
+        console.log(response);
         dispatch(createChat.success(response));
         return true;
     } catch (err) {

@@ -4,21 +4,27 @@ import { loginUser, getUser, logoutUser } from './actions';
 import { UserModule, initialState } from './module';
 
 const userReducer = createReducer<UserModule, Action>(initialState)
-    .handleAction(loginUser.success, (state: UserModule, action: Action) => ({
+    .handleAction(loginUser.success, (state: UserModule) => ({
         ...state,
         authorized: true,
     }))
-    .handleAction(getUser.success, (state: UserModule, action: Action) => ({
+    .handleAction(getUser.success, (state: UserModule) => ({
         ...state,
         authorized: true,
     }))
-    .handleAction(logoutUser.success, (state: UserModule, action: Action) => ({
+    .handleAction(logoutUser.success, (state: UserModule) => ({
         ...state,
         authorized: false,
     }))
-    .handleAction(getUser.failure, (state: UserModule, action: Action) => ({
+    .handleAction(getUser.success, (state: UserModule, { payload }) => ({
         ...state,
-        authorized: false,
+        authorized: true,
+        id: payload.data.id,
+        email: payload.data.email,
+    }))
+    .handleAction(getUser.failure, () => ({
+        ...initialState,
+        authorized: true,
     }));
 
 export default userReducer;

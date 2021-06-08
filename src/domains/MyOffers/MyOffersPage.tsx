@@ -13,7 +13,6 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import { OfferThumbnailCell, DeleteButton, Tag } from './MyOffers.styled';
 import { useHistory } from 'react-router';
-import * as styled from '@domains/OfferDetails/OfferDetailsPage.styled';
 
 interface IProps {}
 
@@ -24,7 +23,9 @@ export const MyOffersPage: React.FC<IProps> = () => {
     const history = useHistory();
 
     useEffect(() => {
-        dispatch(getMyOffers.request(id));
+        if (id) {
+            dispatch(getMyOffers.request(id));
+        }
     }, []);
 
     const handleDeleteOffer = (id: number) => {

@@ -2,7 +2,7 @@ import axios from 'axios';
 import { getJwt } from '@utils/jwt';
 
 export const API = {
-    get: (apiUrl: string, endpointUrl: string, params?: any) =>
+    get: async (apiUrl: string, endpointUrl: string, params?: any) =>
         axios.get(`${apiUrl}/${endpointUrl}`, {
             headers: {
                 'Content-Type': 'application/json',
@@ -11,24 +11,26 @@ export const API = {
             params,
         }),
 
-    post: (apiUrl: string, endpointUrl: string, data?: Object) =>
-        axios.post(`${apiUrl}${endpointUrl}`, data),
+    post: async (apiUrl: string, endpointUrl: string, data?: Object) => {
+        console.log(`${apiUrl}${endpointUrl}`);
+        return axios.post(`${apiUrl}${endpointUrl}`, data);
+    },
 
-    postAuth: (apiUrl: string, endpointUrl: string, data?: Object) =>
+    postAuth: async (apiUrl: string, endpointUrl: string, data?: Object) =>
         axios.post(`${apiUrl}/${endpointUrl}`, data, {
             headers: {
                 Authorization: `Bearer ${getJwt()}`,
             },
         }),
 
-    getAuth: (serviceUrl?: string, endpointUrl?: string) =>
+    getAuth: async (serviceUrl?: string, endpointUrl?: string) =>
         axios.get(`${serviceUrl}${endpointUrl}`, {
             headers: {
                 Authorization: `Bearer ${getJwt()}`,
             },
         }),
 
-    deleteAuth: (serviceUrl?: string, endpointUrl?: string) =>
+    deleteAuth: async (serviceUrl?: string, endpointUrl?: string) =>
         axios.delete(`${serviceUrl}${endpointUrl}`, {
             headers: {
                 Authorization: `Bearer ${getJwt()}`,

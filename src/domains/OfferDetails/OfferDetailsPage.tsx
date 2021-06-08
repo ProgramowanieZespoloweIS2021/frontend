@@ -1,12 +1,16 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import * as styled from './OfferDetailsPage.styled';
+import { useDispatch, useSelector } from 'react-redux';
+
 import { AppBar, Box, Button, Grid, Tabs } from '@material-ui/core';
+import * as styled from './OfferDetailsPage.styled';
 import { IconManager } from '@components/_universal';
+
 import { ICartItemRequest } from '@@types/models/Cart';
 import { addItemToCart } from '@state/_redux/cart/actions';
-import { useDispatch, useSelector } from 'react-redux';
 import { getOfferDetails } from '@state/_redux/offers/actions';
+import { createChat } from '@state/_redux/chat/actions';
+import { selectUserDetails } from '@state/_redux/user/selectors';
 import { selectOfferDetails } from '@state/_redux/offers/selectors';
 import { selectCartId } from '@state/_redux/cart/selectors';
 
@@ -30,6 +34,7 @@ const OfferDetailsPage: React.FC<IProps> = () => {
 
     const offerDetails = useSelector(selectOfferDetails);
     const cartId = useSelector(selectCartId);
+    const userDetails = useSelector(selectUserDetails);
 
     const handleAddToCart = (tierId: number) => {
         const cartItemRequest: ICartItemRequest = {
@@ -41,6 +46,17 @@ const OfferDetailsPage: React.FC<IProps> = () => {
             },
         };
         dispatch(addItemToCart.request(cartItemRequest));
+    };
+
+    const handleContact = () => {
+        if (offerDetails && userDetails.id && userDetails.email) {
+            const contact = {
+                id: offerDetails.ownerId,
+                nickname: offerDetails.title,
+            };
+            const user = { id: userDetails.id, nickname: userDetails.email };
+            dispatch(createChat.request([user, contact]));
+        }
     };
 
     return (
@@ -171,10 +187,8 @@ const OfferDetailsPage: React.FC<IProps> = () => {
                                                                 color={
                                                                     'secondary'
                                                                 }
-                                                                onClick={() =>
-                                                                    console.log(
-                                                                        'tocart',
-                                                                    )
+                                                                onClick={
+                                                                    handleContact
                                                                 }
                                                             >
                                                                 <styled.IconMargin
