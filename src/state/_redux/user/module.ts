@@ -1,5 +1,8 @@
 export type User = {
-    username: string;
+    id: number;
+    email: string;
+    firstName: string;
+    surname: string;
 };
 
 export type UserModule = {

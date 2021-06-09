@@ -18,18 +18,26 @@ import {
     PriceText,
 } from './CartPage.styled';
 import React, { useEffect } from 'react';
-import { deleteItemFromCart, getCart } from '@state/_redux/cart/actions';
+import {
+    createCart,
+    deleteItemFromCart,
+    getCart,
+    submitCart,
+} from '@state/_redux/cart/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectCart, selectCartId } from '@state/_redux/cart/selectors';
 import { ICartItemDetails } from '@@types/models/Cart';
+import { selectUserDetails } from '@state/_redux/user/selectors';
 
 interface IProps {}
 
 const CartPage: React.FC<IProps> = () => {
     const dispatch = useDispatch();
     const cartId = useSelector(selectCartId);
+    const userDetails = useSelector(selectUserDetails);
 
     useEffect(() => {
+        dispatch(createCart.request(null));
         dispatch(getCart.request(cartId));
     }, []);
 
@@ -38,7 +46,8 @@ const CartPage: React.FC<IProps> = () => {
     };
 
     const handleSubmission = () => {
-        console.log('Cart submission');
+        const { id } = userDetails;
+        dispatch(submitCart.request({ cartId, buyerId: id }));
     };
 
     const calculateItemsTotalPrice = (items: ICartItemDetails[]) => {
