@@ -131,6 +131,7 @@ const routerConfig: RouterConfig = [
             },
         ],
         layoutComponent: ShopLayout,
+        pageName: 'My Account',
     },
     {
         routes: [

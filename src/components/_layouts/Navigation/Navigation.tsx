@@ -62,7 +62,7 @@ export const Navigation: React.FC<IProps> = () => {
                             color="primary"
                             onClick={() => history.push(paths.account)}
                         >
-                            Profile
+                            My Account
                         </NavButton>
                         <NavButton color="primary" onClick={handleLogout}>
                             Logout

@@ -58,7 +58,7 @@ const loginRequest = async (action: AnyAction, dispatch: Dispatch) => {
             password,
         });
         dispatch(loginUser.success(response));
-        history.push(paths.account);
+        history.push(paths.home);
         toast.success('Successfully logged in!');
         return true;
     } catch (err) {
