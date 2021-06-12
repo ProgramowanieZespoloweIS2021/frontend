@@ -41,7 +41,7 @@ const MessagesPage: React.FC<IProps> = () => {
             dispatch(
                 chatActions.getChatList.request({
                     userId: user.id,
-                    pageOffset: messages.length,
+                    pageSize: 1000,
                 }),
             );
         }
@@ -52,7 +52,7 @@ const MessagesPage: React.FC<IProps> = () => {
             dispatch(
                 chatActions.getMessages.request({
                     chatId: selectedContact?.id,
-                    pageOffset: messages.length,
+                    pageSize: 1000,
                 }),
             );
             // @ts-ignore

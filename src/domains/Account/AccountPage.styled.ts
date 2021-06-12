@@ -29,14 +29,21 @@ export const Input = styled(TextField)(
     `,
 );
 
-export const Wrapper = styled(Grid)(
+export const Wrapper = styled.div(
     ({ theme }) => css`
         height: 100%;
-        position: absolute;
         display: flex;
+        flex-flow: row;
         justify-content: center;
         align-items: center;
         top: 0;
+    `,
+);
+
+export const Item = styled.div(
+    ({ theme }) => css`
+        flex: 1;
+        margin: 16px;
     `,
 );
 

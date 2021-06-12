@@ -8,6 +8,7 @@ export const Container = styled(Button)(
 
         && {
             padding: 16px 0;
+            font-size: 11px;
         }
     `,
 );
