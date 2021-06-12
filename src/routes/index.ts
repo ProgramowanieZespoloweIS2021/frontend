@@ -36,6 +36,7 @@ const routerConfig: RouterConfig = [
                 component: CartPage,
                 exact: true,
                 path: paths.cart,
+                isProtected: true,
             },
         ],
         layoutComponent: ShopLayout,

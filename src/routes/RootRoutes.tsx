@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import routerConfig from './index';
-import { AuthWrapper } from '@routes/AuthWrapper';
+import { AuthContainer } from '@routes/AuthContainer';
 
 const RootRouter = () => {
     return (
@@ -25,11 +25,11 @@ const RootRouter = () => {
                                                 render={(props) => {
                                                     const Component = component as React.ElementType;
                                                     return isProtected ? (
-                                                        <AuthWrapper>
+                                                        <AuthContainer>
                                                             <Component
                                                                 {...props}
                                                             />
-                                                        </AuthWrapper>
+                                                        </AuthContainer>
                                                     ) : (
                                                         <Component {...props} />
                                                     );
