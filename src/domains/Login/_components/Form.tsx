@@ -9,7 +9,6 @@ import { Grid } from '@material-ui/core';
 import { Container, Button, Input } from './Form.styled';
 
 import { loginUser } from '@state/_redux/user/actions';
-import paths from '@shared/paths';
 import { schema } from '@domains/Login/validation';
 import { ILoginData } from '@domains/Login/types';
 

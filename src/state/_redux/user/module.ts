@@ -7,10 +7,12 @@ export type User = {
 
 export type UserModule = {
     authorized: boolean | null;
-    id: number;
+    id: number | null;
+    email: string | null;
 };
 
 export const initialState: UserModule = {
     authorized: null,
-    id: 0,
+    id: null,
+    email: null,
 };

@@ -9,4 +9,5 @@ export default {
     account: '/account',
     myOffers: '/my-offers',
     orders: '/orders',
+    messages: '/messages',
 };

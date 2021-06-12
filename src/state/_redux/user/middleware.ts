@@ -32,6 +32,7 @@ const creatUserRequest = async (action: AnyAction, dispatch: Dispatch) => {
         toast.success('Successfully registered!');
         history.push(paths.login);
     } catch (err) {
+        console.log(err);
         dispatch(createUser.failure(err));
         toast.error('Error occurred while creating account');
         return false;

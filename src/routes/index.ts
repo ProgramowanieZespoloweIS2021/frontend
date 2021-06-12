@@ -11,6 +11,7 @@ import {
     MyOffersPage,
     OfferEditPage,
     MyOrdersPage,
+    MessagesPage,
 } from '@domains/index';
 import paths from '@shared/paths';
 
@@ -130,6 +131,18 @@ const routerConfig: RouterConfig = [
             },
         ],
         layoutComponent: ShopLayout,
+    },
+    {
+        routes: [
+            {
+                component: MessagesPage,
+                exact: true,
+                path: paths.messages,
+                isProtected: true,
+            },
+        ],
+        layoutComponent: ShopLayout,
+        pageName: 'Messages',
     },
     {
         routes: [
