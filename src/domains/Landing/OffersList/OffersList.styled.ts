@@ -7,6 +7,7 @@ import {
     FormHelperText,
     Select,
     FormControl,
+    Button,
 } from '@material-ui/core';
 import { DefaultText, Header } from '@components/_universal/Typography.styled';
 import styled, { css } from 'styled-components';
@@ -19,6 +20,9 @@ export const Input = styled(TextField)(
             margin-bottom: 8px;
         }
         & label {
+            color: ${theme.colors.primary};
+        }
+        & p {
             color: ${theme.colors.primary};
         }
         &:first-child {
@@ -129,5 +133,13 @@ export const CardBottomActions = styled(CardActions)(
         display: flex;
         justify-content: space-between;
         padding: 16px;
+    `,
+);
+
+export const ClearButton = styled(Button)(
+    ({ theme }) => css`
+        && {
+            margin-left: 10px;
+        }
     `,
 );

@@ -15,6 +15,7 @@ import {
     CardChip,
     CardPriceText,
     Input,
+    ClearButton,
 } from './OffersList.styled';
 import { DefaultText } from '@components/_universal/Typography.styled';
 import Select from 'react-select';
@@ -49,6 +50,7 @@ const OffersList: React.FC<IProps> = () => {
         handleSubmit,
         control,
         formState: { errors, isDirty },
+        reset,
     } = useForm({
         resolver: yupResolver(offersFormValidation),
         mode: 'onSubmit',
@@ -59,7 +61,7 @@ const OffersList: React.FC<IProps> = () => {
 
     useEffect(() => {
         dispatch(getAllTags.request(null));
-        getOffersWithPagination();
+        getOffersWithDefaultParams();
     }, []);
 
     useEffect(() => {
@@ -67,7 +69,7 @@ const OffersList: React.FC<IProps> = () => {
     }, [page, rowsPerPage]);
 
     const onFormError = () => {
-        getOffersWithPagination();
+        getOffersWithDefaultParams();
     };
 
     const onSubmit = (data: IOffersForm): void => {
@@ -88,7 +90,7 @@ const OffersList: React.FC<IProps> = () => {
         dispatch(getOffers.request(requestParams));
     };
 
-    const getOffersWithPagination = () => {
+    const getOffersWithDefaultParams = () => {
         const offerParams: IOfferParams = {
             pagination: {
                 limit: rowsPerPage,
@@ -108,6 +110,11 @@ const OffersList: React.FC<IProps> = () => {
     ) => {
         setRowsPerPage(parseInt(event.target.value, 10));
         setPage(0);
+    };
+
+    const handleReset = () => {
+        reset();
+        getOffersWithDefaultParams();
     };
 
     const tagOptions = useSelector(selectAllTags);
@@ -167,7 +174,7 @@ const OffersList: React.FC<IProps> = () => {
                             )}
                         />
                     </Box>
-                    <Box mb={1}>
+                    <Box mb={2}>
                         <Controller
                             control={control}
                             name="sortDirection"
@@ -188,6 +195,9 @@ const OffersList: React.FC<IProps> = () => {
                     >
                         Search
                     </Button>
+                    <ClearButton variant="contained" onClick={handleReset}>
+                        Reset
+                    </ClearButton>
                 </form>
                 <Box
                     display="flex"
