@@ -14,7 +14,8 @@ import { ICartItemRequest, ICartSubmission } from '@@types/models/Cart';
 import { getCartId, setCartId } from '@utils/storage';
 export {};
 
-const serviceUrl = 'http://localhost:8082';
+const CART_SERVICE_URL =
+    process.env.REACT_APP_CART_SERVICE_URL || 'http://localhost:8082';
 
 export const createCartRequest = async (
     action: AnyAction,
@@ -26,7 +27,7 @@ export const createCartRequest = async (
             dispatch(createCart.success(parseInt(storageCardId)));
             return;
         }
-        const response = await API.getAuth(serviceUrl, '/carts');
+        const response = await API.getAuth(CART_SERVICE_URL, '/carts');
         dispatch(createCart.success(response.data));
     } catch (err) {
         dispatch(createCart.failure(err));
@@ -36,7 +37,10 @@ export const createCartRequest = async (
 export const getCartRequest = async (action: AnyAction, dispatch: Dispatch) => {
     const cartId: number = action.payload;
     try {
-        const response = await API.getAuth(serviceUrl, `/carts/${cartId}`);
+        const response = await API.getAuth(
+            CART_SERVICE_URL,
+            `/carts/${cartId}`,
+        );
         dispatch(getCart.success(response.data));
     } catch (err) {
         dispatch(getCart.failure(err));
@@ -50,7 +54,7 @@ export const addItemToCartRequest = async (
     const { cartId, cartItem }: ICartItemRequest = action.payload;
     try {
         const response = await API.postAuth(
-            serviceUrl,
+            CART_SERVICE_URL,
             `carts/${cartId}/items`,
             cartItem,
         );
@@ -67,7 +71,10 @@ export const deleteItemFromCartRequest = async (
 ) => {
     const { cartId, itemId } = action.payload;
     try {
-        await API.deleteAuth(serviceUrl, `/carts/${cartId}/items/${itemId}`);
+        await API.deleteAuth(
+            CART_SERVICE_URL,
+            `/carts/${cartId}/items/${itemId}`,
+        );
         toast.success('Item was deleted from cart!');
         dispatch(deleteItemFromCart.success(itemId));
     } catch (err) {
@@ -81,7 +88,11 @@ export const submitCartRequest = async (
 ) => {
     const cartSubmission: ICartSubmission = action.payload;
     try {
-        await API.postAuth(serviceUrl, 'carts/submission', cartSubmission);
+        await API.postAuth(
+            CART_SERVICE_URL,
+            'carts/submission',
+            cartSubmission,
+        );
         toast.success('Cart was submitted');
         dispatch(submitCart.success(null));
     } catch (err) {
@@ -140,6 +151,3 @@ export const submitCartMiddleware: Middleware<{}, TState> = ({ dispatch }) => (
     }
     return next(action);
 };
-function getCardId() {
-    throw new Error('Function not implemented.');
-}

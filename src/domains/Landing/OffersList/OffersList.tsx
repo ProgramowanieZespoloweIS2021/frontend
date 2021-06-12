@@ -146,6 +146,7 @@ const OffersList: React.FC<IProps> = () => {
                                 render={({ field: { onChange } }) => (
                                     <Select
                                         isMulti
+                                        placeholder="Select tags..."
                                         options={tagOptions}
                                         onChange={onChange}
                                     />
@@ -159,6 +160,7 @@ const OffersList: React.FC<IProps> = () => {
                             name="sortField"
                             render={({ field: { onChange } }) => (
                                 <Select
+                                    placeholder="Select filter params..."
                                     options={sortFieldOptions}
                                     onChange={onChange}
                                 />
@@ -171,6 +173,7 @@ const OffersList: React.FC<IProps> = () => {
                             name="sortDirection"
                             render={({ field: { onChange } }) => (
                                 <Select
+                                    placeholder="Select direction..."
                                     options={sortDirectionOptions}
                                     onChange={onChange}
                                 />
