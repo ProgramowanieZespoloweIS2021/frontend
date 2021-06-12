@@ -17,14 +17,15 @@ import { createTagsUrl } from '@utils/helpers';
 import { history } from '@utils/history';
 import paths from '@shared/paths';
 
-const API_URL = 'http://localhost:8080';
+const OFFERS_SERVICE_URL =
+    process.env.REACT_APP_OFFERS_SERVICE_URL || 'http://localhost:8080';
 
 export const getAllTagsRequest = async (
     action: AnyAction,
     dispatch: Dispatch,
 ) => {
     try {
-        const response = await API.get(API_URL, 'offers/tags');
+        const response = await API.get(OFFERS_SERVICE_URL, 'offers/tags');
         dispatch(getAllTags.success(response.data));
     } catch (err) {
         dispatch(getAllTags.failure(err));
@@ -37,7 +38,7 @@ export const createOfferRequest = async (
 ) => {
     const data = action.payload;
     try {
-        const response = await API.postAuth(API_URL, 'offers', data);
+        const response = await API.postAuth(OFFERS_SERVICE_URL, 'offers', data);
         dispatch(createOffer.success(response.data));
         return true;
     } catch (err) {
@@ -52,7 +53,11 @@ export const updateOfferRequest = async (
 ) => {
     const data = action.payload;
     try {
-        const response = await API.postAuth(API_URL, `offers/${data.id}`, data);
+        const response = await API.postAuth(
+            OFFERS_SERVICE_URL,
+            `offers/${data.id}`,
+            data,
+        );
         dispatch(updateOffer.success(response.data));
         toast.success('Offer has been updated.');
         history.push(paths.myOffers);
@@ -68,7 +73,10 @@ export const deleteOfferRequest = async (
 ) => {
     const id = action.payload;
     try {
-        const response = await API.deleteAuth(API_URL, `/offers/${id}`);
+        const response = await API.deleteAuth(
+            OFFERS_SERVICE_URL,
+            `/offers/${id}`,
+        );
         dispatch(deleteOffer.success(response.data));
         toast.success('Offer has been deleted.');
         return true;
@@ -98,11 +106,18 @@ export const getOffersRequest = async (
                 min_price: `gt:${minPrice},lt:${maxPrice}`,
                 tags: tagsUrl,
             };
-            const response = await API.get(API_URL, 'offers', params);
+            const response = await API.get(
+                OFFERS_SERVICE_URL,
+                'offers',
+                params,
+            );
             dispatch(getOffers.success(response.data));
             return;
         }
-        const response = await API.get(API_URL, 'offers', { limit, offset });
+        const response = await API.get(OFFERS_SERVICE_URL, 'offers', {
+            limit,
+            offset,
+        });
         dispatch(getOffers.success(response.data));
     } catch (err) {
         dispatch(getOffers.failure(err));
@@ -119,11 +134,15 @@ export const getMyOffersRequest = async (
             const params = {
                 owner_id: `eq:${userId}`,
             };
-            const response = await API.get(API_URL, 'offers', params);
+            const response = await API.get(
+                OFFERS_SERVICE_URL,
+                'offers',
+                params,
+            );
             dispatch(getOffers.success(response.data));
             return;
         }
-        const response = await API.get(API_URL, 'offers');
+        const response = await API.get(OFFERS_SERVICE_URL, 'offers');
         dispatch(getOffers.success(response.data));
     } catch (err) {
         dispatch(getOffers.failure(err));
@@ -136,7 +155,7 @@ export const getOfferDetailsRequest = async (
 ) => {
     const offerId: number = action.payload;
     try {
-        const response = await API.get(API_URL, `offers/${offerId}`);
+        const response = await API.get(OFFERS_SERVICE_URL, `offers/${offerId}`);
         dispatch(getOfferDetails.success(response.data));
     } catch (err) {
         dispatch(getOfferDetails.failure(err));
