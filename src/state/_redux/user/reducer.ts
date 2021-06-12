@@ -8,11 +8,15 @@ const userReducer = createReducer<UserModule, Action>(initialState)
         ...state,
         authorized: true,
     }))
-    .handleAction(getUser.success, (state: UserModule) => ({
-        ...state,
-        authorized: true,
-    }))
-    .handleAction(logoutUser.success, (state: UserModule) => ({
+    .handleAction(
+        getUser.success,
+        (state: UserModule, { payload: { data } }) => ({
+            ...state,
+            id: data.id,
+            authorized: true,
+        }),
+    )
+    .handleAction(logoutUser.success, (state: UserModule, action: Action) => ({
         ...state,
         authorized: false,
     }))

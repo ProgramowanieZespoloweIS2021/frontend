@@ -9,12 +9,12 @@ import {
     loginUser,
     logoutUser,
 } from '@state/_redux/user/actions';
-import { createEmptyCart } from '@state/_redux/cart/actions';
 import { setJwt } from '@utils/jwt';
 import { toast } from 'react-toastify';
 import { API } from '@utils/api';
 import paths from '@shared/paths';
 import { history } from '@utils/history';
+import { clearStorage } from '@utils/storage';
 
 const AUTH_SERVICE_URL =
     process.env.REACT_APP_AUTH_SERVICE_URL || 'http://localhost:8084';
@@ -58,8 +58,6 @@ const loginRequest = async (action: AnyAction, dispatch: Dispatch) => {
             password,
         });
         dispatch(loginUser.success(response));
-        // Create empty cart in login stage
-        dispatch(createEmptyCart.request(null));
         history.push(paths.account);
         toast.success('Successfully logged in!');
         return true;
@@ -75,6 +73,7 @@ const logoutRequest = async (action: AnyAction, dispatch: Dispatch) => {
         const response = await API.getAuth(AUTH_SERVICE_URL, '/auth/logout');
         dispatch(logoutUser.success(response));
         history.push(paths.home);
+        clearStorage();
         return true;
     } catch (err) {
         dispatch(logoutUser.failure(err));

@@ -4,26 +4,32 @@ import { TState } from 'src/boot/configureStore';
 import { getType } from 'typesafe-actions';
 import {
     addItemToCart,
-    createEmptyCart,
+    createCart,
     deleteItemFromCart,
     getCart,
     submitCart,
 } from './actions';
 import { toast } from 'react-toastify';
 import { ICartItemRequest, ICartSubmission } from '@@types/models/Cart';
+import { getCartId, setCartId } from '@utils/storage';
 export {};
 
 const serviceUrl = 'http://localhost:8082';
 
-export const createEmptyCartRequest = async (
+export const createCartRequest = async (
     action: AnyAction,
     dispatch: Dispatch,
 ) => {
     try {
+        const storageCardId = getCartId();
+        if (storageCardId) {
+            dispatch(createCart.success(parseInt(storageCardId)));
+            return;
+        }
         const response = await API.getAuth(serviceUrl, '/carts');
-        dispatch(createEmptyCart.success(response.data));
+        dispatch(createCart.success(response.data));
     } catch (err) {
-        dispatch(createEmptyCart.failure(err));
+        dispatch(createCart.failure(err));
     }
 };
 
@@ -75,7 +81,7 @@ export const submitCartRequest = async (
 ) => {
     const cartSubmission: ICartSubmission = action.payload;
     try {
-        await API.postAuth(serviceUrl, '/carts/submission', cartSubmission);
+        await API.postAuth(serviceUrl, 'carts/submission', cartSubmission);
         toast.success('Cart was submitted');
         dispatch(submitCart.success(null));
     } catch (err) {
@@ -83,11 +89,18 @@ export const submitCartRequest = async (
     }
 };
 
-export const createEmptyCartMiddleware: Middleware<{}, TState> = ({
-    dispatch,
-}) => (next) => async (action: AnyAction) => {
-    if (action.type === getType(createEmptyCart.request)) {
-        await createEmptyCartRequest(action, dispatch);
+const saveCardIdStorage = (action: AnyAction) => {
+    const cardId = action.payload;
+    setCartId(cardId);
+};
+
+export const createCartMiddleware: Middleware<{}, TState> = ({ dispatch }) => (
+    next,
+) => async (action: AnyAction) => {
+    if (action.type === getType(createCart.request)) {
+        await createCartRequest(action, dispatch);
+    } else if (action.type === getType(createCart.success)) {
+        saveCardIdStorage(action);
     }
     return next(action);
 };
@@ -127,3 +140,6 @@ export const submitCartMiddleware: Middleware<{}, TState> = ({ dispatch }) => (
     }
     return next(action);
 };
+function getCardId() {
+    throw new Error('Function not implemented.');
+}
