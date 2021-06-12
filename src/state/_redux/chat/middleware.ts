@@ -9,6 +9,8 @@ import {
     createChat,
 } from '@state/_redux/chat/actions';
 import { API } from '@utils/api';
+import { history } from "@utils/history";
+import paths from '@shared/paths';
 
 const CHAT_SERVICE_URL =
     process.env.REACT_APP_CHAT_SERVICE_URL || 'http://localhost:8086';
@@ -56,6 +58,7 @@ const createChatRequest = async (action: AnyAction, dispatch: Dispatch) => {
         );
         console.log(response);
         dispatch(createChat.success(response));
+        history.push(paths.messages);
         return true;
     } catch (err) {
         dispatch(createChat.failure(err));

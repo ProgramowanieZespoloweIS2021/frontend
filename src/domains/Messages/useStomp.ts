@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import Stomp, { Client, Message } from 'stompjs';
+import Stomp, { Client } from 'stompjs';
 
 interface IProps {
     topic: string;
@@ -45,7 +45,7 @@ export const useStomp = ({ url, topic, sendChannel }: IProps) => {
         return null;
     };
 
-    const setOnMessage = (callback: () => void) => {
+    const setOnMessage = (callback: any) => {
         stompClient?.subscribe(topic, callback);
     };
 

@@ -21,6 +21,9 @@ import { addMessage } from '@state/_redux/chat/actions';
 
 interface IProps {}
 
+const CHAT_SERVICE_WS_URL =
+    process.env.REACT_APP_CHAT_SERVICE_WS_URL || 'ws://localhost:8086/ws';
+
 const MessagesPage: React.FC<IProps> = () => {
     const dispatch = useDispatch();
     const [selectedContact, setSelectedContact] = useState<IChat | null>(null);
@@ -28,7 +31,7 @@ const MessagesPage: React.FC<IProps> = () => {
     const contacts = useSelector(chatSelectors.getContacts);
     const user = useSelector(userSelectors.selectUserDetails);
     const [sendStompMessage, setOnMessage] = useStomp({
-        url: 'ws://localhost:8086/ws',
+        url: CHAT_SERVICE_WS_URL,
         topic: `/user/${user.id}/queue/messages`,
         sendChannel: '/app/chat',
     });
@@ -48,15 +51,13 @@ const MessagesPage: React.FC<IProps> = () => {
         if (selectedContact) {
             dispatch(
                 chatActions.getMessages.request({
-                    // @ts-ignore
-                    chatId: selectedContact.id,
+                    chatId: selectedContact?.id,
                     pageOffset: messages.length,
                 }),
             );
             // @ts-ignore
-            setOnMessage((data) => {
+            setOnMessage((data: any) => {
                 const message = JSON.parse(data.body);
-                console.log(message);
                 if (message.chatId === selectedContact?.id) {
                     dispatch(
                         chatActions.getMessages.request({
