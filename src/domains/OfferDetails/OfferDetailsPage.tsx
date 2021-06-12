@@ -8,7 +8,6 @@ import { IconManager } from '@components/_universal';
 
 import { ICartItemRequest } from '@@types/models/Cart';
 import { addItemToCart, createCart } from '@state/_redux/cart/actions';
-import { useDispatch, useSelector } from 'react-redux';
 import { getOfferDetails } from '@state/_redux/offers/actions';
 import { createChat } from '@state/_redux/chat/actions';
 import { selectUserDetails } from '@state/_redux/user/selectors';
