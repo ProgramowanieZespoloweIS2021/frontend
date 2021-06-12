@@ -6,15 +6,18 @@ import {
 } from '@components/_form-elements/OfferForm/OfferForm';
 import { createOffer } from '@state/_redux/offers/actions';
 import { offerFormToModel } from '@components/_form-elements/OfferForm/helpers';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectUserDetails } from '@state/_redux/user/selectors';
 
 interface IProps {}
 
 const OfferAddPage: React.FC<IProps> = () => {
     const dispatch = useDispatch();
+    const { id: userId } = useSelector(selectUserDetails);
 
     const onSubmit = (data: IAddOfferForm) => {
-        dispatch(createOffer.request(offerFormToModel(data)));
+        if (userId)
+            dispatch(createOffer.request(offerFormToModel(data, userId)));
     };
 
     return (

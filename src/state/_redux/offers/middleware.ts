@@ -39,8 +39,7 @@ export const createOfferRequest = async (
     try {
         const response = await API.postAuth(API_URL, 'offers', data);
         dispatch(createOffer.success(response.data));
-        toast.success('Offer has been added.');
-        history.push(paths.myOffers);
+        return true;
     } catch (err) {
         dispatch(createOffer.failure(err));
         return false;
@@ -157,7 +156,11 @@ export const createOfferMiddleware: Middleware<{}, TState> = ({ dispatch }) => (
     next,
 ) => async (action: AnyAction) => {
     if (action.type === getType(createOffer.request)) {
-        await createOfferRequest(action, dispatch);
+        const response = await createOfferRequest(action, dispatch);
+        if (response) {
+            toast.success('Offer has been added.');
+            history.push(paths.myOffers);
+        }
     }
     return next(action);
 };

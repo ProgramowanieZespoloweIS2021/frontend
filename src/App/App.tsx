@@ -10,20 +10,17 @@ import ToastNotification from '@components/ToastNotification/ToastNotification';
 import { MuiThemeProvider } from '@material-ui/core';
 import muiTheme from '@shared/theme/mui.theme';
 import { history } from '@utils/history';
-import { AuthContainer } from '@routes/AuthContainer';
 
 const App = () => {
     return (
         <Router history={history}>
             <ThemeProvider theme={themeVariant[Theme.DEFAULT]}>
                 <MuiThemeProvider theme={muiTheme}>
-                    <AuthContainer>
-                        <GlobalStyled />
-                        <RootWrapper>
-                            <RootRoutes />
-                            <ToastNotification />
-                        </RootWrapper>
-                    </AuthContainer>
+                    <GlobalStyled />
+                    <RootWrapper>
+                        <RootRoutes />
+                        <ToastNotification />
+                    </RootWrapper>
                 </MuiThemeProvider>
             </ThemeProvider>
         </Router>

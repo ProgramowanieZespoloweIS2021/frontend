@@ -16,6 +16,7 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { selectOfferDetails } from '@state/_redux/offers/selectors';
+import { selectUserDetails } from '@state/_redux/user/selectors';
 
 interface IProps {}
 
@@ -27,13 +28,15 @@ export const OfferEditPage: React.FC<IProps> = () => {
     const { id } = useParams<UrlParams>();
     const offerId = parseInt(id);
     const dispatch = useDispatch();
+    const { id: userId } = useSelector(selectUserDetails);
 
     useEffect(() => {
         dispatch(getOfferDetails.request(offerId));
     }, []);
 
     const onSubmit = (data: IAddOfferForm) => {
-        dispatch(updateOffer.request(offerFormToModel(data)));
+        if (userId)
+            dispatch(updateOffer.request(offerFormToModel(data, userId)));
     };
 
     const defaultValues = useSelector(selectOfferDetails);

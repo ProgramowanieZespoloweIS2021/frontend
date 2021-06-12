@@ -58,7 +58,7 @@ const loginRequest = async (action: AnyAction, dispatch: Dispatch) => {
             password,
         });
         dispatch(loginUser.success(response));
-        history.push(paths.account);
+        history.push(paths.home);
         toast.success('Successfully logged in!');
         return true;
     } catch (err) {
@@ -123,7 +123,7 @@ export const getUserMiddleware: Middleware<{}, TState> = ({ dispatch }) => (
         await getUserRequest(action, dispatch);
     }
     if (action.type === getType(getUser.failure)) {
-        toast.error('You are unathorized to perform this action.');
+        toast.error('You are unauthorized to perform this action.');
         history.push(paths.home);
     }
     return next(action);

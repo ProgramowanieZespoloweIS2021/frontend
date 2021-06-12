@@ -2,9 +2,10 @@ import React from 'react';
 
 import { Grid } from '@material-ui/core';
 
-import { Container, LoginHeader, Wrapper } from './AccountPage.styled';
+import { LoginHeader, Wrapper } from './AccountPage.styled';
 import ChangePasswordForm from './_components/ChangePasswordForm';
 import ChangeUserDetailsForm from './_components/ChangeUserDetailsForm';
+import { SectionContainer } from '@components/_form-elements/SectionContainer';
 
 interface IProps {}
 
@@ -18,17 +19,17 @@ const AccountPage: React.FC<IProps> = () => {
     return (
         <>
             <Wrapper container justify="center" spacing={4}>
-                <Grid item sm={8} md={4} xs={12}>
-                    <Container elevation={2}>
-                        <LoginHeader>My account</LoginHeader>
+                <Grid item xl={6}>
+                    <SectionContainer>
+                        <LoginHeader>Edit account</LoginHeader>
                         <ChangeUserDetailsForm {...USER} />
-                    </Container>
+                    </SectionContainer>
                 </Grid>
-                <Grid item sm={8} md={4} xs={12}>
-                    <Container elevation={2}>
+                <Grid item xl={6}>
+                    <SectionContainer>
                         <LoginHeader>Change password</LoginHeader>
                         <ChangePasswordForm />
-                    </Container>
+                    </SectionContainer>
                 </Grid>
             </Wrapper>
         </>

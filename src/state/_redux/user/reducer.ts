@@ -17,8 +17,9 @@ const userReducer = createReducer<UserModule, Action>(initialState)
         }),
     )
     .handleAction(logoutUser.success, (state: UserModule, action: Action) => ({
-        ...state,
         authorized: false,
+        id: null,
+        email: null,
     }))
     .handleAction(getUser.success, (state: UserModule, { payload }) => ({
         ...state,
