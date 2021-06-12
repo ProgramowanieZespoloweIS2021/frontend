@@ -4,11 +4,11 @@ import { Omit } from '@material-ui/core';
 
 export const offerFormToModel = (
     formData: IAddOfferForm,
+    userId: number,
 ): IOfferRequestBody => ({
     ...formData,
     ...{ tags: formData.tags.map((el) => el.value) },
-    //TODO : Change ownerId
-    ownerId: 1,
+    ownerId: userId,
 });
 
 export const offerModelToForm = (model: IOfferDetails): IAddOfferForm => ({
