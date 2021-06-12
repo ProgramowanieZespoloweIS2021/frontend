@@ -47,7 +47,9 @@ const CartPage: React.FC<IProps> = () => {
 
     const handleSubmission = () => {
         const { id } = userDetails;
-        dispatch(submitCart.request({ cartId, buyerId: id }));
+        if (id) {
+            dispatch(submitCart.request({ cartId, buyerId: id }));
+        }
     };
 
     const calculateItemsTotalPrice = (items: ICartItemDetails[]) => {
