@@ -6,7 +6,6 @@ import {
     LoginPage,
     RegisterPage,
     CartPage,
-    AccountPage,
     OfferAddPage,
     MyOffersPage,
     OfferEditPage,
@@ -121,18 +120,6 @@ const routerConfig: RouterConfig = [
         ],
         layoutComponent: ShopLayout,
         pageName: 'Register',
-    },
-    {
-        routes: [
-            {
-                component: AccountPage,
-                exact: true,
-                path: paths.account,
-                isProtected: true,
-            },
-        ],
-        layoutComponent: ShopLayout,
-        pageName: 'My Account',
     },
     {
         routes: [

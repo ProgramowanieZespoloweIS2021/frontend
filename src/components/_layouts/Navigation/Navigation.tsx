@@ -58,12 +58,6 @@ export const Navigation: React.FC<IProps> = () => {
                         >
                             Messages
                         </NavButton>
-                        <NavButton
-                            color="primary"
-                            onClick={() => history.push(paths.account)}
-                        >
-                            My Account
-                        </NavButton>
                         <NavButton color="primary" onClick={handleLogout}>
                             Logout
                         </NavButton>
