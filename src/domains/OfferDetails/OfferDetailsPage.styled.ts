@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 import { DefaultText, Header } from '@components/_universal/Typography.styled';
-import { Chip, Tab } from '@material-ui/core';
+import { Chip, Tab, TextField } from '@material-ui/core';
 import { IconManager } from '@components/_universal';
 
 export {};
@@ -100,4 +100,11 @@ export const TechnologyChip = styled(Chip)`
 
 export const IconMargin = styled(IconManager)`
     margin-right: 8px;
+`;
+
+export const ItemDescriptionTextField = styled(TextField)`
+    && {
+        width: 100%;
+        margin-bottom: 15px;
+    }
 `;
