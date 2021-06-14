@@ -16,6 +16,7 @@ import {
     CardPriceText,
     Input,
     ClearButton,
+    ReactSelect,
 } from './OffersList.styled';
 import { DefaultText } from '@components/_universal/Typography.styled';
 import Select from 'react-select';
@@ -132,6 +133,7 @@ const OffersList: React.FC<IProps> = () => {
                             {...register('min')}
                             label="min"
                             name="min"
+                            type="number"
                             placeholder="min"
                             variant="outlined"
                         />
@@ -140,18 +142,19 @@ const OffersList: React.FC<IProps> = () => {
                             helperText={errors.max && errors.max.message}
                             {...register('max')}
                             label="max"
+                            type="number"
                             name="max"
                             placeholder="max"
                             variant="outlined"
                         />
                     </Box>
-                    <Box mb={1}>
+                    <Box display="flex" mb={2}>
                         {tagOptions && (
                             <Controller
                                 control={control}
                                 name="tags"
                                 render={({ field: { onChange } }) => (
-                                    <Select
+                                    <ReactSelect
                                         isMulti
                                         placeholder="Select tags..."
                                         options={tagOptions}
@@ -160,27 +163,24 @@ const OffersList: React.FC<IProps> = () => {
                                 )}
                             />
                         )}
-                    </Box>
-                    <Box mb={1}>
                         <Controller
                             control={control}
                             name="sortField"
                             render={({ field: { onChange } }) => (
-                                <Select
-                                    placeholder="Select filter params..."
+                                <ReactSelect
+                                    placeholder="Select sort params..."
                                     options={sortFieldOptions}
                                     onChange={onChange}
                                 />
                             )}
                         />
-                    </Box>
-                    <Box mb={2}>
+
                         <Controller
                             control={control}
                             name="sortDirection"
                             render={({ field: { onChange } }) => (
-                                <Select
-                                    placeholder="Select direction..."
+                                <ReactSelect
+                                    placeholder="Select sort direction..."
                                     options={sortDirectionOptions}
                                     onChange={onChange}
                                 />
