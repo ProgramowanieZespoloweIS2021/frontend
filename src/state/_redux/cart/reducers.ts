@@ -5,6 +5,7 @@ import {
     createCart,
     deleteItemFromCart,
     getCart,
+    clearCart,
 } from './actions';
 
 export type TCartReducer = {
@@ -39,4 +40,5 @@ export const cartReducer = createReducer<TCartReducer, Action>(initialState)
             ...state.cart,
             items: [...state.cart.items].filter((item) => item.id !== payload),
         },
-    }));
+    }))
+    .handleAction(clearCart.success, (state) => initialState);

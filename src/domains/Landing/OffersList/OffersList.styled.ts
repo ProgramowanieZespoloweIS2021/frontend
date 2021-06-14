@@ -5,13 +5,26 @@ import {
     Chip,
     TextField,
     FormHelperText,
-    Select,
     FormControl,
     Button,
 } from '@material-ui/core';
 import { DefaultText, Header } from '@components/_universal/Typography.styled';
 import styled, { css } from 'styled-components';
 import { Link } from 'react-router-dom';
+import Select from 'react-select';
+
+export const ReactSelect = styled(Select)(
+    ({ theme }) => css`
+        && {
+            width: 100%;
+            margin-right: 10px;
+        }
+
+        &&:last-child {
+            margin: 0;
+        }
+    `,
+);
 
 export const Input = styled(TextField)(
     ({ theme }) => css`
@@ -28,12 +41,6 @@ export const Input = styled(TextField)(
         &:first-child {
             margin-right: 5px;
         }
-    `,
-);
-
-export const MaterialSelect = styled(Select)(
-    ({ theme }) => css`
-        width: 100%;
     `,
 );
 
@@ -54,13 +61,6 @@ export const SliderContainer = styled(Box)(
         justify-content: center;
         width: 15rem;
         margin-right: 2rem;
-    `,
-);
-
-export const Dropdown = styled(Select)(
-    ({ theme }) => css`
-        width: 100%;
-        margin-bottom: 5px;
     `,
 );
 

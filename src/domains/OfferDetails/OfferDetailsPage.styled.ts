@@ -62,6 +62,7 @@ export const OfferThumbnail = styled.div<{ url: string }>(
         height: 400px;
         background-image: url(${url});
         background-size: cover;
+        object-fit: cover;
         box-shadow: ${theme.default_shadow};
         margin-bottom: 40px;
     `,

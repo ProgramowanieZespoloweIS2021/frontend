@@ -8,6 +8,7 @@ import { IconManager } from '@components/_universal';
 
 import { ICartItemRequest } from '@@types/models/Cart';
 import { addItemToCart, createCart } from '@state/_redux/cart/actions';
+import { getUser } from '@state/_redux/user/actions';
 import { getOfferDetails } from '@state/_redux/offers/actions';
 import { createChat } from '@state/_redux/chat/actions';
 import { selectUserDetails, isAuthorized } from '@state/_redux/user/selectors';
@@ -28,6 +29,7 @@ const OfferDetailsPage: React.FC<IProps> = () => {
     useEffect(() => {
         dispatch(createCart.request(null));
         dispatch(getOfferDetails.request(offerId));
+        dispatch(getUser.request(''));
     }, []);
 
     const offerDetails = useSelector(selectOfferDetails);
@@ -48,6 +50,7 @@ const OfferDetailsPage: React.FC<IProps> = () => {
     };
 
     const handleContact = () => {
+        console.log(offerDetails, userDetails);
         if (offerDetails && userDetails.id && userDetails.email) {
             const contact = {
                 id: offerDetails.ownerId,
@@ -55,6 +58,12 @@ const OfferDetailsPage: React.FC<IProps> = () => {
             };
             const user = { id: userDetails.id, nickname: userDetails.email };
             dispatch(createChat.request([user, contact]));
+        }
+    };
+
+    const areBtnsVisible = () => {
+        if (offerDetails) {
+            return offerDetails.ownerId !== userDetails.id && isUserAuthorized;
         }
     };
 
@@ -173,7 +182,7 @@ const OfferDetailsPage: React.FC<IProps> = () => {
                                                             <p>{`${tierItem.deliveryTime} days deliver time`}</p>
                                                         </Box>
 
-                                                        {isUserAuthorized && (
+                                                        {areBtnsVisible() && (
                                                             <Box
                                                                 justifyContent={
                                                                     'space-between'

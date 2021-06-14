@@ -21,6 +21,7 @@ import {
     deleteItemFromCartMiddleware,
     getCartMiddleware,
     submitCartMiddleware,
+    clearCartMiddleware,
 } from '@state/_redux/cart/middleware';
 import {
     createChatMiddleware,
@@ -44,6 +45,7 @@ const middlewares = [
     getOfferDetailsMiddleware,
     deleteItemFromCartMiddleware,
     submitCartMiddleware,
+    clearCartMiddleware,
     getMyOffersMiddleware,
     deleteOfferMiddleware,
     updateOfferMiddleware,

@@ -23,6 +23,7 @@ import {
     deleteItemFromCart,
     getCart,
     submitCart,
+    clearCart,
 } from '@state/_redux/cart/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectCart, selectCartId } from '@state/_redux/cart/selectors';
@@ -47,7 +48,10 @@ const CartPage: React.FC<IProps> = () => {
 
     const handleSubmission = () => {
         const { id } = userDetails;
-        if (id) dispatch(submitCart.request({ cartId, buyerId: id }));
+        if (id) {
+            dispatch(submitCart.request({ cartId, buyerId: id }));
+            dispatch(clearCart.request(null));
+        }
     };
 
     const calculateItemsTotalPrice = (items: ICartItemDetails[]) => {
