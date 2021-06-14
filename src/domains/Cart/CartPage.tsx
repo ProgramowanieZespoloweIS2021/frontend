@@ -61,8 +61,7 @@ const CartPage: React.FC<IProps> = () => {
         );
     };
 
-    const cart = useSelector(selectCart);
-    const { items } = cart;
+    const { items } = useSelector(selectCart);
 
     return (
         <>
@@ -75,6 +74,7 @@ const CartPage: React.FC<IProps> = () => {
                                 <TableCell>Product</TableCell>
                                 <TableCell>Tier</TableCell>
                                 <TableCell>Tier title</TableCell>
+                                <TableCell>Description</TableCell>
                                 <TableCell>Price</TableCell>
                                 <TableCell></TableCell>
                             </TableRow>
@@ -88,6 +88,7 @@ const CartPage: React.FC<IProps> = () => {
                                         tierId,
                                         tierTitle,
                                         tierPrice,
+                                        description,
                                     },
                                     index,
                                 ) => (
@@ -95,6 +96,7 @@ const CartPage: React.FC<IProps> = () => {
                                         <TableCell>{offerTitle}</TableCell>
                                         <TableCell>{tierId}</TableCell>
                                         <TableCell>{tierTitle}</TableCell>
+                                        <TableCell>{description}</TableCell>
                                         <TableCell>{tierPrice}</TableCell>
                                         <TableCell>
                                             <IconButton

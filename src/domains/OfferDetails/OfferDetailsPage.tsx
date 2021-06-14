@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { AppBar, Box, Button, Grid, Tabs } from '@material-ui/core';
+import { AppBar, Box, Button, Grid, Tabs, TextField } from '@material-ui/core';
 import * as styled from './OfferDetailsPage.styled';
 import { IconManager } from '@components/_universal';
 
@@ -22,6 +22,7 @@ interface UrlParams {
 
 const OfferDetailsPage: React.FC<IProps> = () => {
     const [tabIndex, setTabIndex] = React.useState(0);
+    const [itemDescription, setItemDescription] = React.useState('');
     const { id } = useParams<UrlParams>();
     const offerId = parseInt(id);
     const dispatch = useDispatch();
@@ -43,14 +44,14 @@ const OfferDetailsPage: React.FC<IProps> = () => {
             cartItem: {
                 offerId,
                 tierId,
-                description: 'new offer',
+                description: itemDescription,
             },
         };
         dispatch(addItemToCart.request(cartItemRequest));
+        setItemDescription('');
     };
 
     const handleContact = () => {
-        console.log(offerDetails, userDetails);
         if (offerDetails && userDetails.id && userDetails.email) {
             const contact = {
                 id: offerDetails.ownerId,
@@ -59,6 +60,11 @@ const OfferDetailsPage: React.FC<IProps> = () => {
             const user = { id: userDetails.id, nickname: userDetails.email };
             dispatch(createChat.request([user, contact]));
         }
+    };
+
+    const handleTextFieldChange = (e: any) => {
+        const text = e.target.value;
+        setItemDescription(text);
     };
 
     const areBtnsVisible = () => {
@@ -183,60 +189,75 @@ const OfferDetailsPage: React.FC<IProps> = () => {
                                                         </Box>
 
                                                         {areBtnsVisible() && (
-                                                            <Box
-                                                                justifyContent={
-                                                                    'space-between'
-                                                                }
-                                                                display={'flex'}
-                                                            >
-                                                                <Button
-                                                                    variant={
-                                                                        'contained'
+                                                            <>
+                                                                <styled.ItemDescriptionTextField
+                                                                    type="text"
+                                                                    variant="outlined"
+                                                                    placeholder="Provide info..."
+                                                                    multiline
+                                                                    rows={6}
+                                                                    rowsMax={12}
+                                                                    onChange={
+                                                                        handleTextFieldChange
                                                                     }
-                                                                    color={
-                                                                        'secondary'
+                                                                />
+                                                                <Box
+                                                                    justifyContent={
+                                                                        'space-between'
                                                                     }
-                                                                    onClick={
-                                                                        handleContact
+                                                                    display={
+                                                                        'flex'
                                                                     }
                                                                 >
-                                                                    <styled.IconMargin
-                                                                        size={
-                                                                            32
+                                                                    <Button
+                                                                        variant={
+                                                                            'contained'
                                                                         }
-                                                                        name="Clock"
-                                                                        fill={[
-                                                                            'secondary',
-                                                                        ]}
-                                                                    />
-                                                                    Contact
-                                                                </Button>
+                                                                        color={
+                                                                            'secondary'
+                                                                        }
+                                                                        onClick={
+                                                                            handleContact
+                                                                        }
+                                                                    >
+                                                                        <styled.IconMargin
+                                                                            size={
+                                                                                32
+                                                                            }
+                                                                            name="Clock"
+                                                                            fill={[
+                                                                                'secondary',
+                                                                            ]}
+                                                                        />
+                                                                        Contact
+                                                                    </Button>
 
-                                                                <Button
-                                                                    variant={
-                                                                        'contained'
-                                                                    }
-                                                                    color={
-                                                                        'secondary'
-                                                                    }
-                                                                    onClick={() => {
-                                                                        handleAddToCart(
-                                                                            tierItem.id,
-                                                                        );
-                                                                    }}
-                                                                >
-                                                                    <styled.IconMargin
-                                                                        size={
-                                                                            32
+                                                                    <Button
+                                                                        variant={
+                                                                            'contained'
                                                                         }
-                                                                        name="ShoppingCart"
-                                                                        fill={[
-                                                                            'secondary',
-                                                                        ]}
-                                                                    />
-                                                                    To cart
-                                                                </Button>
-                                                            </Box>
+                                                                        color={
+                                                                            'secondary'
+                                                                        }
+                                                                        onClick={() => {
+                                                                            handleAddToCart(
+                                                                                tierItem.id,
+                                                                            );
+                                                                        }}
+                                                                    >
+                                                                        <styled.IconMargin
+                                                                            size={
+                                                                                32
+                                                                            }
+                                                                            name="ShoppingCart"
+                                                                            fill={[
+                                                                                'secondary',
+                                                                            ]}
+                                                                        />
+                                                                        To cart
+                                                                    </Button>
+                                                                </Box>
+                                                            </>
                                                         )}
                                                     </>
                                                 )}
