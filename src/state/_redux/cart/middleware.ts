@@ -8,11 +8,11 @@ import {
     deleteItemFromCart,
     getCart,
     submitCart,
+    clearCart,
 } from './actions';
 import { toast } from 'react-toastify';
 import { ICartItemRequest, ICartSubmission } from '@@types/models/Cart';
-import { getCartId, setCartId } from '@utils/storage';
-export {};
+import { getCartId, setCartId, removeCartId } from '@utils/storage';
 
 const CART_SERVICE_URL =
     process.env.REACT_APP_CART_SERVICE_URL || 'http://localhost:8082';
@@ -100,6 +100,14 @@ export const submitCartRequest = async (
     }
 };
 
+export const clearCartRequest = async (
+    action: AnyAction,
+    dispatch: Dispatch,
+) => {
+    removeCartId();
+    dispatch(clearCart.success(null));
+};
+
 const saveCardIdStorage = (action: AnyAction) => {
     const cardId = action.payload;
     setCartId(cardId);
@@ -148,6 +156,15 @@ export const submitCartMiddleware: Middleware<{}, TState> = ({ dispatch }) => (
 ) => async (action: AnyAction) => {
     if (action.type === getType(submitCart.request)) {
         await submitCartRequest(action, dispatch);
+    }
+    return next(action);
+};
+
+export const clearCartMiddleware: Middleware<{}, TState> = ({ dispatch }) => (
+    next,
+) => async (action: AnyAction) => {
+    if (action.type === getType(clearCart.request)) {
+        await clearCartRequest(action, dispatch);
     }
     return next(action);
 };

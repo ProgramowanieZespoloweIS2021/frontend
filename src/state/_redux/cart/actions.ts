@@ -30,3 +30,9 @@ export const submitCart = createAsyncAction(
     'SUBMIT_CART_SUCCESS',
     'SUBMIT_CART_FAILURE',
 )<ICartSubmission, null, string>();
+
+export const clearCart = createAsyncAction(
+    'CLEAR_CART_REQUEST',
+    'CLEAR_CART_SUCCESS',
+    'CLEAR_CART_FAILURE',
+)<null, null, string>();

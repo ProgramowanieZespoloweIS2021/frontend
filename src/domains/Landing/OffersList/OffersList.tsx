@@ -156,7 +156,7 @@ const OffersList: React.FC<IProps> = () => {
                                 render={({ field: { onChange } }) => (
                                     <ReactSelect
                                         isMulti
-                                        placeholder="Select tags..."
+                                        placeholder="Filter by tags..."
                                         options={tagOptions}
                                         onChange={onChange}
                                     />
