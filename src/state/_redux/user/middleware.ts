@@ -123,7 +123,6 @@ export const getUserMiddleware: Middleware<{}, TState> = ({ dispatch }) => (
         await getUserRequest(action, dispatch);
     }
     if (action.type === getType(getUser.failure)) {
-        toast.error('You are unauthorized to perform this action.');
         history.push(paths.home);
     }
     return next(action);
