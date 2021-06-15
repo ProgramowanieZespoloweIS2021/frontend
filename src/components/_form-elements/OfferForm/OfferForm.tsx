@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { useEffect, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { Box, Grid, Omit } from '@material-ui/core';
@@ -118,7 +119,7 @@ export const OfferForm: React.FC<IProps> = ({ onSubmit, defaultValues }) => {
 
                 <Grid item md={6}>
                     <SectionContainer>
-                        <p>Thumbnails</p>
+                        <p>Thumbnails (urls)</p>
 
                         {thumbnailIndexes.map((idx) => (
                             <Box
@@ -130,8 +131,20 @@ export const OfferForm: React.FC<IProps> = ({ onSubmit, defaultValues }) => {
                                     label="Thumbnail"
                                     type="text"
                                     variant="outlined"
+                                    error={
+                                        !!(
+                                            errors.thumbnails &&
+                                            errors?.thumbnails[idx]
+                                        )
+                                    }
+                                    helperText={
+                                        errors?.thumbnails &&
+                                        errors?.thumbnails[idx] &&
+                                        errors?.thumbnails[idx]?.url?.message
+                                    }
                                     {...register(`thumbnails.${idx}` as const)}
                                 />
+
                                 <CancelIcon
                                     name={'Close'}
                                     size={32}

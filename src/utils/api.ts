@@ -26,6 +26,8 @@ export const API = {
         axios.get(`${serviceUrl}${endpointUrl}`, {
             headers: {
                 Authorization: `Bearer ${getJwt()}`,
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
             },
         }),
 

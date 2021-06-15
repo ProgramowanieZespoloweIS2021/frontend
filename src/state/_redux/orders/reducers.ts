@@ -14,6 +14,6 @@ export const OrdersReducer = createReducer(initialState).handleAction(
     getOrders.success,
     (state, { payload }) => ({
         ...state,
-        orders: payload,
+        orders: payload.orders,
     }),
 );

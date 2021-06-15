@@ -29,7 +29,10 @@ import {
     getMessagesMiddleware,
 } from '@state/_redux/chat/middleware';
 
-import { getOrdersMiddleware } from '@state/_redux/orders/middleware';
+import {
+    getOrdersMiddleware,
+    updateOrderStateMiddleware,
+} from '@state/_redux/orders/middleware';
 
 const middlewares = [
     createUserMiddleware,
@@ -53,6 +56,7 @@ const middlewares = [
     createChatMiddleware,
     getContactsMiddleware,
     getMessagesMiddleware,
+    updateOrderStateMiddleware,
 ];
 
 export default applyMiddleware(...middlewares);

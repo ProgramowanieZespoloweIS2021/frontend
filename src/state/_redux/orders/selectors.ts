@@ -9,5 +9,5 @@ const selectOrdersModule = createSelector(
 
 export const selectOrders = createSelector(
     selectOrdersModule,
-    (ordersReducer) => ordersReducer.orders,
+    (ordersReducer) => ordersReducer.orders ?? [],
 );

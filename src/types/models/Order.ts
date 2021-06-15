@@ -15,3 +15,8 @@ export interface IOrder {
     description: string;
     state: string;
 }
+
+export interface IOrderUpdateRequestBody {
+    id: number;
+    status: string;
+}
