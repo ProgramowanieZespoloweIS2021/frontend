@@ -10,6 +10,7 @@ import ToastNotification from '@components/ToastNotification/ToastNotification';
 import { MuiThemeProvider } from '@material-ui/core';
 import muiTheme from '@shared/theme/mui.theme';
 import { history } from '@utils/history';
+import { AuthContainer } from '@routes/AuthContainer';
 
 const App = () => {
     return (
@@ -17,10 +18,12 @@ const App = () => {
             <ThemeProvider theme={themeVariant[Theme.DEFAULT]}>
                 <MuiThemeProvider theme={muiTheme}>
                     <GlobalStyled />
-                    <RootWrapper>
-                        <RootRoutes />
-                        <ToastNotification />
-                    </RootWrapper>
+                    <AuthContainer>
+                        <RootWrapper>
+                            <RootRoutes />
+                            <ToastNotification />
+                        </RootWrapper>
+                    </AuthContainer>
                 </MuiThemeProvider>
             </ThemeProvider>
         </Router>

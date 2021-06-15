@@ -5,6 +5,8 @@ export const DateContainer = styled.div(
         display: flex;
         flex-flow: column;
         margin-right: 16px;
+        color: ${theme.colors.optionalText};
+        font-size: 13px;
     `,
 );
 

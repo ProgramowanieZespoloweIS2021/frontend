@@ -4,9 +4,10 @@ import { Input, SendButton, Form } from './Form.styled';
 
 interface IProps {
     onSubmit: (message: string) => void;
+    isChatSelected: boolean;
 }
 
-const SendForm = ({ onSubmit }: IProps) => {
+const SendForm = ({ onSubmit, isChatSelected }: IProps) => {
     const [content, setContent] = useState<string>('');
 
     const onSend = () => {
@@ -27,8 +28,14 @@ const SendForm = ({ onSubmit }: IProps) => {
                     variant="outlined"
                     color="primary"
                     onChange={handleChange}
+                    disabled={!isChatSelected}
                 />
-                <SendButton variant="outlined" color="primary" onClick={onSend}>
+                <SendButton
+                    variant="outlined"
+                    color="primary"
+                    onClick={onSend}
+                    disabled={!isChatSelected}
+                >
                     Send
                 </SendButton>
             </Form>

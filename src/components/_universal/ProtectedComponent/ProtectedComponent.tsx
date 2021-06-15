@@ -7,7 +7,7 @@ interface IProps {
     children: any;
 }
 
-const ProtectedComponent: React.FC<IProps> = ({ children }) => {
+export const ProtectedComponent: React.FC<IProps> = ({ children }) => {
     const authorized = useSelector(isAuthorized);
 
     return authorized && children;
