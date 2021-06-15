@@ -48,6 +48,12 @@ const MessagesPage: React.FC<IProps> = () => {
     }, []);
 
     useEffect(() => {
+        if (contacts.length) {
+            setSelectedContact(contacts[0]);
+        }
+    }, [contacts]);
+
+    useEffect(() => {
         if (selectedContact) {
             dispatch(
                 chatActions.getMessages.request({
@@ -115,7 +121,10 @@ const MessagesPage: React.FC<IProps> = () => {
                                 />
                             ))}
                         </MessagesList>
-                        <SendForm onSubmit={handleMessageSubmit} />
+                        <SendForm
+                            onSubmit={handleMessageSubmit}
+                            isChatSelected={!!selectedContact?.id}
+                        />
                     </MessagesContainer>
                 </Grid>
             </Grid>
