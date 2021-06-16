@@ -4,8 +4,10 @@ import { useDispatch, useSelector } from 'react-redux';
 
 interface IProps {}
 
-export const PaymentPage: React.FC<IProps> = () => {
+const PaymentPage: React.FC<IProps> = () => {
     useEffect(() => {}, []);
 
     return <></>;
 };
+
+export default PaymentPage;
