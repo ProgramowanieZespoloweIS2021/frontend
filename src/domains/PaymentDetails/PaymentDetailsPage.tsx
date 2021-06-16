@@ -1,28 +1,16 @@
 import React, { useEffect } from 'react';
-import {
-    Paper,
-    Grid,
-    TableContainer,
-    Table,
-    TableHead,
-    TableRow,
-    TableCell,
-    TableBody,
-    Chip,
-    Button,
-    TextField,
-    Box,
-} from '@material-ui/core';
+import { Grid, Button, Box } from '@material-ui/core';
 import { Input, FormContainer, Label } from './PaymentDetailsPage.styled';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUser } from '@state/_redux/user/actions';
 import { selectUserDetails } from '@state/_redux/user/selectors';
-import { getPayments } from '@state/_redux/payments/actions';
+import { getPayments, makePayment } from '@state/_redux/payments/actions';
 import { selectPayments } from '@state/_redux/payments/selectors';
 import { useHistory, useParams } from 'react-router';
 import { Controller, useForm } from 'react-hook-form';
 import { paymentFormValidation } from './validation';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { IPaymentRequest } from '@@types/models/Payment';
 export {};
 
 interface IProps {}
@@ -58,11 +46,27 @@ const PaymentDetailsPage: React.FC<IProps> = () => {
     });
 
     const onSubmit = (data: IForm) => {
-        console.log(data);
+        const {
+            name,
+            surname,
+            email,
+            codeCvv,
+            cardNumber,
+            expirationDateMonth,
+            expirationDateYear,
+        } = data;
+        const paymentRequest: IPaymentRequest = {
+            paymentId,
+            name,
+            surname,
+            email,
+            codeCvv,
+            cardNumber,
+            expirationDate: `${expirationDateMonth}/${expirationDateYear}`,
+        };
+        dispatch(makePayment.request(paymentRequest));
+        history.goBack();
     };
-
-    const payments = useSelector(selectPayments);
-    const payment = payments.filter(({ id }) => id === paymentId);
 
     return (
         <>

@@ -62,43 +62,56 @@ const PaymentPage: React.FC<IProps> = () => {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {payments.map(
-                                ({
-                                    id,
-                                    price,
-                                    createTime,
-                                    offerTitles,
-                                    status,
-                                }) => (
-                                    <TableRow key={id}>
-                                        <TableCell component="th" scope="row">
-                                            {`${price} $`}
-                                        </TableCell>
-                                        <TableCell component="th" scope="row">
-                                            {formatCreateTime(createTime)}
-                                        </TableCell>
-                                        <TableCell component="th" scope="row">
-                                            {offerTitles[0]}
-                                        </TableCell>
-                                        <TableCell component="th" scope="row">
-                                            {chipByStatus.get(status)}
-                                        </TableCell>
-                                        <TableCell>
-                                            <Button
-                                                variant={'contained'}
-                                                color={'primary'}
-                                                onClick={() =>
-                                                    history.push(
-                                                        `payments/${id}`,
-                                                    )
-                                                }
+                            {payments &&
+                                payments.map(
+                                    ({
+                                        id,
+                                        price,
+                                        createTime,
+                                        offerTitles,
+                                        status,
+                                    }) => (
+                                        <TableRow key={id}>
+                                            <TableCell
+                                                component="th"
+                                                scope="row"
                                             >
-                                                Pay
-                                            </Button>
-                                        </TableCell>
-                                    </TableRow>
-                                ),
-                            )}
+                                                {`${price} $`}
+                                            </TableCell>
+                                            <TableCell
+                                                component="th"
+                                                scope="row"
+                                            >
+                                                {formatCreateTime(createTime)}
+                                            </TableCell>
+                                            <TableCell
+                                                component="th"
+                                                scope="row"
+                                            >
+                                                {offerTitles[0]}
+                                            </TableCell>
+                                            <TableCell
+                                                component="th"
+                                                scope="row"
+                                            >
+                                                {chipByStatus.get(status)}
+                                            </TableCell>
+                                            <TableCell>
+                                                <Button
+                                                    variant={'contained'}
+                                                    color={'primary'}
+                                                    onClick={() =>
+                                                        history.push(
+                                                            `payments/${id}`,
+                                                        )
+                                                    }
+                                                >
+                                                    Pay
+                                                </Button>
+                                            </TableCell>
+                                        </TableRow>
+                                    ),
+                                )}
                         </TableBody>
                     </Table>
                 </TableContainer>
