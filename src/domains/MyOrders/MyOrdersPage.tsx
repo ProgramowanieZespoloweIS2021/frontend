@@ -7,11 +7,23 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import { getOrders, updateOrderState } from '@state/_redux/orders/actions';
-import { selectOrders } from '@state/_redux/orders/selectors';
+import {
+    getBoughtOrders,
+    getOrders,
+    updateOrderState,
+} from '@state/_redux/orders/actions';
+import {
+    selectBoughtOrders,
+    selectOrders,
+} from '@state/_redux/orders/selectors';
 import { Controller, useForm } from 'react-hook-form';
 import { Box } from '@material-ui/core';
-import { StyledSelect } from './MyOrders.styled';
+import {
+    StyledSelect,
+    StyledHeader,
+    StyledTableContainer,
+} from './MyOrders.styled';
+import { selectUserDetails } from '@state/_redux/user/selectors';
 
 interface IProps {}
 
@@ -24,7 +36,9 @@ const stateOptions = [
 export const MyOrdersPage: React.FC<IProps> = () => {
     const dispatch = useDispatch();
     const ordersList = useSelector(selectOrders);
+    const boughtOrdersList = useSelector(selectBoughtOrders);
     const { control, getValues } = useForm();
+    const { id } = useSelector(selectUserDetails);
 
     const handleUpdate = (id: number) => {
         const status = getValues(`state[${id}]`).value;
@@ -32,73 +46,109 @@ export const MyOrdersPage: React.FC<IProps> = () => {
     };
 
     useEffect(() => {
-        dispatch(getOrders.request(null));
+        if (id) {
+            dispatch(getOrders.request(id));
+            dispatch(getBoughtOrders.request(id));
+        }
     }, []);
 
     return (
         <Grid container justify="center" spacing={4}>
-            <TableContainer component={Paper}>
-                <Table aria-label="simple table">
-                    <TableHead>
-                        <TableRow>
-                            <TableCell>Buyer</TableCell>
-                            <TableCell>Seller</TableCell>
-                            <TableCell>Description</TableCell>
-                            <TableCell>State</TableCell>
-                            <TableCell>Update</TableCell>
-                        </TableRow>
-                    </TableHead>
-                    {ordersList.map(
-                        ({ id, buyer, seller, state, description }) => (
-                            <TableRow key={id}>
-                                <TableCell component="th" scope="row">
-                                    {buyer.firstName}
-                                </TableCell>
-                                <TableCell component="th" scope="row">
-                                    {seller.firstName}
-                                </TableCell>
-                                <TableCell component="th" scope="row">
-                                    {description}
-                                </TableCell>
+            <Grid item>
+                <StyledHeader>Sold services</StyledHeader>
 
-                                <TableCell component="th" scope="row">
-                                    {state}
-                                </TableCell>
-                                <TableCell component="th" scope="row">
-                                    <Box display="flex">
-                                        <Controller
-                                            control={control}
-                                            name={`state.${id}`}
-                                            render={({
-                                                field: { onChange },
-                                                fieldState: { error },
-                                            }) => (
-                                                <>
-                                                    <StyledSelect
-                                                        options={stateOptions}
-                                                        className="basic-multi-select"
-                                                        classNamePrefix="select"
-                                                        onChange={onChange}
-                                                    />
-                                                    {error?.message}
-                                                </>
-                                            )}
-                                        />
-
-                                        <Button
-                                            variant={'contained'}
-                                            color={'secondary'}
-                                            onClick={() => handleUpdate(id)}
-                                        >
-                                            Edit
-                                        </Button>
-                                    </Box>
-                                </TableCell>
+                <TableContainer component={Paper}>
+                    <Table aria-label="simple table">
+                        <TableHead>
+                            <TableRow>
+                                <TableCell>Buyer</TableCell>
+                                <TableCell>Description</TableCell>
+                                <TableCell>State</TableCell>
+                                <TableCell>Update</TableCell>
                             </TableRow>
-                        ),
-                    )}
-                </Table>
-            </TableContainer>
+                        </TableHead>
+                        {ordersList.map(
+                            ({ id, buyer, seller, state, description }) => (
+                                <TableRow key={id}>
+                                    <TableCell component="th" scope="row">
+                                        {buyer.firstName}
+                                    </TableCell>
+                                    <TableCell component="th" scope="row">
+                                        {description}
+                                    </TableCell>
+
+                                    <TableCell component="th" scope="row">
+                                        {state}
+                                    </TableCell>
+                                    <TableCell component="th" scope="row">
+                                        <Box display="flex">
+                                            <Controller
+                                                control={control}
+                                                name={`state.${id}`}
+                                                render={({
+                                                    field: { onChange },
+                                                    fieldState: { error },
+                                                }) => (
+                                                    <>
+                                                        <StyledSelect
+                                                            options={
+                                                                stateOptions
+                                                            }
+                                                            className="basic-multi-select"
+                                                            classNamePrefix="select"
+                                                            onChange={onChange}
+                                                        />
+                                                        {error?.message}
+                                                    </>
+                                                )}
+                                            />
+
+                                            <Button
+                                                variant={'contained'}
+                                                color={'secondary'}
+                                                onClick={() => handleUpdate(id)}
+                                            >
+                                                Edit
+                                            </Button>
+                                        </Box>
+                                    </TableCell>
+                                </TableRow>
+                            ),
+                        )}
+                    </Table>
+                </TableContainer>
+            </Grid>
+
+            <Grid item>
+                <StyledHeader>Bought services</StyledHeader>
+                <TableContainer component={Paper}>
+                    <Table aria-label="simple table">
+                        <TableHead>
+                            <TableRow>
+                                <TableCell>Seller</TableCell>
+                                <TableCell>Description</TableCell>
+                                <TableCell>State</TableCell>
+                            </TableRow>
+                        </TableHead>
+                        {boughtOrdersList.map(
+                            ({ id, seller, state, description }) => (
+                                <TableRow key={id}>
+                                    <TableCell component="th" scope="row">
+                                        {seller.firstName}
+                                    </TableCell>
+                                    <TableCell component="th" scope="row">
+                                        {description}
+                                    </TableCell>
+
+                                    <TableCell component="th" scope="row">
+                                        {state}
+                                    </TableCell>
+                                </TableRow>
+                            ),
+                        )}
+                    </Table>
+                </TableContainer>
+            </Grid>
         </Grid>
     );
 };

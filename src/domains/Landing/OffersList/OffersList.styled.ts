@@ -96,6 +96,7 @@ export const SortingLabel = styled(DefaultText)(
 export const CardImage = styled(CardMedia)(
     ({ theme }) => css`
         padding-top: 56.25%;
+        background-color: ${theme.colors.primary};
     `,
 );
 

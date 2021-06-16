@@ -11,3 +11,8 @@ export const selectOrders = createSelector(
     selectOrdersModule,
     (ordersReducer) => ordersReducer.orders ?? [],
 );
+
+export const selectBoughtOrders = createSelector(
+    selectOrdersModule,
+    (ordersReducer) => ordersReducer.boughtOrders ?? [],
+);

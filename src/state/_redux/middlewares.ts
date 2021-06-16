@@ -32,6 +32,7 @@ import {
 import {
     getOrdersMiddleware,
     updateOrderStateMiddleware,
+    getBoughtOrdersMiddleware,
 } from '@state/_redux/orders/middleware';
 
 import {
@@ -64,6 +65,7 @@ const middlewares = [
     updateOrderStateMiddleware,
     getPaymentsMiddleware,
     makePaymentMiddleware,
+    getBoughtOrdersMiddleware,
 ];
 
 export default applyMiddleware(...middlewares);

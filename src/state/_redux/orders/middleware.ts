@@ -2,7 +2,11 @@ import { AnyAction, Dispatch, Middleware } from 'redux';
 import { API } from '@utils/api';
 import { TState } from '../../../boot/configureStore';
 import { getType } from 'typesafe-actions';
-import { getOrders, updateOrderState } from '@state/_redux/orders/actions';
+import {
+    getBoughtOrders,
+    getOrders,
+    updateOrderState,
+} from '@state/_redux/orders/actions';
 import { toast } from 'react-toastify';
 
 const ORDERS_SERVICE_URL =
@@ -13,10 +17,28 @@ export const getOrdersRequest = async (
     dispatch: Dispatch,
 ) => {
     try {
-        const response = await API.getAuth(ORDERS_SERVICE_URL, '/orders');
+        const response = await API.getAuth(
+            ORDERS_SERVICE_URL,
+            `/orders?seller_id=${action.payload}`,
+        );
         dispatch(getOrders.success(response.data));
     } catch (err) {
         dispatch(getOrders.failure(err));
+    }
+};
+
+export const getBoughtOrdersRequest = async (
+    action: AnyAction,
+    dispatch: Dispatch,
+) => {
+    try {
+        const response = await API.getAuth(
+            ORDERS_SERVICE_URL,
+            `/orders?buyer_id=${action.payload}`,
+        );
+        dispatch(getBoughtOrders.success(response.data));
+    } catch (err) {
+        dispatch(getBoughtOrders.failure(err));
     }
 };
 
@@ -46,6 +68,15 @@ export const getOrdersMiddleware: Middleware<{}, TState> = ({ dispatch }) => (
 ) => async (action: AnyAction) => {
     if (action.type === getType(getOrders.request)) {
         await getOrdersRequest(action, dispatch);
+    }
+    return next(action);
+};
+
+export const getBoughtOrdersMiddleware: Middleware<{}, TState> = ({
+    dispatch,
+}) => (next) => async (action: AnyAction) => {
+    if (action.type === getType(getBoughtOrders.request)) {
+        await getBoughtOrdersRequest(action, dispatch);
     }
     return next(action);
 };
