@@ -22,13 +22,14 @@ export const API = {
             },
         }),
 
-    getAuth: async (serviceUrl?: string, endpointUrl?: string) =>
+    getAuth: async (serviceUrl?: string, endpointUrl?: string, params?: any) =>
         axios.get(`${serviceUrl}${endpointUrl}`, {
             headers: {
                 Authorization: `Bearer ${getJwt()}`,
                 'Content-Type': 'application/json',
                 'Access-Control-Allow-Origin': '*',
             },
+            params,
         }),
 
     deleteAuth: async (serviceUrl?: string, endpointUrl?: string) =>

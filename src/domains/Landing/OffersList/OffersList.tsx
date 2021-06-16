@@ -17,6 +17,7 @@ import {
     Input,
     ClearButton,
     ReactSelect,
+    Label,
 } from './OffersList.styled';
 import { DefaultText } from '@components/_universal/Typography.styled';
 import Select from 'react-select';
@@ -114,7 +115,6 @@ const OffersList: React.FC<IProps> = () => {
     };
 
     const handleReset = () => {
-        reset();
         getOffersWithDefaultParams();
     };
 
@@ -126,10 +126,10 @@ const OffersList: React.FC<IProps> = () => {
         <>
             <Container>
                 <form onSubmit={handleSubmit(onSubmit)}>
+                    <Label>Price range</Label>
                     <Box display="flex">
                         <Input
-                            error={!!errors.min && isDirty}
-                            helperText={errors.min && errors.min.message}
+                            helperText="Select min price"
                             {...register('min')}
                             label="min"
                             name="min"
@@ -138,8 +138,7 @@ const OffersList: React.FC<IProps> = () => {
                             variant="outlined"
                         />
                         <Input
-                            error={!!errors.max && isDirty}
-                            helperText={errors.max && errors.max.message}
+                            helperText="Select max price"
                             {...register('max')}
                             label="max"
                             type="number"
@@ -196,7 +195,7 @@ const OffersList: React.FC<IProps> = () => {
                         Search
                     </Button>
                     <ClearButton variant="contained" onClick={handleReset}>
-                        Reset
+                        Default
                     </ClearButton>
                 </form>
                 <Box

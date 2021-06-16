@@ -9,4 +9,6 @@ export default {
     myOffers: '/my-offers',
     orders: '/orders',
     messages: '/messages',
+    payments: '/payments',
+    paymentDetails: '/payments/:id',
 };

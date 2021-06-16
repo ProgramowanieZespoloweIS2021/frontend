@@ -11,6 +11,8 @@ import {
     OfferEditPage,
     MyOrdersPage,
     MessagesPage,
+    PaymentsPage,
+    PaymentDetailsPage,
 } from '@domains/index';
 import paths from '@shared/paths';
 
@@ -133,6 +135,31 @@ const routerConfig: RouterConfig = [
         layoutComponent: ShopLayout,
         pageName: 'Messages',
     },
+    {
+        routes: [
+            {
+                component: PaymentDetailsPage,
+                exact: true,
+                path: paths.paymentDetails,
+                isProtected: true,
+            },
+        ],
+        layoutComponent: ShopLayout,
+        pageName: 'Payment Details',
+    },
+    {
+        routes: [
+            {
+                component: PaymentsPage,
+                exact: true,
+                path: paths.payments,
+                isProtected: true,
+            },
+        ],
+        layoutComponent: ShopLayout,
+        pageName: 'Payments',
+    },
+
     {
         routes: [
             {

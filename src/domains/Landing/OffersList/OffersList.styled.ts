@@ -7,6 +7,7 @@ import {
     FormHelperText,
     FormControl,
     Button,
+    InputLabel,
 } from '@material-ui/core';
 import { DefaultText, Header } from '@components/_universal/Typography.styled';
 import styled, { css } from 'styled-components';
@@ -26,12 +27,25 @@ export const ReactSelect = styled(Select)(
     `,
 );
 
+export const Label = styled(InputLabel)(
+    ({ theme }) => css`
+        && {
+            color: ${theme.colors.primary};
+            margin-bottom: 10px;
+        }
+    `,
+);
+
 export const Input = styled(TextField)(
     ({ theme }) => css`
         width: 100%;
         && {
             margin-bottom: 8px;
         }
+        & input {
+            background-color: ${theme.colors.white};
+        }
+
         & label {
             color: ${theme.colors.primary};
         }
