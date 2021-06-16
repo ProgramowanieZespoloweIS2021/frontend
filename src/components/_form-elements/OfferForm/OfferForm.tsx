@@ -40,6 +40,7 @@ export const OfferForm: React.FC<IProps> = ({ onSubmit, defaultValues }) => {
         register,
         handleSubmit,
         control,
+        watch,
         formState: { errors },
     } = useForm<IAddOfferForm>({
         defaultValues: defaultValues && defaultValues,
@@ -55,6 +56,8 @@ export const OfferForm: React.FC<IProps> = ({ onSubmit, defaultValues }) => {
     }, []);
 
     const tagOptions = useSelector(selectAllTags);
+
+    console.log(watch());
 
     return (
         <form
@@ -218,7 +221,6 @@ export const OfferForm: React.FC<IProps> = ({ onSubmit, defaultValues }) => {
                                 />
                                 <TierInput
                                     label="Delivery time (days)"
-                                    type="text"
                                     variant="outlined"
                                     type="number"
                                     {...{ errors }}
@@ -228,7 +230,6 @@ export const OfferForm: React.FC<IProps> = ({ onSubmit, defaultValues }) => {
                                 />
                                 <TierInput
                                     label="Price (dollars)"
-                                    type="text"
                                     variant="outlined"
                                     type="number"
                                     {...{ errors }}

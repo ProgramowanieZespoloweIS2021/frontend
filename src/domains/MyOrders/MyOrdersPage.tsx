@@ -6,6 +6,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+
 import Paper from '@material-ui/core/Paper';
 import {
     getBoughtOrders,
@@ -22,6 +23,7 @@ import {
     StyledSelect,
     StyledHeader,
     StyledTableContainer,
+    StyledTableRow,
 } from './MyOrders.styled';
 import { selectUserDetails } from '@state/_redux/user/selectors';
 
@@ -69,7 +71,7 @@ export const MyOrdersPage: React.FC<IProps> = () => {
                         </TableHead>
                         {ordersList.map(
                             ({ id, buyer, seller, state, description }) => (
-                                <TableRow key={id}>
+                                <StyledTableRow key={id}>
                                     <TableCell component="th" scope="row">
                                         {buyer.firstName}
                                     </TableCell>
@@ -112,7 +114,7 @@ export const MyOrdersPage: React.FC<IProps> = () => {
                                             </Button>
                                         </Box>
                                     </TableCell>
-                                </TableRow>
+                                </StyledTableRow>
                             ),
                         )}
                     </Table>
