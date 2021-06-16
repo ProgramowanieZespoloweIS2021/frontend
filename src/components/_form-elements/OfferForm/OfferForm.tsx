@@ -217,18 +217,20 @@ export const OfferForm: React.FC<IProps> = ({ onSubmit, defaultValues }) => {
                                     )}
                                 />
                                 <TierInput
-                                    label="Delivery time"
+                                    label="Delivery time (days)"
                                     type="text"
                                     variant="outlined"
+                                    type="number"
                                     {...{ errors }}
                                     {...register(
                                         `tiers.${idx}.deliveryTime` as const,
                                     )}
                                 />
                                 <TierInput
-                                    label="Price"
+                                    label="Price (dollars)"
                                     type="text"
                                     variant="outlined"
+                                    type="number"
                                     {...{ errors }}
                                     {...register(`tiers.${idx}.price` as const)}
                                 />

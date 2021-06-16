@@ -70,7 +70,7 @@ export const MyOffersPage: React.FC<IProps> = () => {
                                         ))}
                                     </TableCell>
                                     <TableCell component="th" scope="row">
-                                        {minimalPrice}
+                                        {minimalPrice}$
                                     </TableCell>
                                     <TableCell component="th" scope="row">
                                         <Button

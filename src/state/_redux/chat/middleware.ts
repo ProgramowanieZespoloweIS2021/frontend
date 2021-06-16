@@ -9,7 +9,7 @@ import {
     createChat,
 } from '@state/_redux/chat/actions';
 import { API } from '@utils/api';
-import { history } from "@utils/history";
+import { history } from '@utils/history';
 import paths from '@shared/paths';
 
 const CHAT_SERVICE_URL =
@@ -19,7 +19,7 @@ const getMessagesRequest = async (action: AnyAction, dispatch: Dispatch) => {
     try {
         const offset = action.payload.pageOffset || 0;
         const size = action.payload.pageSzie || 15;
-        const response = await API.get(
+        const response = await API.getAuth(
             CHAT_SERVICE_URL,
             `messages/${action.payload.chatId}?pageOffset=${offset}&pageSize=${size}`,
         );
@@ -36,7 +36,7 @@ const getChatListRequest = async (action: AnyAction, dispatch: Dispatch) => {
     try {
         const offset = action.payload.pageOffset || 0;
         const size = action.payload.pageSzie || 15;
-        const response = await API.get(
+        const response = await API.getAuth(
             CHAT_SERVICE_URL,
             `chats/${action.payload.userId}?pageOffset=${offset}&pageSize=${size}`,
         );

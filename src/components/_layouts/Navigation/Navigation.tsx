@@ -42,6 +42,12 @@ export const Navigation: React.FC<IProps> = () => {
                     <>
                         <NavButton
                             color="primary"
+                            onClick={() => history.push(paths.offerAdd)}
+                        >
+                            Add Offer
+                        </NavButton>
+                        <NavButton
+                            color="primary"
                             onClick={() => history.push(paths.myOffers)}
                         >
                             My Offers
