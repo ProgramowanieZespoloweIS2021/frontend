@@ -115,7 +115,6 @@ const OffersList: React.FC<IProps> = () => {
     };
 
     const handleReset = () => {
-        reset();
         getOffersWithDefaultParams();
     };
 

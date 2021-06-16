@@ -6,6 +6,7 @@ import {
     Checkbox as CheckboxMui,
     Box,
     Paper,
+    InputLabel,
 } from '@material-ui/core';
 import IconButton from '@components/_universal/IconButton/IconButton';
 export {};
@@ -18,6 +19,16 @@ export const Input = styled(TextField)(
         }
         & label {
             color: ${theme.colors.primary};
+        }
+    `,
+);
+
+export const Label = styled(InputLabel)(
+    ({ theme }) => css`
+        && {
+            color: ${theme.colors.black};
+            margin: 10px 0;
+            align-self: flex-start;
         }
     `,
 );

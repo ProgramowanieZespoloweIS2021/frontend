@@ -5,6 +5,7 @@ export const paymentFormValidation = yup.object().shape({
     name: yup.string().required(),
     surname: yup.string().required(),
     cardNumber: yup.string().required().length(16),
-    expirationDate: yup.string().required(),
+    expirationDateMonth: yup.string().required().length(2),
+    expirationDateYear: yup.string().required().length(2),
     codeCvv: yup.string().required().length(3),
 });
