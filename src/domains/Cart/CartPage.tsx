@@ -25,6 +25,7 @@ import {
     submitCart,
     clearCart,
 } from '@state/_redux/cart/actions';
+import { getUser } from '@state/_redux/user/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectCart, selectCartId } from '@state/_redux/cart/selectors';
 import { ICartItemDetails } from '@@types/models/Cart';
@@ -40,6 +41,7 @@ const CartPage: React.FC<IProps> = () => {
     useEffect(() => {
         dispatch(createCart.request(null));
         dispatch(getCart.request(cartId));
+        dispatch(getUser.request(''));
     }, [cartId]);
 
     const handleDelete = (itemId: number) => {
@@ -50,7 +52,6 @@ const CartPage: React.FC<IProps> = () => {
         const { id } = userDetails;
         if (id) {
             dispatch(submitCart.request({ cartId, buyerId: id }));
-            dispatch(clearCart.request(null));
         }
     };
 

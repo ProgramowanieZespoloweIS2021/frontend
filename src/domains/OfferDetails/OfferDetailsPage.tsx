@@ -22,7 +22,7 @@ interface UrlParams {
 
 const OfferDetailsPage: React.FC<IProps> = () => {
     const [tabIndex, setTabIndex] = React.useState(0);
-    const [itemDescription, setItemDescription] = React.useState('');
+    const [itemDescription, setItemDescription] = React.useState('info');
     const { id } = useParams<UrlParams>();
     const offerId = parseInt(id);
     const dispatch = useDispatch();
@@ -44,11 +44,11 @@ const OfferDetailsPage: React.FC<IProps> = () => {
             cartItem: {
                 offerId,
                 tierId,
-                description: itemDescription,
+                description: itemDescription || 'item info',
             },
         };
         dispatch(addItemToCart.request(cartItemRequest));
-        setItemDescription('');
+        setItemDescription('info');
     };
 
     const handleContact = () => {

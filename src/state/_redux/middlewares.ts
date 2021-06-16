@@ -34,6 +34,8 @@ import {
     updateOrderStateMiddleware,
 } from '@state/_redux/orders/middleware';
 
+import { getPaymentsMiddleware } from '@state/_redux/payments/middleware';
+
 const middlewares = [
     createUserMiddleware,
     loginMiddleware,
@@ -57,6 +59,7 @@ const middlewares = [
     getContactsMiddleware,
     getMessagesMiddleware,
     updateOrderStateMiddleware,
+    getPaymentsMiddleware,
 ];
 
 export default applyMiddleware(...middlewares);

@@ -95,6 +95,7 @@ export const submitCartRequest = async (
         );
         toast.success('Cart was submitted');
         dispatch(submitCart.success(null));
+        dispatch(clearCart.request(null));
     } catch (err) {
         dispatch(submitCart.failure(err));
     }

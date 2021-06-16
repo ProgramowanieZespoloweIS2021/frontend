@@ -4,6 +4,7 @@ import userReducer from './user/reducer';
 import { cartReducer } from './cart/reducers';
 import { OrdersReducer } from '@state/_redux/orders/reducers';
 import { chatReducer } from './chat/reducer';
+import { PaymentsReducer } from './payments/reducers';
 
 export default combineReducers({
     offers: OffersReducer,
@@ -11,4 +12,5 @@ export default combineReducers({
     user: userReducer,
     cart: cartReducer,
     chat: chatReducer,
+    payments: PaymentsReducer,
 });
