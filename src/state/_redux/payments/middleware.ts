@@ -13,17 +13,17 @@ export const getPaymentsRequest = async (
     action: AnyAction,
     dispatch: Dispatch,
 ) => {
-    const { userId } = action.payload;
+    const id = action.payload;
     try {
         const params = {
-            user_id: userId,
+            user_id: id,
         };
-        const payments = await API.postAuth(
+        const response = await API.getAuth(
             PAYMENT_SERVICE_URL,
-            'payments',
+            '/payments',
             params,
         );
-        dispatch(getPayments.success(payments));
+        dispatch(getPayments.success(response.data));
     } catch (e) {
         dispatch(getPayments.failure(e));
     }
