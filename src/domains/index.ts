@@ -30,3 +30,6 @@ export { default as MessagesPage } from '@domains/Messages/MessagesPage';
 
 // payments page
 export { default as PaymentsPage } from '@domains/Payments/PaymentsPage';
+
+// payment details page
+export { default as PaymentDetailsPage } from '@domains/PaymentDetails/PaymentDetailsPage';

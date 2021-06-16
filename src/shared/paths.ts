@@ -10,4 +10,5 @@ export default {
     orders: '/orders',
     messages: '/messages',
     payments: '/payments',
+    paymentDetails: '/payments/:id',
 };
