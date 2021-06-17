@@ -46,7 +46,13 @@ export const useStomp = ({ url, topic, sendChannel }: IProps) => {
     };
 
     const setOnMessage = (callback: any) => {
-        stompClient?.subscribe(topic, callback);
+        if (stompClient?.ws.readyState === 1) {
+            stompClient?.subscribe(topic, callback);
+        } else {
+            setTimeout(function () {
+                setOnMessage(callback);
+            }, 1000);
+        }
     };
 
     useEffect(() => {
