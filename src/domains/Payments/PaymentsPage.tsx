@@ -47,6 +47,8 @@ const PaymentPage: React.FC<IProps> = () => {
 
     const payments = useSelector(selectPayments);
 
+    const isPayBtnVisible = (status: string) => status === 'IN_PROGRESS';
+
     return (
         <>
             <Grid container justify="center" spacing={4}>
@@ -97,17 +99,19 @@ const PaymentPage: React.FC<IProps> = () => {
                                                 {chipByStatus.get(status)}
                                             </TableCell>
                                             <TableCell>
-                                                <Button
-                                                    variant={'contained'}
-                                                    color={'primary'}
-                                                    onClick={() =>
-                                                        history.push(
-                                                            `payments/${id}`,
-                                                        )
-                                                    }
-                                                >
-                                                    Pay
-                                                </Button>
+                                                {isPayBtnVisible(status) && (
+                                                    <Button
+                                                        variant={'contained'}
+                                                        color={'primary'}
+                                                        onClick={() =>
+                                                            history.push(
+                                                                `payments/${id}`,
+                                                            )
+                                                        }
+                                                    >
+                                                        Pay
+                                                    </Button>
+                                                )}
                                             </TableCell>
                                         </TableRow>
                                     ),

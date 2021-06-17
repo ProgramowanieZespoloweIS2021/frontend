@@ -98,7 +98,7 @@ const CartPage: React.FC<IProps> = () => {
                                         <TableCell>{tierId}</TableCell>
                                         <TableCell>{tierTitle}</TableCell>
                                         <TableCell>{description}</TableCell>
-                                        <TableCell>{tierPrice}</TableCell>
+                                        <TableCell>{`${tierPrice} $`}</TableCell>
                                         <TableCell>
                                             <IconButton
                                                 aria-label="delete"

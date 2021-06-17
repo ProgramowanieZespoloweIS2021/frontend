@@ -7,6 +7,8 @@ export const OfferThumbnailCell = styled.div<{ url: string }>(
         height: 100px;
         background-image: url(${url});
         cursor: pointer;
+        background-size: cover;
+        object-fit: cover;
         background-color: ${theme.colors.primary};
     `,
 );

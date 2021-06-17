@@ -34,6 +34,7 @@ const getMessagesRequest = async (action: AnyAction, dispatch: Dispatch) => {
 
 const getChatListRequest = async (action: AnyAction, dispatch: Dispatch) => {
     try {
+        console.log(action.payload);
         const offset = action.payload.pageOffset || 0;
         const size = action.payload.pageSzie || 15;
         const response = await API.getAuth(

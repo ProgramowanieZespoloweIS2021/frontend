@@ -11,6 +11,7 @@ import { Controller, useForm } from 'react-hook-form';
 import { paymentFormValidation } from './validation';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { IPaymentRequest } from '@@types/models/Payment';
+import paths from '@shared/paths';
 export {};
 
 interface IProps {}
@@ -65,7 +66,7 @@ const PaymentDetailsPage: React.FC<IProps> = () => {
             expirationDate: `${expirationDateMonth}/${expirationDateYear}`,
         };
         dispatch(makePayment.request(paymentRequest));
-        history.goBack();
+        history.push(paths.home);
     };
 
     return (

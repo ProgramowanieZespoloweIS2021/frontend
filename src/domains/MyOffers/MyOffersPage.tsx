@@ -42,7 +42,6 @@ export const MyOffersPage: React.FC<IProps> = () => {
                             <TableCell>Name</TableCell>
                             <TableCell>Tags</TableCell>
                             <TableCell>Minimal price</TableCell>
-                            <TableCell>Edit</TableCell>
                             <TableCell align="right">Delete</TableCell>
                         </TableRow>
                     </TableHead>
@@ -71,19 +70,6 @@ export const MyOffersPage: React.FC<IProps> = () => {
                                     </TableCell>
                                     <TableCell component="th" scope="row">
                                         {minimalPrice}$
-                                    </TableCell>
-                                    <TableCell component="th" scope="row">
-                                        <Button
-                                            variant={'contained'}
-                                            color={'secondary'}
-                                            onClick={() =>
-                                                history.push(
-                                                    `offers/edit/${id}`,
-                                                )
-                                            }
-                                        >
-                                            Edit
-                                        </Button>
                                     </TableCell>
                                     <TableCell
                                         align="right"
