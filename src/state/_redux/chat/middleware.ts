@@ -21,7 +21,7 @@ const getMessagesRequest = async (action: AnyAction, dispatch: Dispatch) => {
         const size = action.payload.pageSzie || 15;
         const response = await API.getAuth(
             CHAT_SERVICE_URL,
-            `messages/${action.payload.chatId}?pageOffset=${offset}&pageSize=${size}`,
+            `/messages/${action.payload.chatId}?pageOffset=${offset}&pageSize=${size}`,
         );
         dispatch(getMessages.success(response));
         return true;
